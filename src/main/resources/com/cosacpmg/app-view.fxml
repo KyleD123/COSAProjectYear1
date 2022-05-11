@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+
+<Accordion fx:controller="com.cosacpmg.App" minHeight="500.0" minWidth="0.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" >
+    <panes>
+        <TitledPane animated="true" text="Hello World">
+            <content>
+                <AnchorPane>
+                    <children>
+                        <Label fx:id="welcomeText" alignment="CENTER" maxHeight="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
+                        <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                            <children>
+                                <Button onAction="#onHelloButtonClick" text="Hello!" />
+                            </children>
+                        </StackPane>
+
+                    </children>
+                </AnchorPane>
+            </content>
+        </TitledPane>
+        <TitledPane animated="true" text="Table View">
+            <content>
+                <AnchorPane>
+               <children>
+                  <TableView AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn text="ID" />
+                      <TableColumn text="Name" />
+                      <TableColumn text="Position" />
+                      <TableColumn text="Email" />
+                      <TableColumn text="Phone" />
+                    </columns>
+                  </TableView>
+               </children>
+                </AnchorPane>
+            </content>
+        </TitledPane>
+    </panes>
+</Accordion>
