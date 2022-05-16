@@ -64,7 +64,6 @@ public class TournamentTest
     public void setUpValidTournament()
     {
         obTourn = new Tournament();
-        obTourn.setTournamentId(1);
         obTourn.setTournamentName("Penguins");
         startDate = new Date();
         endDate = new Date();

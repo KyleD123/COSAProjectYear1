@@ -16,7 +16,7 @@ public class TournamentController
 
     public boolean createTournament(Tournament obTourn)
     {
-
+        return true;
     }
 
     public boolean verifyUnique(Tournament obTourn)
