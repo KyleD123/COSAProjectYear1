@@ -1,10 +1,17 @@
 package tournament_tests;
 
-import models.Tournament;
+import javafx.util.converter.LocalDateTimeStringConverter;
+import models.*;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 import javax.validation.*;
+import java.util.Date;
+import java.util.Set;
 
 public class TournamentTest
 {
@@ -12,11 +19,29 @@ public class TournamentTest
     private static Validator valid;
 
     private static Tournament obTourn;
+    private static Date startDate;
+    private static Date endDate;
 
     //HELPER METHODS
     public String repeatW(int nCount)
     {
        return new String(new char[nCount]).replace('\0', 'W');
+    }
+
+    private void assertInvalidTournament(String expProperty, String expMsg, Object expValue)
+    {
+        Set<ConstraintViolation<Tournament>> constraintViolations = valid.validate(obTourn);
+
+        assertEquals(1, constraintViolations.size());
+
+        ConstraintViolation<Tournament> violation = constraintViolations.iterator().next();
+
+        assertEquals(expProperty, violation.getPropertyPath().toString());
+
+        assertEquals(expMsg, violation.getMessage());
+
+        assertEquals(expValue, violation.getInvalidValue());
+
     }
 
 
@@ -29,7 +54,7 @@ public class TournamentTest
     }
     
     @AfterClass
-    public static void closedownValidator()
+    public static void closeDownValidator()
     {
         valFac.close();
     }
@@ -38,8 +63,36 @@ public class TournamentTest
     @Before
     public void setUpValidTournament()
     {
-
+        obTourn = new Tournament();
+        obTourn.setTournamentId(1);
+        obTourn.setTournamentName("Penguins");
+        startDate = new Date();
+        endDate = new Date();
+        endDate.setTime(startDate.getTime() + (1000*60*60*24));
+        obTourn.setStartDate(startDate);
+        obTourn.setEndDate(endDate);
     }
+
+    //Tests
+    @Test
+    public void testTournamentPastStartDate()
+    {
+        startDate.setTime(startDate.getTime() - (1000*60*60*24));
+        obTourn.setStartDate(startDate);
+        assertInvalidTournament("startDate","Past date entered", startDate);
+    }
+
+
+    @Test
+    public void testTournamentPastEndDate()
+    {
+        endDate.setTime(startDate.getTime() - (1000*60*60*25));
+        obTourn.setEndDate(endDate);
+        assertInvalidTournament("endDate", "Past date entered", endDate);
+    }
+
+
+
 
 
 }

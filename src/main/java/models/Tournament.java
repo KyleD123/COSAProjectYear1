@@ -14,21 +14,25 @@ import java.util.Date;
 public class Tournament implements Serializable
 {
     //ano's
-
+    @DatabaseField(generatedId = true, unique = true)
     private int tournamentId;
 
     //annotations for tournament name
+    @DatabaseField(canBeNull = true)
     @Size(max = 40, message="Character length limit exceeded")
     private String tournamentName;
 
     //ano's for start date
+    @DatabaseField(canBeNull = false)
+    @NotEmpty(message = "invalid date format")
     @Future(message = "Past date entered")
     private Date startDate;
 
     //ano's for end data (MAKE A CUSTOM VALIDATION FOR DAY AFTER THE START DATE)
+    @DatabaseField(canBeNull = false)
+    @NotEmpty(message = "invalid date format")
     @Future(message = "Past date entered")
     private Date endDate;
-
 
     public Tournament()
     {
@@ -71,5 +75,6 @@ public class Tournament implements Serializable
     {
         this.endDate = end;
     }
+
 
 }
