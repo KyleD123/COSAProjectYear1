@@ -24,13 +24,13 @@ public class Tournament implements Serializable
 
     //ano's for start date
     @DatabaseField(canBeNull = false)
-    @NotEmpty(message = "invalid date format")
+    @NotEmpty(message = "Empty Date Entered")
     @Future(message = "Past date entered")
     private Date startDate;
 
     //ano's for end data (MAKE A CUSTOM VALIDATION FOR DAY AFTER THE START DATE)
     @DatabaseField(canBeNull = false)
-    @NotEmpty(message = "invalid date format")
+    @NotEmpty(message = "Empty Date Entered")
     @Future(message = "Past date entered")
     private Date endDate;
 

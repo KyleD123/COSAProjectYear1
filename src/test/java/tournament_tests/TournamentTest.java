@@ -73,7 +73,12 @@ public class TournamentTest
         obTourn.setEndDate(endDate);
     }
 
-    //Tests
+ //Tests
+    //START AND END DATES
+
+    /**
+     * INVALID TEST
+     */
     @Test
     public void testTournamentPastStartDate()
     {
@@ -82,7 +87,9 @@ public class TournamentTest
         assertInvalidTournament("startDate","Past date entered", startDate);
     }
 
-
+    /**
+     * INVALID TEST
+     */
     @Test
     public void testTournamentPastEndDate()
     {
@@ -91,7 +98,91 @@ public class TournamentTest
         assertInvalidTournament("endDate", "Past date entered", endDate);
     }
 
+    /**
+     * INVALID TEST
+     */
+    @Test
+    public void testTournamentBlankStartDate()
+    {
+        obTourn.setStartDate(null);
+        assertInvalidTournament("startDate", "Empty Date Entered", obTourn.getStartDate());
+    }
 
+    /**
+     * INVALID TEST
+     */
+    @Test
+    public void testTournamentBlankEndDate()
+    {
+        obTourn.setEndDate(null);
+        assertInvalidTournament("endDate", "Empty Date Entered", obTourn.getEndDate());
+    }
+
+    /**
+     * VALID TEST
+     */
+    @Test
+    public void testTournamentValidStartDate()
+    {
+        startDate.setTime(startDate.getTime() + (1000*60*60*168));
+        obTourn.setStartDate(startDate);
+        assertEquals(0, valid.validate(obTourn).size());
+    }
+
+    /**
+     * VALID TEST
+     */
+    @Test
+    public void testTournamentValidEndDate()
+    {
+        endDate.setTime(startDate.getTime() + (1000*60*60*48));
+        obTourn.setEndDate(endDate);
+        assertEquals(0, valid.validate(obTourn).size());
+    }
+
+
+    //Tournament Name
+    /**
+     * INVALID TEST
+     */
+    @Test
+    public void testTournamentNameAboveLimit()
+    {
+        String sName = repeatW(41);
+        obTourn.setTournamentName(sName);
+        assertInvalidTournament("tournamentName", "Character length limit exceeded", sName);
+    }
+
+    /**
+     * VALID TEST
+     */
+    @Test
+    public void testTournamentNameWithinLimit()
+    {
+        String sName = repeatW(40);
+        obTourn.setTournamentName(sName);
+        assertEquals(0, valid.validate(obTourn).size());
+    }
+
+    /**
+     * VALID TEST
+     */
+    @Test
+    public void testBlankTournamentName()
+    {
+        obTourn.setTournamentName("");
+        assertEquals(0, valid.validate(obTourn).size());
+    }
+
+    /**
+     * VALID TEST
+     */
+    @Test
+    public void testValidTournamentName()
+    {
+        obTourn.setTournamentName("Bryce Javanians");
+        assertEquals(0, valid.validate(obTourn).size());
+    }
 
 
 
