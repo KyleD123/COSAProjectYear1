@@ -4,12 +4,13 @@ import models.Team;
 
 import java.util.ArrayList;
 
-public class TeamController {
-    public Team createTeam(Team obTeam) {
+public class TeamController
+{
+    public Team createTeam(Team obTeam)
+    {
 
         return null;
     }
-
 
     public Team modifyTeamName(Team obTeam) {
         return null;
@@ -27,12 +28,12 @@ public class TeamController {
         return null;
     }
 
-
     public boolean isSuccesfullyAdded() {
         return false;
     }
 
-    public void sendTeam(Team obTeam) {
+    public void sendTeam(Team obTeam)
+    {
 
     }
 
@@ -40,4 +41,6 @@ public class TeamController {
     {
 
     }
+
+
  }
