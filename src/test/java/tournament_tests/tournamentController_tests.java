@@ -26,7 +26,7 @@ public class tournamentController_tests
         }
     }
 
-    //Create tests
+    //CREATE TOURNAMENT TEST
 
     @Test
     public void testCreateValidTournament()
@@ -101,7 +101,7 @@ public class tournamentController_tests
         }
     }
 
-    //Modify functionality
+    //MODIFY TOURNAMENT TOURNAMENT
 
     @Test
     public void testEditValidTournament()
@@ -123,7 +123,6 @@ public class tournamentController_tests
         }
 
     }
-
 
     @Test
     public void testEditInvalidTournament()

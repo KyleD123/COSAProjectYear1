@@ -19,18 +19,18 @@ public class Tournament implements Serializable
 
     //annotations for tournament name
     @DatabaseField(canBeNull = true)
-    @Size(max = 40, message="Character length limit exceeded")
+    @Size(max = 40, min = 0, message="Character length limit exceeded")
     private String tournamentName;
 
     //ano's for start date
     @DatabaseField(canBeNull = false)
-    @NotEmpty(message = "Empty Date Entered")
+    @NotNull(message = "Empty Date Entered")
     @Future(message = "Past date entered")
     private Date startDate;
 
     //ano's for end data (MAKE A CUSTOM VALIDATION FOR DAY AFTER THE START DATE)
     @DatabaseField(canBeNull = false)
-    @NotEmpty(message = "Empty Date Entered")
+    @NotNull(message = "Empty Date Entered")
     @Future(message = "Past date entered")
     private Date endDate;
 

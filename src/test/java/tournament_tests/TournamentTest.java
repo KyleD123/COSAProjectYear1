@@ -22,6 +22,11 @@ public class TournamentTest
     private static Date startDate;
     private static Date endDate;
 
+    /**
+     * Apparently, all of this passed somehow. I dont know where we messed it up.
+     * @param nCount
+     * @return
+     */
     //HELPER METHODS
     public String repeatW(int nCount)
     {
@@ -66,6 +71,7 @@ public class TournamentTest
         obTourn = new Tournament();
         obTourn.setTournamentName("Penguins");
         startDate = new Date();
+//        startDate.setTime(startDate.getTime() + (1000*60*60*24));
         endDate = new Date();
         endDate.setTime(startDate.getTime() + (1000*60*60*24));
         obTourn.setStartDate(startDate);
@@ -105,6 +111,7 @@ public class TournamentTest
     {
         obTourn.setStartDate(null);
         assertInvalidTournament("startDate", "Empty Date Entered", obTourn.getStartDate());
+
     }
 
     /**
@@ -150,6 +157,7 @@ public class TournamentTest
         String sName = repeatW(41);
         obTourn.setTournamentName(sName);
         assertInvalidTournament("tournamentName", "Character length limit exceeded", sName);
+
     }
 
     /**
@@ -181,6 +189,8 @@ public class TournamentTest
     {
         obTourn.setTournamentName("Bryce Javanians");
         assertEquals(0, valid.validate(obTourn).size());
+        System.out.println(valid.validate(obTourn));
+
     }
 
 
