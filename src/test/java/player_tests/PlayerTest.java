@@ -66,6 +66,20 @@ public class PlayerTest {
     }
 
     @Test
+    public void testFirstNameLowerBound() {
+        player.setsFirstName(repeatQ(1));
+
+        assertEquals(0, validator.validate(player).size());
+    }
+
+    @Test
+    public void testFirstNameUpperBound() {
+        player.setsFirstName(repeatQ(15));
+
+        assertEquals(0, validator.validate(player).size());
+    }
+
+    @Test
     public void testFirstNameIsEmpty() {
         player.setsFirstName("");
 
@@ -78,6 +92,20 @@ public class PlayerTest {
         player.setsLastName(invalid);
 
         assertInvalidPlayer("sLastName", "Player Last Name Too Long", invalid);
+    }
+
+    @Test
+    public void testLastNameLowerBound() {
+        player.setsLastName(repeatQ(1));
+
+        assertEquals(0, validator.validate(player).size());
+    }
+
+    @Test
+    public void testLastNameUpperBound() {
+        player.setsLastName(repeatQ(15));
+
+        assertEquals(0, validator.validate(player).size());
     }
 
     @Test
@@ -95,10 +123,97 @@ public class PlayerTest {
     }
 
     @Test
-    public void testPlayerNumberIsValid() {
-        player.setnPlayerNumber("2a");
+    public void testPlayerNumberUpperBound() {
+        player.setnPlayerNumber(99);
 
-        assertInvalidPlayer("nPlayerNumber", "Player Number must be 1 or 2 digits", "2a");
+        assertEquals(0, validator.validate(player).size());
+    }
+
+    @Test
+    public void testPlayerNumberLowerBound() {
+        player.setnPlayerNumber(1);
+
+        assertEquals(0, validator.validate(player).size());
+    }
+
+    @Test
+    public void testPlayerPositionIsTooLong() {
+        String invalid = repeatQ(25);
+        player.setsPosition(invalid);
+
+        assertInvalidPlayer("sPosition", "Player Position Too Long", invalid);
+    }
+
+    @Test
+    public void testPlayerPositionUpperBound() {
+        player.setsPosition(repeatQ(20));
+
+        assertEquals(0, validator.validate(player).size());
+    }
+
+    @Test
+    public void testPlayerPositionLowerBound() {
+        player.setsPosition(repeatQ(1));
+
+        assertEquals(0, validator.validate(player).size());
+    }
+
+    @Test
+    public void testPlayerPositionIsEmpty() {
+        player.setsPosition("");
+
+        assertInvalidPlayer("sPosition", "Player Position is Required", "");
+    }
+
+    @Test
+    public void testPlayerParentInfoIsTooLong() {
+        String invalid = repeatQ(35);
+        player.setsParentInfo(invalid);
+
+        assertInvalidPlayer("sParentInfo", "Player Parent Info Too Long", invalid);
+    }
+
+    @Test
+    public void testPlayerParentInfoUpperBound() {
+        player.setsParentInfo(repeatQ(30));
+
+        assertEquals(0, validator.validate(player).size());
+    }
+
+    @Test
+    public void testPlayerParentInfoLowerBound() {
+        player.setsParentInfo(repeatQ(1));
+
+        assertEquals(0, validator.validate(player).size());
+    }
+
+    @Test
+    public void testPlayerParentInfoIsEmpty() {
+        player.setsParentInfo("");
+
+        assertInvalidPlayer("sParentInfo", "Player Parent Info is Required", "");
+    }
+
+    @Test
+    public void testPlayerEmergencyContactIsValid() {
+        String[] validContact = {"123-456-7890", "1-123-456-7890"};
+
+        for (String valid : validContact) {
+            player.setsEmergencyContact(valid);
+
+            assertEquals(0, validator.validate(player).size());
+        }
+    }
+
+    @Test
+    public void testPlayerEmergencyContactIsInvalid() {
+        String[] invalidContact = {"1234567890", "11234567890", "123-4569"};
+
+        for (String valid : invalidContact) {
+            player.setsEmergencyContact(valid);
+
+            assertInvalidPlayer("sEmergencyContact", "Improper Phone Number Format", valid);
+        }
     }
 
 }

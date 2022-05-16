@@ -23,7 +23,7 @@ public class Player implements Serializable {
     private String sLastName;
 
     @DatabaseField(canBeNull = false)
-    @Min(value = 0, message = "Player Number must be 1 or 2 digits")
+    @Min(value = 1, message = "Player Number must be 1 or 2 digits")
     @Max(value = 99, message = "Player Number must be 1 or 2 digits")
     private int nPlayerNumber;
 
@@ -38,7 +38,7 @@ public class Player implements Serializable {
     private String sParentInfo;
 
     @DatabaseField(canBeNull = false)
-    @Size(max = 14, min = 12, message = "Invalid Phone Number")
+    //@Size(max = 14, min = 12, message = "Invalid Phone Number")
     @Pattern(regexp = "[0-9]?[-]?[0-9]{3}[-][0-9]{3}[-][0-9]{4}", message = "Improper Phone Number Format")
     private String sEmergencyContact;
 
