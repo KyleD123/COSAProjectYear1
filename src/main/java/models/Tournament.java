@@ -1,11 +1,16 @@
 package models;
 
+
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 
 
 
-//@DatabaseTable(tableName = "tournaments")
+@DatabaseTable(tableName = "tournaments")
 public class Tournament implements Serializable
 {
     //ano's
@@ -13,13 +18,15 @@ public class Tournament implements Serializable
     private int tournamentId;
 
     //annotations for tournament name
-
+    @Size(max = 40, message="Character length limit exceeded")
     private String tournamentName;
 
     //ano's for start date
+    @Future(message = "Past date entered")
     private Date startDate;
 
-    //ano's for end data
+    //ano's for end data (MAKE A CUSTOM VALIDATION FOR DAY AFTER THE START DATE)
+    @Future(message = "Past date entered")
     private Date endDate;
 
 
@@ -28,11 +35,7 @@ public class Tournament implements Serializable
 
     }
 
-    public int getTournamentId()
-    {
-
-        return this.tournamentId;
-    }
+    public int getTournamentId() { return this.tournamentId; }
 
     public void setTournamentId(int nId)
     {
@@ -68,8 +71,5 @@ public class Tournament implements Serializable
     {
         this.endDate = end;
     }
-
-
-
 
 }
