@@ -112,4 +112,17 @@ public class TeamTest
         obTeam.setTeamName(repeatM(1));
         assertEquals(0, validator.validate(obTeam).size());
     }
+
+
+    @Test
+    public void testCoachName()
+    {
+
+        obTeam.setCoachName(repeatM(5));
+        assertEquals(0, validator.validate(obTeam).size());
+    }
+
+
+
+
 }

@@ -15,13 +15,15 @@ public class TeamController
 
     }
 
-    public Boolean createTeam(Team obTeam)
+    public boolean createTeam(Team obTeam)
     {
-        return null;
+        //return null;
+        return true;
     }
 
-    public Team modifyTeamName(Team obTeam) {
-        return null;
+    public boolean modifyTeamName(Team obTeam) {
+        //return null;
+        return true;
     }
 
     public boolean verifyUniqueTeamName(Team obTeam) {
