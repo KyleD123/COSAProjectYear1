@@ -16,7 +16,7 @@ public class Team implements Serializable {
 
     @DatabaseField(canBeNull = false)
     @Size(max = 40, message = "Team Name Too Long")
-    @NotEmpty(message = "Team Name is Required")
+    @NotEmpty(message = "Please enter a name")
     private String sTeamName;
 
     //Coach Name - In format "FirstName LastName"
@@ -32,21 +32,13 @@ public class Team implements Serializable {
 
     //Getters
     public int getTeamID() { return nTeamID; }
-
     public String getTeamName() { return sTeamName; }
-
     public String getCoachName() { return sCoachName; }
 
-    public int setTeamID(int teamID) { return nTeamID; }
-
-    public String setTeamName(String teamName) { return sTeamName; }
-
-    public String setCoachName(String coachName) { return sCoachName; }
-
-
-
-
     //Setters
+    public void setTeamID(int nTeamID) { this.nTeamID = nTeamID; }
+    public void setTeamName(String sTeamName) { this.sTeamName = sTeamName; }
+    public void setCoachName(String sCoachName) { this.sCoachName = sCoachName; }
 
     public void setAllValues(Team team)
     {

@@ -1,14 +1,22 @@
 package controllers;
 
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.support.ConnectionSource;
 import models.Team;
-
 import java.util.ArrayList;
 
 public class TeamController
 {
-    public Team createTeam(Team obTeam)
+    private Dao<Team, Long> repo;
+//    private ValidationHelper vh = new ValidationHelper();
+
+    public TeamController(ConnectionSource databaseConn)
     {
 
+    }
+
+    public Boolean createTeam(Team obTeam)
+    {
         return null;
     }
 
