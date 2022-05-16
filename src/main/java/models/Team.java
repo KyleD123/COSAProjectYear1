@@ -25,13 +25,9 @@ public class Team implements Serializable {
     @NotEmpty(message = "Coach Name is Required")
     private String sCoachName;
 
-    public Team(int nTeamID, String sTeamName, String sCoachName)
+    public Team()
     {
-        this.nTeamID = nTeamID;
-        this.sTeamName = sTeamName;
-        this.sCoachName = sCoachName;
 
-        //Fill More
     }
 
     //Getters
@@ -41,7 +37,26 @@ public class Team implements Serializable {
 
     public String getCoachName() { return sCoachName; }
 
+    public int setTeamID(int teamID) { return nTeamID; }
+
+    public String setTeamName(String teamName) { return sTeamName; }
+
+    public String setCoachName(String coachName) { return sCoachName; }
+
+
+
+
     //Setters
+
+    public void setAllValues(Team team)
+    {
+        this.setTeamID(team.getTeamID());
+        this.setTeamName(team.getTeamName());
+        this.setCoachName(team.getCoachName());
+    }
+
+
+
 
 
 }
