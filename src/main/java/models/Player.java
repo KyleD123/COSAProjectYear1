@@ -23,8 +23,8 @@ public class Player implements Serializable {
     private String sLastName;
 
     @DatabaseField(canBeNull = false)
-    @Size(min = 2, max = 2, message = "Player Number must be 2 digits")
-    @NotEmpty(message = "Player Number is Required")
+    @Min(value = 0, message = "Player Number must be 1 or 2 digits")
+    @Max(value = 99, message = "Player Number must be 1 or 2 digits")
     private int nPlayerNumber;
 
     @DatabaseField(canBeNull = false)
