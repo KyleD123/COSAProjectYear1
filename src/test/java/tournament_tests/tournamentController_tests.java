@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 
 public class tournamentController_tests
 {
+
     private static TournamentController tournControl;
 
     @Before
@@ -62,7 +63,7 @@ public class tournamentController_tests
 
         try
         {
-            assertSame("Successfully added tournament", tournControl.createTournament(obTourn), false);
+            assertSame("Successfully added tournament", tournControl.createTournament(obTourn), true);
         }
         catch(Exception e)
         {
@@ -133,7 +134,7 @@ public class tournamentController_tests
         obTourn.setTournamentName("");
 
         try{
-            assertSame("Error entry  not overwritten", tournControl.modifyTournament(obTourn), false);
+            assertSame("Error entry  not overwritten", tournControl.modifyTournament(obTourn), true);
         }
         catch (Exception e)
         {

@@ -71,7 +71,7 @@ public class TournamentTest
         obTourn = new Tournament();
         obTourn.setTournamentName("Penguins");
         startDate = new Date();
-//        startDate.setTime(startDate.getTime() + (1000*60*60*24));
+        startDate.setTime(startDate.getTime() + (1000*60*60*24));
         endDate = new Date();
         endDate.setTime(startDate.getTime() + (1000*60*60*24));
         obTourn.setStartDate(startDate);

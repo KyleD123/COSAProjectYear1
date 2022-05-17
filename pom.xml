@@ -86,7 +86,7 @@
               <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>com.cosacpmg.App</mainClass>
+                <mainClass>com.cosacpmg.MainWindow</mainClass>
               </manifest>
             </archive>
           </configuration>

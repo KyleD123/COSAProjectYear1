@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddTournamentController">
+   <top>
+      <Pane prefHeight="128.0" prefWidth="1366.0" style="-fx-background-color: #D3D3D3;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="153.0" fitWidth="568.0" layoutX="399.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/createTourn.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+   </top>
+   <bottom>
+      <Pane prefHeight="111.0" prefWidth="1366.0" style="-fx-background-color: #D3D3D3;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox layoutX="474.0" layoutY="26.0" prefHeight="51.0" prefWidth="418.0" spacing="20.0">
+               <children>
+                  <ImageView fx:id="saveBtn" fitHeight="52.0" fitWidth="206.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#saveTournament">
+                     <image>
+                        <Image url="@img/saveBtn.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cancelBtn" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#cancel" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/cancelBtn.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children></Pane>
+   </bottom>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="1366.0" spacing="10.0">
+               <children>
+                  <DatePicker fx:id="txtStart" prefHeight="30.0" prefWidth="444.0" promptText="START DATE" />
+                  <Label text="*" textFill="#dd1313">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1366.0" spacing="20.0">
+               <children>
+                  <DatePicker fx:id="txtEnd" prefHeight="30.0" prefWidth="440.0" promptText="END DATE" />
+                  <Label text="*" textFill="#dd1313">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Label>
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1366.0">
+               <children>
+                  <TextField fx:id="txtName" prefHeight="36.0" prefWidth="473.0" promptText="Tournament Name (Optional)" />
+               </children></HBox>
+            <Label text="* - REQUIRED FIELDS" textFill="#c60d0d">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
