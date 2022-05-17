@@ -82,7 +82,38 @@ public class PlayerControllerTest {
     }
 
     @Test
-    public void testModifyPlayer() {
+    public void testModifyPlayerWithValidInfo() {
+        Player player1 = new Player();
+        player1.setsFirstName("Timmy");
+        player1.setsLastName("Jackson");
+        player1.setnPlayerNumber(24);
+        player1.setsPosition("Right Wing");
+        player1.setsParentInfo("Linda Jackson");
+        player1.setsEmergencyContact("306-456-7892");
 
+        Player player2 = new Player();
+        player2.setsFirstName("Timmy");
+        player2.setsLastName("Jackson");
+        player2.setnPlayerNumber(26);
+        player2.setsPosition("Right Wing");
+        player2.setsParentInfo("Linda Jackson");
+        player2.setsEmergencyContact("306-456-7892");
+
+        pc.createPlayer(player1);
+        assertSame("Player Successfully modified, send new data, and return edited Player", pc.modifyPlayer(player2), true);
+    }
+
+    @Test
+    public void testModifyPlayerWithIdenticalInfo() {
+        Player player1 = new Player();
+        player1.setsFirstName("Timmy");
+        player1.setsLastName("Jackson");
+        player1.setnPlayerNumber(24);
+        player1.setsPosition("Right Wing");
+        player1.setsParentInfo("Linda Jackson");
+        player1.setsEmergencyContact("306-456-7892");
+
+        pc.createPlayer(player1);
+        assertSame("Passed Player Object exists in database return false", pc.modifyPlayer(player1), false);
     }
 }
