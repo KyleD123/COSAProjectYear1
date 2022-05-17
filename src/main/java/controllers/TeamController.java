@@ -17,12 +17,10 @@ public class TeamController
 
     public boolean createTeam(Team obTeam)
     {
-        //return null;
         return true;
     }
 
     public boolean modifyTeamName(Team obTeam) {
-        //return null;
         return true;
     }
 
@@ -36,20 +34,6 @@ public class TeamController
 
     private ArrayList<Team> getTeams() {
         return null;
-    }
-
-    public boolean isSuccesfullyAdded() {
-        return false;
-    }
-
-    public void sendTeam(Team obTeam)
-    {
-
-    }
-
-    public void initiateORMConnection()
-    {
-
     }
 
 

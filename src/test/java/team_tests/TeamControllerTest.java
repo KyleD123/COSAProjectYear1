@@ -30,10 +30,8 @@ public class TeamControllerTest
         }
     }
 
-
     @Test
-    public void testAddTeamWithValidName() {
-
+    public void testCreateTeamWithValidName() {
         Team team1 = new Team();
         team1.setTeamName("Saskatoon Blades");
         team1.setCoachName("Sebastion Bird");
@@ -53,39 +51,44 @@ public class TeamControllerTest
         } catch (Exception e){
 
         }
-
     }
 
-
+    /**
+     * Invalid team name entry
+     */
     @Test
-    public void testAddTeamWithInvalidName() {
+    public void testCreateTeamWithInvalidName() {
         Team team = new Team();
 
         assertTrue( "Add invalid Team name expect null", tc.createTeam(team));
     }
 
-
-
-
-
-
-
-
-    @Ignore("test not implemented yet")
+    /**
+     * Valid modify team name entry
+     */
     @Test
-    public void testEditTeamWithValidTeam() {
-        //TODO implement test
+    public void testModifyTeamWithValidName()
+    {
+        Team team1 = new Team();
+        team1.setTeamName("Saskatoon Blades");
+
+        Team team2 = new Team();
+        team2.setTeamName("Saskatoon Thunder");
+
+        tc.createTeam(team1);
+        assertSame("Team successfully modified, send new data, and return edited Team", tc.modifyTeamName(team2), true);
     }
 
-    @Ignore("test not implemented yet")
+    /**
+     * Invalid modify team name entry
+     */
     @Test
-    public void testEditTeamWithInvalidTeam() {
-        //TODO implement test
-    }
+    public void testModifyTeamWithIdenticalName()
+    {
+        Team team1 = new Team();
+        team1.setTeamName("Saskatoon Blades");
 
-    @Ignore("test not implemented yet")
-    @Test
-    public void testExistsTeam() {
-        //TODO implement test
+        tc.createTeam(team1);
+        assertSame("Passed Team Object exists in database return false", tc.modifyTeamName(team1), false);
     }
 }
