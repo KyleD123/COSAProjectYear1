@@ -3,6 +3,7 @@ package models;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import models.custom_constraints.AfterStartDate;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -31,7 +32,7 @@ public class Tournament implements Serializable
     //ano's for end data (MAKE A CUSTOM VALIDATION FOR DAY AFTER THE START DATE)
     @DatabaseField(canBeNull = false)
     @NotNull(message = "Empty Date Entered")
-    @Future(message = "Past date entered")
+//    @AfterStartDate(message = "Date must be after one day after the start date")
     private Date endDate;
 
     public Tournament()

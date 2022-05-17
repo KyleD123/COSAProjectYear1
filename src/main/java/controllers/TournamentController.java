@@ -8,6 +8,8 @@ import models.Tournament;
 import models.TournamentValidator;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TournamentController
 {
@@ -35,9 +37,10 @@ public class TournamentController
         boolean isCreated = false; // false indicates not created
         try
         {
-            if(tV.isTournValid(obTourn))
+            if (tV.isTournValid(obTourn) && repo.queryForEq("startDate", obTourn.getStartDate()).size() == 0 && repo.queryForEq("endDate", obTourn.getEndDate()).size() == 0)
             {
                 int result = repo.create(obTourn);
+
                 isCreated = true;
             }
         }
@@ -68,6 +71,45 @@ public class TournamentController
         return isCreated;
     }
 
+    /**
+     * For future releases, to edit the last Tournament entry, this queries all of the Tournament entries and returns that list of Tournaments
+     * @return
+     */
+    public List<Tournament> getAllTournament()
+    {
+        List<Tournament> obReturn = new ArrayList<>();
+        try
+        {
+            obReturn = repo.queryForAll();
+        }
+
+        catch (SQLException e)
+        {
+
+        }
+
+        return obReturn;
+    }
+
+    public Tournament getLastEntry()
+    {
+        return getAllTournament().get(getAllTournament().size() - 1);
+    }
+
+//    public Tournament getTournamentById(Long id)
+//    {
+//        Tournament obReturn;
+//
+//        try {
+//            obReturn = repo.queryForId((long) id);
+//
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        return obReturn;
+//
+//    }
 
 
 
