@@ -1,23 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
-   <bottom>
+   <center>
       <Pane prefHeight="160.0" prefWidth="1366.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="75.0" fitWidth="100.0" layoutX="959.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+            <HBox alignment="CENTER" layoutX="546.0" layoutY="293.0" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
+               <children>
+                  <ImageView fitHeight="100.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/addButton.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="100.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/editButton.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/addButton.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="75.0" fitWidth="100.0" layoutX="547.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/editButton.png" />
+                  <Image url="@../img/player.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
+   </center>
+   <bottom>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../img/cancelBtn.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets bottom="30.0" />
+         </BorderPane.margin>
+      </ImageView>
    </bottom>
 </BorderPane>
