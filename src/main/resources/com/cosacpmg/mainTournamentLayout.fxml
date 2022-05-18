@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -25,9 +25,9 @@
          </children></Pane>
    </top>
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <Pane  prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ChoiceBox fx:id="cBoxIDs" layoutX="40.0" layoutY="69.0" prefHeight="33.0" prefWidth="1286.0" />
+            <ComboBox fx:id="cBoxIds" layoutX="40.0" layoutY="66.0" onAction="#changeInformation" prefHeight="45.0" prefWidth="1297.0" />
             <Label layoutX="40.0" layoutY="30.0" prefHeight="28.0" prefWidth="268.0" text="Specify Tournament ID:">
                <font>
                   <Font name="Franklin Gothic Heavy" size="24.0" />
@@ -39,15 +39,15 @@
                </font>
             </Label>
             <GridPane alignment="CENTER" layoutX="40.0" layoutY="228.0" prefHeight="241.0" prefWidth="1285.0" style="-fx-background-color: #c3c8cc; -fx-border-radius: 3;">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="654.0" minWidth="10.0" prefWidth="236.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1135.0" minWidth="10.0" prefWidth="1049.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="130.0" minHeight="4.0" prefHeight="4.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="266.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="320.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="654.0" minWidth="10.0" prefWidth="236.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1135.0" minWidth="10.0" prefWidth="1049.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="130.0" minHeight="4.0" prefHeight="4.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="266.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="320.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="95.0" prefWidth="237.0" style="-fx-background-color: #9db1ba; -fx-border-style: solid; -fx-border-width: 3; -fx-border-color: #45687b;" text="Tournament Name:">
                      <font>
@@ -89,7 +89,7 @@
    <bottom>
       <Pane prefHeight="109.0" prefWidth="1366.0" style="-fx-background-color: #D3D3D3;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="btnAdd" accessibleRole="BUTTON" fitHeight="87.0" fitWidth="82.0" layoutX="1184.0" layoutY="11.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" onMouseClicked="#switchCreateScene">
+            <ImageView fx:id="btnAdd" accessibleRole="BUTTON" fitHeight="87.0" fitWidth="82.0" layoutX="1184.0" layoutY="11.0" nodeOrientation="INHERIT" onMouseClicked="#switchCreateScene" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/addButton.png" />
                </image>
@@ -97,7 +97,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="btnEdit" accessibleRole="BUTTON" fitHeight="94.0" fitWidth="76.0" layoutX="1263.0" layoutY="11.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" onMouseClicked="#switchModifyScene">
+            <ImageView fx:id="btnEdit" accessibleRole="BUTTON" fitHeight="94.0" fitWidth="76.0" layoutX="1263.0" layoutY="11.0" nodeOrientation="INHERIT" onMouseClicked="#switchModifyScene" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/editButton.png" />
                </image>

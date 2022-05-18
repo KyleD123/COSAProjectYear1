@@ -77,5 +77,10 @@ public class Tournament implements Serializable
         this.endDate = end;
     }
 
+    @Override
+    public String toString()
+    {
+        return getTournamentId() + "";
+    }
 
 }

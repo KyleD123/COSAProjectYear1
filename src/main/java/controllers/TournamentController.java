@@ -6,7 +6,6 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import models.Tournament;
 import models.TournamentValidator;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.List;
 public class TournamentController
 {
    private Dao<Tournament, Long> repo;
-//   private ValidationHelper vh = new ValidationHelper();
     private TournamentValidator tV = new TournamentValidator();
 
     public TournamentController(ConnectionSource databaseConn)
@@ -37,7 +35,7 @@ public class TournamentController
         boolean isCreated = false; // false indicates not created
         try
         {
-            if (tV.isTournValid(obTourn) && repo.queryForEq("startDate", obTourn.getStartDate()).size() == 0 && repo.queryForEq("endDate", obTourn.getEndDate()).size() == 0)
+            if (tV.isTournValid(obTourn) && repo.queryForEq("startDate", obTourn.getStartDate()).size() == 0)
             {
                 int result = repo.create(obTourn);
 
@@ -96,20 +94,20 @@ public class TournamentController
         return getAllTournament().get(getAllTournament().size() - 1);
     }
 
-//    public Tournament getTournamentById(Long id)
-//    {
-//        Tournament obReturn;
-//
-//        try {
-//            obReturn = repo.queryForId((long) id);
-//
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        return obReturn;
-//
-//    }
+    public Tournament getTournamentById(Long id)
+    {
+        Tournament obReturn;
+
+        try {
+            obReturn = repo.queryForId((long) id);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return obReturn;
+
+    }
 
 
 

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import static org.junit.Assert.*;
 
-public class tournamentController_tests
+public class TournamentControllerTests
 {
 
     private static TournamentController tournControl;
@@ -140,6 +140,13 @@ public class tournamentController_tests
         {
             e.printStackTrace();
         }
+
+    }
+
+
+    @Test
+    public void testCreateTournamentList()
+    {
 
     }
 

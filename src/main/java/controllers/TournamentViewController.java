@@ -7,14 +7,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Tournament;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -31,23 +30,10 @@ public class TournamentViewController implements Initializable
     private ImageView btnAdd, cancelBtn, btnEdit;
 
     @FXML
-    private DatePicker txtStart;
+    private ComboBox cBoxIds;
 
     @FXML
-    private DatePicker txtEnd;
-
-    @FXML
-    private DatePicker txtStartEdit;
-
-    @FXML
-    private DatePicker txtEndEdit;
-
-    @FXML
-    private TextField txtName, txtNameEdit;
-
-    @FXML
-    private ChoiceBox cBoxIDs;
-
+    private Label txtTournamentName, txtStartDate, txtEndDate, txtTournamentInfoTitle;
 
     private Stage obMainStage  = new Stage();
 
@@ -64,6 +50,8 @@ public class TournamentViewController implements Initializable
             e.printStackTrace();
         }
         tournControl = new TournamentController(dbConn);
+
+        populateDropDownMenu();
     }
 
 
@@ -86,6 +74,26 @@ public class TournamentViewController implements Initializable
 
     public void populateDropDownMenu()
     {
+
         List<Tournament> list = tournControl.getAllTournament();
+        cBoxIds.getItems().addAll(list);
+
     }
+
+
+    public void changeInformation(javafx.event.ActionEvent actionEvent) {
+        int nID = Integer.parseInt(cBoxIds.getValue().toString());
+        Tournament nShow = tournControl.getTournamentById((long) nID);
+        txtTournamentInfoTitle.setText("Information for Tournament ID " + nID);
+
+
+        Date dStart = nShow.getStartDate();
+        Date dEnd = nShow.getEndDate();
+        DateFormat canadianDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        txtTournamentName.setText(nShow.getTournamentName() == null ? "" : nShow.getTournamentName());
+        txtStartDate.setText(canadianDateFormat.format(dStart));
+        txtEndDate.setText(canadianDateFormat.format(dEnd));
+    }
+
 }

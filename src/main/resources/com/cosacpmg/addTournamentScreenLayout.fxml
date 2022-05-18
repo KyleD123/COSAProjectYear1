@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddTournamentController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateTournamentController">
    <top>
       <Pane prefHeight="128.0" prefWidth="1366.0" style="-fx-background-color: #D3D3D3;" BorderPane.alignment="CENTER">
          <children>
@@ -21,7 +21,7 @@
          <children>
             <HBox layoutX="474.0" layoutY="26.0" prefHeight="51.0" prefWidth="418.0" spacing="20.0">
                <children>
-                  <ImageView fx:id="saveBtn" fitHeight="52.0" fitWidth="206.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#saveTournament">
+                  <ImageView fx:id="saveBtn" fitHeight="52.0" fitWidth="206.0" onMouseClicked="#saveTournament" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/saveBtn.png" />
                      </image>
@@ -48,6 +48,7 @@
                   </Label>
                </children>
             </HBox>
+            <Label fx:id="lblError1" textFill="RED" />
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1366.0" spacing="20.0">
                <children>
                   <DatePicker fx:id="txtEnd" prefHeight="30.0" prefWidth="440.0" promptText="END DATE" />
@@ -57,10 +58,12 @@
                      </font>
                   </Label>
                </children></HBox>
+            <Label fx:id="lblError2" textFill="RED" />
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1366.0">
                <children>
                   <TextField fx:id="txtName" prefHeight="36.0" prefWidth="473.0" promptText="Tournament Name (Optional)" />
                </children></HBox>
+            <Label fx:id="lblError3" textFill="RED" />
             <Label text="* - REQUIRED FIELDS" textFill="#c60d0d">
                <font>
                   <Font name="System Bold" size="12.0" />
