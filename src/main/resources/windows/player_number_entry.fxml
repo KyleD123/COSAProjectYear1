@@ -9,7 +9,7 @@
       <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Please enter an existing Player Number" />
-            <TextField prefWidth="100.0" promptText="Player Number" />
+            <TextField fx:id="txtNumModify" prefWidth="100.0" promptText="Player Number" />
          </children>
       </VBox>
    </center>
@@ -23,12 +23,12 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnPlayerNumEnter" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/enterBtn.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnPlayerNumCancel" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/cancelBtn.png" />
                </image>

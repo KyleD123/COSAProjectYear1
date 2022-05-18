@@ -4,18 +4,18 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PlayerViewController">
    <center>
       <Pane prefHeight="160.0" prefWidth="1366.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" layoutX="546.0" layoutY="293.0" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
                <children>
-                  <ImageView fitHeight="100.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="btnPlayerAdd" fitHeight="100.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/addButton.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="100.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="btnPlayerEdit" fitHeight="100.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/editButton.png" />
                      </image>
@@ -31,7 +31,7 @@
       </Pane>
    </center>
    <bottom>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fx:id="btnPlayerCancel" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
             <Image url="@../img/cancelBtn.png" />
          </image>

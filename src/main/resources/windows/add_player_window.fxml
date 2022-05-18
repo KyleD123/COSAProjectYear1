@@ -9,12 +9,12 @@
    <center>
       <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField prefWidth="300.0" promptText="First Name" />
-            <TextField prefWidth="300.0" promptText="Last Name" />
-            <TextField prefWidth="300.0" promptText="Player Number" />
-            <TextField prefWidth="300.0" promptText="Position" />
-            <TextField prefWidth="300.0" promptText="Parent Information" />
-            <TextField prefWidth="300.0" promptText="Emergency Contact" />
+            <TextField fx:id="txtFirstAdd" prefWidth="300.0" promptText="First Name" />
+            <TextField fx:id="txtLastAdd" prefWidth="300.0" promptText="Last Name" />
+            <TextField fx:id="txtPlayerAdd" prefWidth="300.0" promptText="Player Number" />
+            <TextField fx:id="txtPositionAdd" prefWidth="300.0" promptText="Position" />
+            <TextField fx:id="txtParentAdd" prefWidth="300.0" promptText="Parent Information" />
+            <TextField fx:id="txtContactAdd" prefWidth="300.0" promptText="Emergency Contact" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -34,12 +34,12 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnPlayerAddSave" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/saveBtn.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnPlayerAddCancel" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/cancelBtn.png" />
                </image>

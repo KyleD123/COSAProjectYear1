@@ -25,7 +25,7 @@ public class PlayerController {
     public boolean createPlayer(Player obPlayer) {
         if (verifyUnique(obPlayer)) {
             try {
-                int result = repo.create(obPlayer);
+                int nResult = repo.create(obPlayer);
                 return true;
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -35,14 +35,33 @@ public class PlayerController {
     }
 
     public boolean verifyUnique(Player obPlayer) {
+        try {
+//            int nFirstName = repo.queryForEq("sFirstName", obPlayer.getsFirstName()).size();
+//            int nLastName = repo.queryForEq("sLastName", obPlayer.getsLastName()).size();
+//            int nPlayerNum = repo.queryForEq("nPlayerNumber", obPlayer.getnPlayerNumber()).size();
+//            int nParentInfo = repo.queryForEq("sParentInfo", obPlayer.getsParentInfo()).size();
+//            int nEmergencyContact = repo.queryForEq("sEmergencyContact", obPlayer.getsEmergencyContact()).size();
+//            int[] naResult = {nFirstName, nLastName, nPlayerNum, nParentInfo, nEmergencyContact};
 
-        return true;
+//            for (int nField : naResult) {
+//                if (nField == 0) {
+//                    return true;
+//                }
+//            }
+            if (repo.queryForMatching(obPlayer).size() == 0) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public boolean modifyPlayer(Player obPlayer) {
-        if (verifyUnique(obPlayer)) {
+        if (!verifyUnique(obPlayer)) {
             try {
-                int result = repo.update(obPlayer);
+                int nResult = repo.update(obPlayer);
                 return true;
             } catch (SQLException e) {
                 e.printStackTrace();
