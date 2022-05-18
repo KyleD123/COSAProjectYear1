@@ -32,6 +32,7 @@ public class Tournament implements Serializable
     //ano's for end data (MAKE A CUSTOM VALIDATION FOR DAY AFTER THE START DATE)
     @DatabaseField(canBeNull = false)
     @NotNull(message = "Empty Date Entered")
+    @Future(message = "Past date entered")
 //    @AfterStartDate(message = "Date must be after one day after the start date")
     private Date endDate;
 

@@ -75,25 +75,27 @@ public class TournamentControllerTests
     {
         Tournament obTourn = new Tournament();
         Date start = new Date();
-        start.setTime(start.getTime() + + (1000*60*60*24));
+
+        start.setTime(start.getTime() +  (1000*60*60*48));
         obTourn.setStartDate(start);
+
         Date end = new Date();
-        end.setTime(start.getTime() + (1000*60*60*24));
+        end.setTime(start.getTime() + (1000*60*60*72));
         obTourn.setEndDate(end);
         obTourn.setTournamentName("");
 
         Tournament obTourn2 = new Tournament();
         Date start2 = new Date();
-        start2.setTime(start2.getTime() + + (1000*60*60*24));
-        obTourn.setStartDate(start2);
+        start2.setTime(start2.getTime() + + (1000*60*60*72));
+        obTourn2.setStartDate(start2);
 
         Date end2 = new Date();
-        end.setTime(start2.getTime() + (1000*60*60*48));
-        obTourn.setEndDate(end2);
-        obTourn.setTournamentName("Tester Tournament");
+        end.setTime(start2.getTime() + (1000*60*60*127));
+        obTourn2.setEndDate(end2);
+        obTourn2.setTournamentName("Tester Tournament");
 
-            assertSame("Successfully added tournament", tournControl.createTournament(obTourn), true);
-            assertSame("Tournaments with the same start and/or end date exist", tournControl.createTournament(obTourn2), false);
+        assertSame("Successfully added tournament", tournControl.createTournament(obTourn), true);
+        assertSame("Tournaments with the same start and/or end date exist", tournControl.createTournament(obTourn2), false);
 
     }
 
@@ -135,19 +137,21 @@ public class TournamentControllerTests
     {
         Tournament obTourn1 = new Tournament();
         Date start = new Date();
-        start.setTime(start.getTime() + + (1000*60*60*24));
+        start.setTime(start.getTime() + + (1000*60*60*48));
         obTourn1.setStartDate(start);
         Date end = new Date();
-        end.setTime(start.getTime() + (1000*60*60*24));
+
+        end.setTime(start.getTime() + (1000*60*60*72));
         obTourn1.setEndDate(end);
         obTourn1.setTournamentName("");
 
         Tournament obTourn2 = new Tournament();
         Date start2 = new Date();
-        start2.setTime(start2.getTime() + (1000*60*60*72));
+        start2.setTime(start2.getTime() + (1000*60*60*96));
         obTourn2.setStartDate(start2);
+
         Date end2 = new Date();
-        end.setTime(start2.getTime() + (1000*60*60*180));
+        end2.setTime(start2.getTime() + (1000*60*60*120));
         obTourn2.setEndDate(end2);
         obTourn2.setTournamentName("");
 
