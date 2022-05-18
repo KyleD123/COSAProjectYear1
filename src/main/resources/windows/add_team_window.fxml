@@ -21,16 +21,19 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="btnSave" fitHeight="150.0" fitWidth="200.0" layoutX="383.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnSave" fitHeight="150.0" fitWidth="200.0" layoutX="402.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/saveBtn.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="btnCancel" fitHeight="150.0" fitWidth="200.0" layoutX="781.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnCancel" fitHeight="150.0" fitWidth="200.0" layoutX="790.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/cancelBtn.png" />
          </image>
       </ImageView>
-      <Label layoutX="713.0" layoutY="329.0" text="TEAM NAME EXISTS" textFill="RED" />
+      <Label layoutX="677.0" layoutY="313.0" text="TEAM NAME EXISTS" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
    </children>
 </AnchorPane>
