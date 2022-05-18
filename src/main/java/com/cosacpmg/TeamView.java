@@ -11,16 +11,19 @@ import java.sql.SQLException;
 public class TeamView extends Application
 {
     private Scene obMainScene;
+
     private Stage obMainStage = new Stage();
+
 
     @Override
     public void start(Stage stage) throws IOException, SQLException
     {
         FXMLLoader mainLoader = new FXMLLoader(this.getClass().getResource("team_window.fxml"));
         obMainScene = new Scene(mainLoader.load());
-        this.obMainStage.setTitle("eSchedule - Team");
-        this.obMainStage.setScene(obMainScene);
-        this.obMainStage.show();
+        stage.setTitle("eSchedule - Team");
+        stage.setScene(obMainScene);
+        stage.setResizable(false);
+        stage.show();
     }
 
     public static void main(String[] args)

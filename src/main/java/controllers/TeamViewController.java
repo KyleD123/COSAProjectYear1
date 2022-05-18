@@ -16,6 +16,7 @@ import models.Team;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TeamViewController implements Initializable
@@ -52,12 +53,35 @@ public class TeamViewController implements Initializable
 
     public void switchCreateScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(TeamView.class.getResource("edit_team_window.fxml"));
+        FXMLLoader newScene = new FXMLLoader(TeamView.class.getResource("add_team_window.fxml"));
         obMainStage = (Stage) btnSave.getScene().getWindow();
-        obMainStage.setScene(new Scene(newScene.load()), 1366, 768);
+        obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();
     }
 
-    public voide
+    public void switchModifyScene(MouseEvent mouseEvent) throws Exception
+    {
+        FXMLLoader newScene = new FXMLLoader(TeamView.class.getResource("edit_team_window.fxml"));
+        obMainStage = (Stage) btnEdit.getScene().getWindow();
+        obMainStage.setScene(new Scene(newScene.load(), 1366,768));
+        obMainStage.show();
+    }
+
+//    public void populateDropDownMenu()
+//    {
+//
+//        List<Team> list = TeamController.getAllTeam();
+//        cBoxName.getItems().addAll(list);
+//
+//    }
+
+
+//    public void changeInformation(javafx.event.ActionEvent actionEvent) {
+//        int nID = Integer.parseInt(cBoxName.getValue().toString());
+//        Team nShow = TeamController.getTeam((long) nID);
+//        lblTeamID.setText(nID);
+//    }
+
+
 
 }
