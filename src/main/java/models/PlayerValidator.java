@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.Set;
 
 
-public class ValidationHelper {
+public class PlayerValidator {
     private ValidatorFactory vf;
     private Validator validator;
 
     /***
      * initailize the external validation objects
      */
-    public ValidationHelper() {
+    public PlayerValidator() {
         vf = Validation.buildDefaultValidatorFactory();
         validator = vf.getValidator();
     }

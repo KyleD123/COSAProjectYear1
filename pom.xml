@@ -99,7 +99,7 @@
               <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>com.cosacpmg.App</mainClass>
+                <mainClass>com.cosacpmg.PlayerView</mainClass>
               </manifest>
             </archive>
           </configuration>
