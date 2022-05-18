@@ -22,27 +22,27 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField layoutX="650.0" layoutY="311.0">
+      <TextField fx:id="txtNameEdit" layoutX="650.0" layoutY="311.0" promptText="Team Name">
          <font>
             <Font size="24.0" />
          </font>
       </TextField>
-      <Label layoutX="650.0" layoutY="253.0" text="&lt;&lt;TEAM ID&gt;&gt;">
+      <Label fx:id="lblTeamID" layoutX="650.0" layoutY="253.0" text="&lt;&lt;TEAM ID&gt;&gt;">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="450.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnSave" fitHeight="150.0" fitWidth="200.0" layoutX="450.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/saveBtn.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="748.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnCancel" fitHeight="150.0" fitWidth="200.0" layoutX="748.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/cancelBtn.png" />
          </image>
       </ImageView>
-      <Label layoutX="693.0" layoutY="378.0" text="TEAM NAME EXISTS" textFill="RED">
+      <Label fx:id="lblNameExists" layoutX="693.0" layoutY="378.0" text="TEAM NAME EXISTS" textFill="RED">
          <font>
             <Font size="24.0" />
          </font>

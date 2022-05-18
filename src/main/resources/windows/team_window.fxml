@@ -7,13 +7,13 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="windows.AddTeamWindow">
    <children>
-      <ChoiceBox id="cboTeamName" layoutX="662.0" layoutY="125.0" prefHeight="50.0" prefWidth="200.0" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="453.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+      <ChoiceBox id="cboTeamName" fx:id="cBoxName" layoutX="662.0" layoutY="125.0" prefHeight="50.0" prefWidth="200.0" />
+      <ImageView id="btnAddTeam" fx:id="btnAdd" fitHeight="150.0" fitWidth="200.0" layoutX="453.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/addButton.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="783.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="btnEditTeam" fx:id="btnEdit" fitHeight="150.0" fitWidth="200.0" layoutX="783.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/editButton.png" />
          </image>
@@ -24,12 +24,12 @@
             <Image url="@../img/team.png" />
          </image>
       </ImageView>
-      <Label layoutX="504.0" layoutY="133.0" text="Team Name:">
+      <Label fx:id="lblName" layoutX="504.0" layoutY="133.0" text="Team Name:">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="583.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnCancel" fitHeight="150.0" fitWidth="200.0" layoutX="583.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/cancelBtn.png" />
          </image>
