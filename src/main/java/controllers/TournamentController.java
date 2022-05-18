@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TournamentController
 {
-   private Dao<Tournament, Long> repo;
+    public Dao<Tournament, Long> repo;
     private TournamentValidator tV = new TournamentValidator();
 
     public TournamentController(ConnectionSource databaseConn)

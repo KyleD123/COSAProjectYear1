@@ -55,7 +55,7 @@ public class MainWindow extends Application
     @FXML
     public void openTournamentWindow(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader mainLoader = new FXMLLoader(TournamentView.class.getResource("mainTournamentLayout.fxml"));
+        FXMLLoader mainLoader = new FXMLLoader(TournamentView.class.getResource("main-tournament-layout.fxml"));
         Scene obMainScene = new Scene(mainLoader.load());
         Stage newWindow = new Stage();
         newWindow.setTitle("eSchedule - Tournament");

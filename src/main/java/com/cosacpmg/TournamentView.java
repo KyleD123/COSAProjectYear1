@@ -16,7 +16,7 @@ public class TournamentView extends Application
 
     @Override
     public void start(Stage stage) throws IOException, SQLException {
-        FXMLLoader mainLoader = new FXMLLoader(this.getClass().getResource("mainTournamentLayout.fxml"));
+        FXMLLoader mainLoader = new FXMLLoader(this.getClass().getResource("main-tournament-layout.fxml"));
         obMainScene = new Scene(mainLoader.load());
         stage.setTitle("eSchedule - Tournament");
         stage.setScene(obMainScene);

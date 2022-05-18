@@ -45,7 +45,7 @@ public class TournamentViewController implements Initializable
     {
         ConnectionSource dbConn = null;
         try {
-            dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:tournaments.db");
+            dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -58,7 +58,7 @@ public class TournamentViewController implements Initializable
     public void switchCreateScene(MouseEvent mouseEvent) throws Exception
     {
 
-        FXMLLoader newScene = new FXMLLoader(TournamentView.class.getResource("addTournamentScreenLayout.fxml"));
+        FXMLLoader newScene = new FXMLLoader(TournamentView.class.getResource("add-tournament-screen-layout.fxml"));
         obMainStage = (Stage) btnAdd.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366,768));
         obMainStage.show();
@@ -66,7 +66,7 @@ public class TournamentViewController implements Initializable
 
     public void switchModifyScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(TournamentView.class.getResource("modifyTournamentScreenLayout.fxml"));
+        FXMLLoader newScene = new FXMLLoader(TournamentView.class.getResource("modify-tournament-screen-layout.fxml"));
         obMainStage = (Stage) btnEdit.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366,768));
         obMainStage.show();

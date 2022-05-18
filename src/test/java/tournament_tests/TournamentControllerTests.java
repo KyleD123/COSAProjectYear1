@@ -1,6 +1,8 @@
 package tournament_tests;
 
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
 import controllers.TournamentController;
 import models.Tournament;
 import org.junit.Before;
@@ -8,6 +10,8 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class TournamentControllerTests
@@ -18,8 +22,11 @@ public class TournamentControllerTests
     @Before
     public void setUpMockDb()
     {
-        try{
-            tournControl = new TournamentController(new JdbcConnectionSource("jdbc:h2:mem:myDb"));
+        try
+        {
+            ConnectionSource obConn = new JdbcConnectionSource("jdbc:h2:mem:myDb");
+            tournControl = new TournamentController(obConn);
+            TableUtils.clearTable(obConn, Tournament.class);
         }
         catch(SQLException e)
         {
@@ -34,19 +41,16 @@ public class TournamentControllerTests
     {
         Tournament obTourn = new Tournament();
         Date start = new Date();
+        start.setTime(start.getTime() + + (1000*60*60*24));
+
         obTourn.setStartDate(start);
         Date end = new Date();
         end.setTime(start.getTime() + (1000*60*60*24));
         obTourn.setEndDate(end);
         obTourn.setTournamentName("");
 
-        try{
-            assertSame("Successfully added tournament", tournControl.createTournament(obTourn), true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        assertSame("Successfully added tournament", tournControl.createTournament(obTourn), true);
+
 
     }
 
@@ -59,16 +63,9 @@ public class TournamentControllerTests
         Date end = new Date();
         end.setTime(start.getTime() - (1000*60*60*24));
         obTourn.setEndDate(end);
-        obTourn.setTournamentName("");
 
-        try
-        {
-            assertSame("Successfully added tournament", tournControl.createTournament(obTourn), true);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        assertFalse("Successfully added tournament", tournControl.createTournament(obTourn));
+
 
     }
 
@@ -78,6 +75,7 @@ public class TournamentControllerTests
     {
         Tournament obTourn = new Tournament();
         Date start = new Date();
+        start.setTime(start.getTime() + + (1000*60*60*24));
         obTourn.setStartDate(start);
         Date end = new Date();
         end.setTime(start.getTime() + (1000*60*60*24));
@@ -86,20 +84,17 @@ public class TournamentControllerTests
 
         Tournament obTourn2 = new Tournament();
         Date start2 = new Date();
-        obTourn.setStartDate(start);
+        start2.setTime(start2.getTime() + + (1000*60*60*24));
+        obTourn.setStartDate(start2);
+
         Date end2 = new Date();
-        end.setTime(start.getTime() + (1000*60*60*24));
-        obTourn.setEndDate(end);
+        end.setTime(start2.getTime() + (1000*60*60*48));
+        obTourn.setEndDate(end2);
         obTourn.setTournamentName("Tester Tournament");
 
-        try{
             assertSame("Successfully added tournament", tournControl.createTournament(obTourn), true);
             assertSame("Tournaments with the same start and/or end date exist", tournControl.createTournament(obTourn2), false);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+
     }
 
     //MODIFY TOURNAMENT TOURNAMENT
@@ -109,19 +104,16 @@ public class TournamentControllerTests
     {
         Tournament obTourn = new Tournament();
         Date start = new Date();
+        start.setTime(start.getTime() + + (1000*60*60*24));
         obTourn.setStartDate(start);
+
         Date end = new Date();
-        end.setTime(start.getTime() + (1000*60*60*24));
+        end.setTime(start.getTime() + (1000*60*60*48));
         obTourn.setEndDate(end);
         obTourn.setTournamentName("");
 
-        try{
-            assertSame("Successfully overwritten", tournControl.modifyTournament(obTourn), true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        assertTrue( "Successfully overwritten!", tournControl.modifyTournament(obTourn));
+
 
     }
 
@@ -133,13 +125,7 @@ public class TournamentControllerTests
         obTourn.setEndDate(null);
         obTourn.setTournamentName("");
 
-        try{
-            assertSame("Error entry  not overwritten", tournControl.modifyTournament(obTourn), true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        assertFalse("Error entry  not overwritten", tournControl.modifyTournament(obTourn));
 
     }
 
@@ -147,6 +133,31 @@ public class TournamentControllerTests
     @Test
     public void testCreateTournamentList()
     {
+        Tournament obTourn1 = new Tournament();
+        Date start = new Date();
+        start.setTime(start.getTime() + + (1000*60*60*24));
+        obTourn1.setStartDate(start);
+        Date end = new Date();
+        end.setTime(start.getTime() + (1000*60*60*24));
+        obTourn1.setEndDate(end);
+        obTourn1.setTournamentName("");
+
+        Tournament obTourn2 = new Tournament();
+        Date start2 = new Date();
+        start2.setTime(start2.getTime() + (1000*60*60*72));
+        obTourn2.setStartDate(start2);
+        Date end2 = new Date();
+        end.setTime(start2.getTime() + (1000*60*60*180));
+        obTourn2.setEndDate(end2);
+        obTourn2.setTournamentName("");
+
+        tournControl.createTournament(obTourn1);
+        tournControl.createTournament(obTourn2);
+
+        List<Tournament> actualList = tournControl.getAllTournament();
+
+        assertEquals("EQUAL!", actualList.size(), 2);
+
 
     }
 

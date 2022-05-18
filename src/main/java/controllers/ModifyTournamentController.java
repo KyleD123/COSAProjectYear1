@@ -71,7 +71,7 @@ public class ModifyTournamentController  implements Initializable {
     {
         ConnectionSource dbConn = null;
         try {
-            dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:tournaments.db");
+            dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -147,7 +147,7 @@ public class ModifyTournamentController  implements Initializable {
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
 
-        FXMLLoader mainLoader =  new FXMLLoader(TournamentView.class.getResource("mainTournamentLayout.fxml"));
+        FXMLLoader mainLoader =  new FXMLLoader(TournamentView.class.getResource("main-tournament-layout.fxml"));
         Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
         obMainStage = (Stage) cancelBtn.getScene().getWindow();
         obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
@@ -194,7 +194,7 @@ public class ModifyTournamentController  implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK)
         {
-            FXMLLoader mainLoader =  new FXMLLoader(TournamentView.class.getResource("mainTournamentLayout.fxml"));
+            FXMLLoader mainLoader =  new FXMLLoader(TournamentView.class.getResource("main-tournament-layout.fxml"));
             Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
             obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
             obMainStage.show();
