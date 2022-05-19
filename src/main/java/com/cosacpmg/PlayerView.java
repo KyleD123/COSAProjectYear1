@@ -12,7 +12,7 @@ public class PlayerView extends Application
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader mainLoader = new FXMLLoader(this.getClass().getResource("player_window.fxml"));
+        FXMLLoader mainLoader = new FXMLLoader(this.getClass().getResource("main-player-screen-layout.fxml"));
         obMainScene = new Scene(mainLoader.load());
         stage.setTitle("eSchedule - Player");
         stage.setScene(obMainScene);

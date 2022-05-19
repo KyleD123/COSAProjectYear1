@@ -5,16 +5,22 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddPlayerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreatePlayerController">
    <center>
       <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="txtFirstAdd" prefWidth="300.0" promptText="First Name" />
+            <Label fx:id="lblError1" textFill="RED" />
             <TextField fx:id="txtLastAdd" prefWidth="300.0" promptText="Last Name" />
+            <Label fx:id="lblError2" textFill="RED" />
             <TextField fx:id="txtNumAdd" prefWidth="300.0" promptText="Player Number" />
+            <Label fx:id="lblError3" textFill="RED" />
             <TextField fx:id="txtPositionAdd" prefWidth="300.0" promptText="Position" />
+            <Label fx:id="lblError4" textFill="RED" />
             <TextField fx:id="txtParentAdd" prefWidth="300.0" promptText="Parent Information" />
+            <Label fx:id="lblError5" textFill="RED" />
             <TextField fx:id="txtContactAdd" prefWidth="300.0" promptText="Emergency Contact" />
+            <Label fx:id="lblError6" textFill="RED" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -27,21 +33,21 @@
    <top>
       <ImageView fitHeight="150.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_LEFT">
          <image>
-            <Image url="@../img/createPlayer.png" />
+            <Image url="@img/createPlayer.png" />
          </image>
       </ImageView>
    </top>
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="btnPlayerAddSave" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnPlayerAddSave" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#savePlayer" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/saveBtn.png" />
+                  <Image url="@img/saveBtn.png" />
                </image>
             </ImageView>
             <ImageView fx:id="btnPlayerAddCancel" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/cancelBtn.png" />
+                  <Image url="@img/cancelBtn.png" />
                </image>
             </ImageView>
          </children>

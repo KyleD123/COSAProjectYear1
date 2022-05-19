@@ -1,4 +1,5 @@
 package controllers;
 
-public class ModifyPlayerController {
+public class ModifyPlayerController
+{
 }

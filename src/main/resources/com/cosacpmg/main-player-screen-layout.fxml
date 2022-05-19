@@ -10,21 +10,21 @@
          <children>
             <HBox alignment="CENTER" layoutX="546.0" layoutY="293.0" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
                <children>
-                  <ImageView fx:id="btnPlayerAdd" fitHeight="100.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="btnPlayerAdd" fitHeight="100.0" fitWidth="95.0" onMouseClicked="#switchCreateScene" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/addButton.png" />
+                        <Image url="@img/addButton.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="btnPlayerEdit" fitHeight="100.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="btnPlayerEdit" fitHeight="100.0" fitWidth="95.0" onMouseClicked="#switchModifyScene" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/editButton.png" />
+                        <Image url="@img/editButton.png" />
                      </image>
                   </ImageView>
                </children>
             </HBox>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/player.png" />
+                  <Image url="@img/player.png" />
                </image>
             </ImageView>
          </children>
@@ -33,7 +33,7 @@
    <bottom>
       <ImageView fx:id="btnPlayerCancel" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
-            <Image url="@../img/cancelBtn.png" />
+            <Image url="@img/cancelBtn.png" />
          </image>
          <BorderPane.margin>
             <Insets bottom="30.0" />

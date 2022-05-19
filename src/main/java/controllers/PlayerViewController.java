@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
-public class PlayerViewController implements Initializable {
+public class PlayerViewController {
 
     @FXML
     private ImageView btnPlayerAdd, btnPlayerEdit, btnPlayerCancel;
@@ -31,28 +31,29 @@ public class PlayerViewController implements Initializable {
 
     public void switchCreateScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(PlayerView.class.getResource("add_player_window.fxml"));
+        FXMLLoader newScene = new FXMLLoader(PlayerView.class.getResource("create-player-screen-layout.fxml"));
         obMainStage = (Stage) btnPlayerAdd.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();
     }
 
-    public void switchModifyScene(MouseEvent mouseEvent) throws Exception {
-        FXMLLoader newScene = new FXMLLoader(PlayerView.class.getResource("modifyTournamentScreenLayout.fxml"));
+    public void switchModifyScene(MouseEvent mouseEvent) throws Exception
+    {
+        FXMLLoader newScene = new FXMLLoader(PlayerView.class.getResource("modify-player-screen-layout.fxml"));
         obMainStage = (Stage) btnPlayerEdit.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366,768));
         obMainStage.show();
     }
 
-    @FXML
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        ConnectionSource databaseConn = null;
-        try {
-            databaseConn = new JdbcPooledConnectionSource("jdbc:sqlite:players.db");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        playerController = new PlayerController(databaseConn);
-    }
+//    @FXML
+//    @Override
+//    public void initialize(URL location, ResourceBundle resources) {
+//        ConnectionSource databaseConn = null;
+//        try {
+//            databaseConn = new JdbcPooledConnectionSource("jdbc:sqlite:players.db");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        playerController = new PlayerController(databaseConn);
+//    }
 }
