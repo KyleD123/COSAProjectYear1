@@ -9,7 +9,7 @@
    <children>
       <ImageView fitHeight="134.0" fitWidth="334.0" layoutX="25.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/createTean.png" />
+            <Image url="@img/createTean.png" />
          </image>
       </ImageView>
       <TextField fx:id="txtName" layoutX="634.0" layoutY="256.0" promptText="Team Name">
@@ -23,15 +23,15 @@
       </Label>
       <ImageView fx:id="btnSave" fitHeight="150.0" fitWidth="200.0" layoutX="402.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/saveBtn.png" />
+            <Image url="@img/saveBtn.png" />
          </image>
       </ImageView>
       <ImageView fx:id="btnCancel" fitHeight="150.0" fitWidth="200.0" layoutX="790.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/cancelBtn.png" />
+            <Image url="@img/cancelBtn.png" />
          </image>
       </ImageView>
-      <Label layoutX="677.0" layoutY="313.0" text="TEAM NAME EXISTS" textFill="RED">
+      <Label layoutX="677.0" layoutY="313.0" text="Team Name Exists" textFill="RED">
          <font>
             <Font size="24.0" />
          </font></Label>

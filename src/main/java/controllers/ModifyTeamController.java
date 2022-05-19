@@ -31,8 +31,6 @@ class ModifyTeamController implements Initializable {
     @FXML
     private ImageView btnAdd, cancelBtn, btnEdit;
 
-
-
     @FXML
     private TextField txtNameEdit;
 
@@ -42,14 +40,11 @@ class ModifyTeamController implements Initializable {
     @FXML
     private Label lblNameExists;
 
-
-
     private TeamController teamController;
 
     private Team toBeEdited;
 
     private TeamValidator obValid;
-
 
     /**
      * When initiating the CreateTournamentController, this method initializes:
@@ -63,7 +58,7 @@ class ModifyTeamController implements Initializable {
     {
         ConnectionSource dbConn = null;
         try {
-            dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:teams.db");
+            dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -127,7 +122,6 @@ class ModifyTeamController implements Initializable {
      */
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
-
         FXMLLoader mainLoader =  new FXMLLoader(TeamController.class.getResource("team_window.fxml"));
         Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
         obMainStage = (Stage) cancelBtn.getScene().getWindow();
@@ -135,17 +129,12 @@ class ModifyTeamController implements Initializable {
         obMainStage.show();
     }
 
-
-
     public void populateTextFields()
     {
-
-        //This date object is just fake stuff for testing purposes
         toBeEdited = teamController.getLastEntry();
 
-
         txtNameEdit.setText(toBeEdited.getTeamName() == null ? "" : toBeEdited.getTeamName());
-        lblTeamID.setText("Editing Information for Tournament ID#: " + toBeEdited.getTeamID());
+        lblTeamID.setText("Editing Information for Team ID#: " + toBeEdited.getTeamID());
     }
 
 
@@ -165,7 +154,7 @@ class ModifyTeamController implements Initializable {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error has occured");
             alert.setHeaderText(null);
-            alert.setContentText("The entry entry has already existed. Check your start date and end date if it is filled with a certain tournament. Press OK to cancel");
+            alert.setContentText("The entry entry has already existed. Press OK to cancel");
 
         }
 
@@ -173,7 +162,7 @@ class ModifyTeamController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK)
         {
-            FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("mainTournamentLayout.fxml"));
+            FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team_window.fxml"));
             Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
             obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
             obMainStage.show();
@@ -181,3 +170,4 @@ class ModifyTeamController implements Initializable {
     }
 
 }
+

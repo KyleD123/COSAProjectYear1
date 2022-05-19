@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -30,6 +31,9 @@ public class TeamViewController implements Initializable
     @FXML
     private ChoiceBox cBoxName;
 
+    @FXML
+    private Label lblTeamID;
+
     private Stage obMainStage = new Stage();
     private TeamController teamControl;
 
@@ -40,7 +44,7 @@ public class TeamViewController implements Initializable
         ConnectionSource databaseConn = null;
         try
         {
-            databaseConn = new JdbcPooledConnectionSource("jdbc:sqlite:teams.db");
+            databaseConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
 
         }
         catch (SQLException e)
@@ -67,20 +71,17 @@ public class TeamViewController implements Initializable
         obMainStage.show();
     }
 
-//    public void populateDropDownMenu()
-//    {
-//
-//        List<Team> list = TeamController.getAllTeam();
-//        cBoxName.getItems().addAll(list);
-//
-//    }
+    public void populateDropDownMenu()
+    {
+        List<Team> list = teamControl.getAllTeam();
+        cBoxName.getItems().addAll(list);
+    }
 
-
-//    public void changeInformation(javafx.event.ActionEvent actionEvent) {
-//        int nID = Integer.parseInt(cBoxName.getValue().toString());
-//        Team nShow = TeamController.getTeam((long) nID);
-//        lblTeamID.setText(nID);
-//    }
+    public void changeInformation(javafx.event.ActionEvent actionEvent) {
+        long nID = Integer.parseInt(cBoxName.getValue().toString());
+        Team nShow = teamControl.getTeamByID((long) nID);
+        lblTeamID.setText("" + nID);
+    }
 
 
 

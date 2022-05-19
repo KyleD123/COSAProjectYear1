@@ -1,47 +1,32 @@
 package controllers;
-
 import com.cosacpmg.TeamView;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
-import com.j256.ormlite.support.ConnectionSource;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import com.j256.ormlite.support.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.fxml.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import models.Team;
-import models.TeamValidator;
+import models.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class CreateTournamentController implements Initializable
+class CreateTeamController implements Initializable
 {
-
     @FXML
     private ImageView btnAdd, cancelBtn, btnEdit;
-
-
-
-
 
     @FXML
     private TextField txtName;
 
     @FXML
     private Label lblAddExist;
-
-
 
     private TeamController teamController;
     private TeamValidator obValid;
@@ -53,26 +38,24 @@ public class CreateTournamentController implements Initializable
      * @param resources
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
+    public void initialize(URL location, ResourceBundle resources) {
         ConnectionSource dbConn = null;
         try {
-            dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:teams.db");
+            dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         teamController = new TeamController(dbConn);
         obValid = new TeamValidator();
-
     }
 
     /**
      * When the save button is pressed, it firstly grabs the value of the first and second DatePicker as a date, creates
-     * a temporary Tournament object, sets the StartDate and EndDate based on those values (including the Name textfield's value),
+     * a temporary Team object, sets the StartDate and EndDate based on those values (including the Name textfield's value),
      * and goes to a verification if its valid.
      *
-     * If it is valid, it creates the tournament and assuming all went well (if the dates are not conflicting each other), it shows up a message
+     * If it is valid, it creates the team and assuming all went well (if the dates are not conflicting each other), it shows up a message
      * that it is successful!
      *
      * If it is not valid, it removes all and tells the user what errors they made so they can correct it.
@@ -80,31 +63,22 @@ public class CreateTournamentController implements Initializable
      * @param mouseEvent
      * @throws IOException
      */
-    public void saveTournament(MouseEvent mouseEvent) throws IOException {
+    public void saveTeam(MouseEvent mouseEvent) throws IOException
+    {
         try
         {
-
-
             Team obTemp = new Team();
             obTemp.setTeamName("Rosetown Giants");
             obTemp.setTeamName("Grant O'Brian");
             obTemp.setTeamID(1);
-
 
             HashMap<String, String> listOfErrors = obValid.getErrors(obTemp);
 
             //If the annotations have errors, then it shows what kind of error you made.
             if (listOfErrors.size() > 0)
             {
-
-
-
-
-                lblAddExist.setText("TEAM NAME EXISTS");
-
+                lblAddExist.setText("Team Name Exists");
             }
-
-            //if all works, then lets send it to the database, show a prompt, and when you click close, and we go back to the mainTournamentWindow
             else
             {
                 lblAddExist.setText("");
@@ -127,23 +101,20 @@ public class CreateTournamentController implements Initializable
                 obMainStage.show();
             }
         }
-
-
     }
 
     /**
-     * This is a mouse click event handler to go back to the main tournament window.
+     * This is a mouse click event handler to go back to the main team window.
      * @param mouseEvent
      * @throws IOException
      */
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
-        FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("mainTournamentLayout.fxml"));
+        FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team_window.fxml"));
         Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
         obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
         obMainStage.show();
     }
-
 
     /**
      * This is a generic boolean based response prompt. It checks if its true and if its false.
@@ -168,17 +139,19 @@ public class CreateTournamentController implements Initializable
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error has occured");
             alert.setHeaderText(null);
-            alert.setContentText("The entry entry has already existed. Check your start date and end date if it is filled with a certain tournament. Press OK to cancel");
+            alert.setContentText("The Team entry has already existed. Press OK to cancel");
         }
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK)
         {
-            FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("mainTournamentLayout.fxml"));
+            FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team_window.fxml"));
             Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
             obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
             obMainStage.show();
         }
 
     }
+
+
 }

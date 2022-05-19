@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-class TeamController
+public class TeamController
 {
     private Dao<Team, Long> repo;
     private TeamValidator tV = new TeamValidator();
@@ -20,7 +20,7 @@ class TeamController
         try
         {
             this.repo = DaoManager.createDao(databaseConn, Team.class);
-            repo.setAutoCommit(databaseConn.getReadWriteConnection("tournaments"), true);
+            repo.setAutoCommit(databaseConn.getReadWriteConnection("teams"), true);
             TableUtils.createTableIfNotExists(databaseConn, Team.class);
         }
         catch(Exception e)
@@ -35,7 +35,7 @@ class TeamController
         boolean isCreated = false; // false indicates not created
         try
         {
-            if (tV.isTeamValid(obTeam) && repo.queryForEq("startDate", obTeam.getTeamName()).size() == 0)
+            if (tV.isTeamValid(obTeam) && repo.queryForEq("sTeamName", obTeam.getTeamName()).size() == 0)
             {
                 int result = repo.create(obTeam);
 
@@ -83,7 +83,7 @@ class TeamController
 
         catch (SQLException e)
         {
-
+            e.printStackTrace();
         }
 
         return obReturn;
@@ -94,7 +94,7 @@ class TeamController
         return getAllTeam().get(getAllTeam().size() - 1);
     }
 
-    public Team getTournamentById(Long id)
+    public Team getTeamByID(Long id)
     {
         Team obReturn;
 
@@ -108,8 +108,4 @@ class TeamController
         return obReturn;
 
     }
-
-
-
-
 }

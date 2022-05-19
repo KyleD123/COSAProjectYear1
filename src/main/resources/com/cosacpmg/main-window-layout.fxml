@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cosacpmg.MainWindow">
+    <top>
+        <VBox alignment="CENTER" prefWidth="681.0" style="-fx-background-color: #eeeeee;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="26.0" fitWidth="447.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@img/choose_tagline.png" />
+                    </image>
+                </ImageView>
+                <HBox alignment="CENTER" prefHeight="164.0" prefWidth="1366.0" spacing="10.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="2.0" />
+                    </padding>
+                    <children>
+                        <ImageView fx:id="playerBtn" fitHeight="145.0" fitWidth="124.0" onMouseClicked="#openPlayerWindow" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/player_icon.png" />
+                            </image>
+                            <viewport>
+                                <Rectangle2D />
+                            </viewport>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                        <ImageView fx:id="teamBtn" fitHeight="150.0" fitWidth="134.0" onMouseClicked="#openTeamWindow" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/team_icon.png" />
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                        <ImageView fx:id="tournamentBtn" fitHeight="150.0" fitWidth="134.0" onMouseClicked="#openTournamentWindow" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/tournament_icon.png" />
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets top="5.0" />
+            </padding>
+        </VBox>
+    </top>
+    <bottom>
+        <Pane prefHeight="58.0" prefWidth="637.0" style="-fx-background-color: #eeeeee;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="48.0" fitWidth="175.0" layoutX="263.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@img/escheduler_logo.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+    </bottom>
+    <cursor>
+        <Cursor fx:constant="DEFAULT" />
+    </cursor>
+</BorderPane>
+

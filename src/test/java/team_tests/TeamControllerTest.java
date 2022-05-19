@@ -76,7 +76,7 @@ public class TeamControllerTest
         team2.setTeamName("Saskatoon Thunder");
 
         tc.createTeam(team1);
-        assertSame("Team successfully modified, send new data, and return edited Team", tc.modifyTeamName(team2), true);
+        assertSame("Team successfully modified, send new data, and return edited Team", tc.modifyTeam(team2), true);
     }
 
     /**
@@ -89,6 +89,6 @@ public class TeamControllerTest
         team1.setTeamName("Saskatoon Blades");
 
         tc.createTeam(team1);
-        assertSame("Passed Team Object exists in database return false", tc.modifyTeamName(team1), false);
+        assertSame("Passed Team Object exists in database return false", tc.modifyTeam(team1), false);
     }
 }

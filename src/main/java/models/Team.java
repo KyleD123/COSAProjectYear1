@@ -47,8 +47,11 @@ public class Team implements Serializable {
         this.setCoachName(team.getCoachName());
     }
 
-
-
+    @Override
+    public String toString()
+    {
+        return this.getTeamName() == null ? this.getTeamID() + "" : this.getTeamName() + " ID: " + this.getTeamID();
+    }
 
 
 }
