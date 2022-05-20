@@ -23,7 +23,7 @@ public class CreateTeamController implements Initializable
     private ImageView btnAdd, btnCancel, btnEdit;
 
     @FXML
-    private TextField txtName;
+    private TextField txtName, txtCoachName;
 
     @FXML
     private Label error1;
@@ -68,7 +68,7 @@ public class CreateTeamController implements Initializable
         try
         {
             Team obTemp = new Team();
-            obTemp.setCoachName("NA");
+            obTemp.setCoachName(txtCoachName.getText());
             obTemp.setTeamName(txtName.getText());
 
             HashMap<String, String> listOfErrors = obValid.getErrors(obTemp);
@@ -77,7 +77,6 @@ public class CreateTeamController implements Initializable
             if (listOfErrors.size() > 0)
             {
                 error1.setText(listOfErrors.get("sTeamName"));
-                System.out.println("avc");
             }
             else
             {

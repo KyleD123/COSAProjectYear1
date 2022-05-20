@@ -32,17 +32,27 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="btnSave" fitHeight="150.0" fitWidth="200.0" layoutX="450.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnSave" fitHeight="150.0" fitWidth="200.0" layoutX="450.0" layoutY="544.0" onMouseClicked="#saveTeam" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/saveBtn.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="btnCancel" fitHeight="150.0" fitWidth="200.0" layoutX="748.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnCancel" fitHeight="150.0" fitWidth="200.0" layoutX="748.0" layoutY="544.0" onMouseClicked="#cancel" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/cancelBtn.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblNameExists" layoutX="683.0" layoutY="367.0" text="TEAM NAME EXISTS" textFill="RED">
+      <Label fx:id="lblNameExists" layoutX="683.0" layoutY="367.0" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtCoachName" disable="true" layoutX="650.0" layoutY="384.0" prefHeight="51.0" prefWidth="298.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label layoutX="439.0" layoutY="384.0" prefHeight="51.0" prefWidth="158.0" text="COACH NAME">
          <font>
             <Font size="24.0" />
          </font>

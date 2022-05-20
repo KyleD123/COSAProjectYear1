@@ -17,22 +17,16 @@ import models.TeamValidator;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ModifyTeamController implements Initializable {
     @FXML
-    private ImageView btnAdd, cancelBtn, btnEdit;
+    private ImageView btnAdd, btnCancel, btnEdit;
 
     @FXML
-    private TextField txtNameEdit;
+    private TextField txtNameEdit, txtCoachName;
 
     @FXML
     private Label lblTeamID;
@@ -45,6 +39,8 @@ public class ModifyTeamController implements Initializable {
     private Team toBeEdited;
 
     private TeamValidator obValid;
+
+    private int teamID;
 
     /**
      * When initiating the CreateTournamentController, this method initializes:
@@ -65,7 +61,6 @@ public class ModifyTeamController implements Initializable {
         teamController = new TeamController(dbConn);
 
         obValid = new TeamValidator();
-        populateTextFields();
     }
 
     /**
@@ -81,31 +76,24 @@ public class ModifyTeamController implements Initializable {
      * @param mouseEvent
      * @throws IOException
      */
-    public void saveTournament(MouseEvent mouseEvent) throws IOException
+    public void saveTeam(MouseEvent mouseEvent) throws IOException
     {
         try
         {
-
-
-
             toBeEdited.setTeamName(txtNameEdit.getText());
-
 
             HashMap<String, String> listOfErrors = obValid.getErrors(toBeEdited);
 
             //If the annotations have errors, then it shows what kind of error you made.
             if (listOfErrors.size() > 0)
             {
-                lblNameExists.setText("TEAM NAME EXISTS");
-
+                lblNameExists.setText("Team Name Exists");
             }
 
             //if all works, then lets send it to the database, show a prompt, and when you click close, and we go back to the mainTournamentWindow
             else
             {
                 lblNameExists.setText("");
-
-
                 responsePrompt(teamController.modifyTeam(toBeEdited));
             }
         }
@@ -122,21 +110,21 @@ public class ModifyTeamController implements Initializable {
      */
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
-        FXMLLoader mainLoader =  new FXMLLoader(TeamController.class.getResource("team_window.fxml"));
-        Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
-        obMainStage = (Stage) cancelBtn.getScene().getWindow();
+        FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team_window.fxml"));
+        Stage obMainStage = (Stage) btnCancel.getScene().getWindow();
+        obMainStage = (Stage) btnCancel.getScene().getWindow();
         obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
         obMainStage.show();
     }
 
     public void populateTextFields()
     {
-        toBeEdited = teamController.getLastEntry();
+        toBeEdited = teamController.getTeamByID((long)teamID);
 
         txtNameEdit.setText(toBeEdited.getTeamName() == null ? "" : toBeEdited.getTeamName());
         lblTeamID.setText("Editing Information for Team ID#: " + toBeEdited.getTeamID());
+        txtCoachName.setText(toBeEdited.getCoachName());
     }
-
 
     public void responsePrompt(boolean status) throws IOException
     {
@@ -148,25 +136,28 @@ public class ModifyTeamController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Successfully Overwritten!");
         }
-
         else
         {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error has occured");
             alert.setHeaderText(null);
-            alert.setContentText("The entry entry has already existed. Press OK to cancel");
+            alert.setContentText("The Team entry has already existed. Press OK to cancel");
 
         }
-
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK)
         {
             FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team_window.fxml"));
-            Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
+            Stage obMainStage = (Stage) btnCancel.getScene().getWindow();
             obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
             obMainStage.show();
         }
+    }
+
+    public void setID(int id)
+    {
+        this.teamID = id;
     }
 
 }

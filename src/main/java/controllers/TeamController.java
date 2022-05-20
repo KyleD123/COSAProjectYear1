@@ -55,7 +55,7 @@ public class TeamController
         boolean isCreated = false; // false indicates not created
         try
         {
-            if(tV.isTeamValid(obTeam))
+            if(tV.isTeamValid(obTeam) && repo.queryForEq("sTeamName", obTeam.getTeamName()).size() == 0)
             {
                 int result = repo.update(obTeam);
                 isCreated = true;
