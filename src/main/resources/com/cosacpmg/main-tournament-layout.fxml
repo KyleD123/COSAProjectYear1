@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TournamentViewController">
+   <top>
+      <Pane prefHeight="120.0" prefWidth="1366.0" style="-fx-background-color: #D3D3D3;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="89.0" fitWidth="419.0" layoutX="21.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/tournament.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+   </top>
+   <center>
+      <Pane  prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ComboBox fx:id="cBoxIds" layoutX="40.0" layoutY="66.0" onAction="#changeInformation" prefHeight="45.0" prefWidth="1297.0" />
+            <Label layoutX="40.0" layoutY="30.0" prefHeight="28.0" prefWidth="268.0" text="Specify Tournament ID:">
+               <font>
+                  <Font name="Franklin Gothic Heavy" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="txtTournamentInfoTitle" layoutX="504.0" layoutY="184.0" text="Information for Tournament #x: ">
+               <font>
+                  <Font name="Franklin Gothic Heavy" size="24.0" />
+               </font>
+            </Label>
+            <GridPane alignment="CENTER" layoutX="40.0" layoutY="228.0" prefHeight="241.0" prefWidth="1285.0" style="-fx-background-color: #c3c8cc; -fx-border-radius: 3;">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="654.0" minWidth="10.0" prefWidth="236.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1135.0" minWidth="10.0" prefWidth="1049.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="130.0" minHeight="4.0" prefHeight="4.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="266.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="320.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="95.0" prefWidth="237.0" style="-fx-background-color: #9db1ba; -fx-border-style: solid; -fx-border-width: 3; -fx-border-color: #45687b;" text="Tournament Name:">
+                     <font>
+                        <Font name="Franklin Gothic Demi Cond" size="27.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding></Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="82.0" prefWidth="237.0" style="-fx-background-color: #9db1ba; -fx-border-style: solid; -fx-border-width: 3; -fx-border-color: #45687b;" text="Start Date:" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Franklin Gothic Demi Cond" size="27.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="89.0" prefWidth="237.0" style="-fx-background-color: #9db1ba; -fx-border-color: solid; -fx-border-width: 3; -fx-border-color: #45687b;" text="End Date:" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Franklin Gothic Demi Cond" size="27.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="txtTournamentName" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="1059.0" textAlignment="CENTER" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Franklin Gothic Book" size="21.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="txtStartDate" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="1066.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Franklin Gothic Book" size="21.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="txtEndDate" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="1096.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Franklin Gothic Book" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+         </children>
+      </Pane>
+   </center>
+   <bottom>
+      <Pane prefHeight="109.0" prefWidth="1366.0" style="-fx-background-color: #D3D3D3;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="btnAdd" accessibleRole="BUTTON" fitHeight="87.0" fitWidth="82.0" layoutX="1184.0" layoutY="11.0" nodeOrientation="INHERIT" onMouseClicked="#switchCreateScene" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/addButton.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="btnEdit" accessibleRole="BUTTON" fitHeight="94.0" fitWidth="76.0" layoutX="1263.0" layoutY="11.0" nodeOrientation="INHERIT" onMouseClicked="#switchModifyScene" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/editButton.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Pane>
+   </bottom>
+</BorderPane>
