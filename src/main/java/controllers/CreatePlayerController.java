@@ -64,8 +64,7 @@ public class CreatePlayerController implements Initializable
         obPlayer.setnPlayerNumber(nPlayerNum);
         obPlayer.setsParentInfo(sParent);
         obPlayer.setsEmergencyContact(sContact);
-
-
+        
         HashMap<String, String> listOfErrors = obValid.getErrors(obPlayer);
 
         if (listOfErrors.size() > 0)
