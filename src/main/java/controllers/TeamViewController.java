@@ -60,7 +60,7 @@ public class TeamViewController implements Initializable
 
     public void switchCreateScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(TeamView.class.getResource("add_team_window.fxml"));
+        FXMLLoader newScene = new FXMLLoader(TeamView.class.getResource("add-team-window.fxml"));
         obMainStage = (Stage) btnAdd.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();
@@ -68,7 +68,7 @@ public class TeamViewController implements Initializable
 
     public void switchModifyScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(TeamView.class.getResource("edit_team_window.fxml"));
+        FXMLLoader newScene = new FXMLLoader(TeamView.class.getResource("edit-team-window.fxml"));
         obMainStage = (Stage) btnEdit.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366,768));
         obMainStage.show();
@@ -95,7 +95,7 @@ public class TeamViewController implements Initializable
 
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
-//        FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team_window.fxml"));
+//        FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team-window.fxml"));
         obMainStage = (Stage) btnCancel.getScene().getWindow();
 //        obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
         obMainStage.close();

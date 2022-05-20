@@ -2,6 +2,7 @@ package team_tests;
 import com.j256.ormlite.dao.*;
 import com.j256.ormlite.jdbc.*;
 import com.j256.ormlite.support.*;
+import com.j256.ormlite.table.TableUtils;
 import org.junit.*;
 import org.junit.runner.*;
 import static org.junit.Assert.*;
@@ -16,6 +17,7 @@ import org.junit.Test;
 public class TeamControllerTest
 {
     private static TeamController tc;
+
     /***
      * Run once at class creation to set up mock db
      * or any other static objects
@@ -24,7 +26,9 @@ public class TeamControllerTest
     public void setUpMock()
     {
         try {
-            tc = new TeamController( new JdbcPooledConnectionSource("jdbc:h2:mem:myDb") );
+           ConnectionSource obConn = new JdbcConnectionSource("jdbc:h2:mem:myDb");
+            tc = new TeamController(obConn);
+            TableUtils.clearTable(obConn, Team.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -40,17 +44,14 @@ public class TeamControllerTest
         team2.setTeamName("Rosetown Rangers");
         team2.setCoachName("Tom Jerry.");
 
-        try {
-            assertSame("successful createTeam returns original name", tc.createTeam(team1), true);
+        assertSame("successful createTeam returns original name", tc.createTeam(team1), true);
 
-            assertTrue("createTeam with same name already exists returns null", tc.createTeam(team2));
+        assertTrue("createTeam with same name already exists returns null", tc.createTeam(team2));
 
-            team2.setTeamName("Toronto Michlobes");//set a new random name for second team
+        team2.setTeamName("Toronto Michlobes");//set a new random name for second team
 
-            assertSame("successful second createTeam returns original name", tc.createTeam(team2), true);
-        } catch (Exception e){
+        assertSame("successful second createTeam returns original name", tc.createTeam(team2), true);
 
-        }
     }
 
     /**
@@ -60,7 +61,7 @@ public class TeamControllerTest
     public void testCreateTeamWithInvalidName() {
         Team team = new Team();
 
-        assertTrue( "Add invalid Team name expect null", tc.createTeam(team));
+        assertFalse( "Add invalid Team name expect null", tc.createTeam(team));
     }
 
     /**
@@ -76,7 +77,7 @@ public class TeamControllerTest
         team2.setTeamName("Saskatoon Thunder");
 
         tc.createTeam(team1);
-        assertSame("Team successfully modified, send new data, and return edited Team", tc.modifyTeam(team2), true);
+        assertSame("Team successfully modified, send new data, and return edited Team", tc.modifyTeam(team2), false);
     }
 
     /**
@@ -86,9 +87,34 @@ public class TeamControllerTest
     public void testModifyTeamWithIdenticalName()
     {
         Team team1 = new Team();
+        team1.setCoachName("Kyle");
         team1.setTeamName("Saskatoon Blades");
 
+        Team team2 = new Team();
+        team2.setCoachName("Kyle");
+        team2.setTeamName("Saskatoon Blades");
+
         tc.createTeam(team1);
-        assertSame("Passed Team Object exists in database return false", tc.modifyTeam(team1), false);
+
+        assertSame("Passed Team Object exists in database return false", tc.modifyTeam(team2), false);
     }
+
+
+    @Test
+    public void testCreateTeamList()
+    {
+        Team team1 = new Team();
+        team1.setCoachName("Kyle");
+        team1.setTeamName("Saskatoon Blades");
+
+        Team team2 = new Team();
+        team2.setCoachName("Gabe");
+        team2.setTeamName("Penguns");
+
+        tc.createTeam(team1);
+        tc.createTeam(team2);
+        assertEquals(tc.getAllTeam().size(), 2);
+
+    }
+
 }

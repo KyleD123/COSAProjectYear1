@@ -18,7 +18,7 @@ public class TeamView extends Application
     @Override
     public void start(Stage stage) throws IOException, SQLException
     {
-        FXMLLoader mainLoader = new FXMLLoader(this.getClass().getResource("team_window.fxml"));
+        FXMLLoader mainLoader = new FXMLLoader(this.getClass().getResource("team-window.fxml"));
         obMainScene = new Scene(mainLoader.load());
         stage.setTitle("eSchedule - Team");
         stage.setScene(obMainScene);

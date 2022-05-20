@@ -110,7 +110,7 @@ public class ModifyTeamController implements Initializable {
      */
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
-        FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team_window.fxml"));
+        FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team-window.fxml"));
         Stage obMainStage = (Stage) btnCancel.getScene().getWindow();
         obMainStage = (Stage) btnCancel.getScene().getWindow();
         obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
@@ -148,7 +148,7 @@ public class ModifyTeamController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK)
         {
-            FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team_window.fxml"));
+            FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team-window.fxml"));
             Stage obMainStage = (Stage) btnCancel.getScene().getWindow();
             obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
             obMainStage.show();
