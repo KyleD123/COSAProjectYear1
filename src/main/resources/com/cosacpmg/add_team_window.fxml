@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="windows.AddTeamWindow">
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateTeamController">
    <children>
       <ImageView fitHeight="134.0" fitWidth="334.0" layoutX="25.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -21,17 +21,17 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="btnSave" fitHeight="150.0" fitWidth="200.0" layoutX="402.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnSave" fitHeight="150.0" onMouseClicked="#saveTeam" fitWidth="200.0" layoutX="402.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/saveBtn.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="btnCancel" fitHeight="150.0" fitWidth="200.0" layoutX="790.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnCancel" fitHeight="150.0" onMouseClicked="#cancel" fitWidth="200.0" layoutX="790.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/cancelBtn.png" />
          </image>
       </ImageView>
-      <Label layoutX="677.0" layoutY="313.0" text="Team Name Exists" textFill="RED">
+      <Label fx:id="error1" layoutX="677.0" layoutY="313.0" textFill="RED">
          <font>
             <Font size="24.0" />
          </font></Label>

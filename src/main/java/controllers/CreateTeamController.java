@@ -17,16 +17,16 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-class CreateTeamController implements Initializable
+public class CreateTeamController implements Initializable
 {
     @FXML
-    private ImageView btnAdd, cancelBtn, btnEdit;
+    private ImageView btnAdd, btnCancel, btnEdit;
 
     @FXML
     private TextField txtName;
 
     @FXML
-    private Label lblAddExist;
+    private Label error1;
 
     private TeamController teamController;
     private TeamValidator obValid;
@@ -68,20 +68,20 @@ class CreateTeamController implements Initializable
         try
         {
             Team obTemp = new Team();
-            obTemp.setTeamName("Rosetown Giants");
-            obTemp.setTeamName("Grant O'Brian");
-            obTemp.setTeamID(1);
+            obTemp.setCoachName("NA");
+            obTemp.setTeamName(txtName.getText());
 
             HashMap<String, String> listOfErrors = obValid.getErrors(obTemp);
 
             //If the annotations have errors, then it shows what kind of error you made.
             if (listOfErrors.size() > 0)
             {
-                lblAddExist.setText("Team Name Exists");
+                error1.setText(listOfErrors.get("sTeamName"));
+                System.out.println("avc");
             }
             else
             {
-                lblAddExist.setText("");
+                error1.setText("");
                 responsePrompt(teamController.createTeam(obTemp));
             }
         }
@@ -90,13 +90,13 @@ class CreateTeamController implements Initializable
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error has occured");
             alert.setHeaderText(null);
-            alert.setContentText("Something went wrong with the database. Either the connection dropped or the one of the fields is missing. Press OK to cancel");
+            alert.setContentText("Something went wrong with the database. Press OK to cancel");
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK)
             {
-                FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("mainTournamentLayout.fxml"));
-                Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
+                FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team_window.fxml"));
+                Stage obMainStage = (Stage) btnCancel.getScene().getWindow();
                 obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
                 obMainStage.show();
             }
@@ -111,7 +111,7 @@ class CreateTeamController implements Initializable
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
         FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team_window.fxml"));
-        Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
+        Stage obMainStage = (Stage) btnCancel.getScene().getWindow();
         obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
         obMainStage.show();
     }
@@ -146,7 +146,7 @@ class CreateTeamController implements Initializable
         if (result.get() == ButtonType.OK)
         {
             FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team_window.fxml"));
-            Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
+            Stage obMainStage = (Stage) btnCancel.getScene().getWindow();
             obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
             obMainStage.show();
         }

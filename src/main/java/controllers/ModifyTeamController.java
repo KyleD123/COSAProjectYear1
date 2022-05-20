@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-class ModifyTeamController implements Initializable {
+public class ModifyTeamController implements Initializable {
     @FXML
     private ImageView btnAdd, cancelBtn, btnEdit;
 

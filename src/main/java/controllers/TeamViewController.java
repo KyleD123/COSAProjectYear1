@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Team;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -53,12 +54,14 @@ public class TeamViewController implements Initializable
         }
 
         teamControl = new TeamController(databaseConn);
+        populateDropDownMenu();
     }
+
 
     public void switchCreateScene(MouseEvent mouseEvent) throws Exception
     {
         FXMLLoader newScene = new FXMLLoader(TeamView.class.getResource("add_team_window.fxml"));
-        obMainStage = (Stage) btnSave.getScene().getWindow();
+        obMainStage = (Stage) btnAdd.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();
     }
@@ -83,6 +86,13 @@ public class TeamViewController implements Initializable
         lblTeamID.setText("" + nID);
     }
 
+    public void cancel(MouseEvent mouseEvent) throws IOException
+    {
+        FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team_window.fxml"));
+        Stage obMainStage = (Stage) btnCancel.getScene().getWindow();
+        obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
+        obMainStage.show();
+    }
 
 
 }
