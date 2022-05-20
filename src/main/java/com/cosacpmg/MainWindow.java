@@ -9,11 +9,14 @@ import javafx.stage.*;
 import java.io.IOException;
 public class MainWindow extends Application
 {
+    private static Stage obStage;
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("main-window-layout.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        this.obStage = stage;
+        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("main-window-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 700, 700);
         stage.setTitle("eSchedule");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
@@ -22,6 +25,11 @@ public class MainWindow extends Application
         launch();
     }
 
+    /**
+     * Opens the Team Window
+
+     * @throws Exception
+     */
     @FXML
     public void openTeamWindow(MouseEvent mouseEvent) throws Exception
     {
@@ -41,7 +49,12 @@ public class MainWindow extends Application
     @FXML
     public void openPlayerWindow(MouseEvent mouseEvent) throws Exception
     {
-        System.out.println("Bruh");
+        FXMLLoader mainLoader = new FXMLLoader(PlayerView.class.getResource("main-player-screen-layout.fxml"));
+        Scene obMainScene = new Scene(mainLoader.load());
+        Stage newWindow = new Stage();
+        newWindow.setTitle("eSchedule - Tournament");
+        newWindow.setScene(obMainScene);
+        newWindow.show();
     }
 
     /**
@@ -52,11 +65,12 @@ public class MainWindow extends Application
     @FXML
     public void openTournamentWindow(MouseEvent mouseEvent) throws Exception
     {
-//        FXMLLoader mainLoader = new FXMLLoader(TournamentView.class.getResource("main-tournament-layout.fxml"));
-//        Scene obMainScene = new Scene(mainLoader.load());
-//        Stage newWindow = new Stage();
-//        newWindow.setTitle("eSchedule - Tournament");
-//        newWindow.setScene(obMainScene);
-//        newWindow.show();
+        FXMLLoader mainLoader = new FXMLLoader(TournamentView.class.getResource("main-tournament-layout.fxml"));
+        Scene obMainScene = new Scene(mainLoader.load());
+        Stage newWindow = new Stage();
+        newWindow.setTitle("eSchedule - Tournament");
+        newWindow.setScene(obMainScene);
+        newWindow.show();
     }
+
 }

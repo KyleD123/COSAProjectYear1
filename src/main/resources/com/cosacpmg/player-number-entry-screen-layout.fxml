@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MinPlayerNumEntryController">
+   <center>
+      <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Please enter an existing Player Number" />
+            <ComboBox fx:id="cmbPlayerNum" prefWidth="150.0" promptText="Player Number" />
+         </children>
+      </VBox>
+   </center>
+   <top>
+      <ImageView fitHeight="150.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_LEFT">
+         <image>
+            <Image url="@img/player.png" />
+         </image>
+      </ImageView>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="btnPlayerNumEnter" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#changeToEntryScene" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/enterBtn.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="btnPlayerNumCancel" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#cancel" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/cancelBtn.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
