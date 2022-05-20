@@ -39,10 +39,16 @@ public class PlayerViewController {
 
     public void switchModifyScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(PlayerView.class.getResource("modify-player-screen-layout.fxml"));
+        FXMLLoader newScene = new FXMLLoader(PlayerView.class.getResource("player-number-entry-screen-layout.fxml"));
         obMainStage = (Stage) btnPlayerEdit.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366,768));
         obMainStage.show();
+    }
+
+    public void closeWindow(MouseEvent mouseEvent) throws Exception
+    {
+        obMainStage = (Stage) btnPlayerEdit.getScene().getWindow();
+        obMainStage.close();
     }
 
 //    @FXML

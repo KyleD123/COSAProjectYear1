@@ -9,6 +9,9 @@ import models.PlayerValidator;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PlayerController {
     private Dao<Player, Long> repo;
@@ -32,42 +35,18 @@ public class PlayerController {
         boolean sent = false;
         try
         {
-            if (obValid.isValid(obPlayer)) {
-                    int nResult = repo.create(obPlayer);
-                    sent = true;
-        }
+            if (obValid.isValid(obPlayer) && repo.queryForMatching(obPlayer).isEmpty() ) {
+                int nResult = repo.create(obPlayer);
+                sent = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return sent;
     }
 
-//    public boolean verifyUnique(Player obPlayer) {
-//        try {
-//            int nFirstName = repo.queryForEq("sFirstName", obPlayer.getsFirstName()).size();
-//            int nLastName = repo.queryForEq("sLastName", obPlayer.getsLastName()).size();
-//            int nPlayerNum = repo.queryForEq("nPlayerNumber", obPlayer.getnPlayerNumber()).size();
-//            int nParentInfo = repo.queryForEq("sParentInfo", obPlayer.getsParentInfo()).size();
-//            int nEmergencyContact = repo.queryForEq("sEmergencyContact", obPlayer.getsEmergencyContact()).size();
-//            int[] naResult = {nFirstName, nLastName, nPlayerNum, nParentInfo, nEmergencyContact};
-//
-//            for (int nField : naResult) {
-//                if (nField == 0) {
-//                    return true;
-//                }
-//            }
-//            if (repo.queryForMatching(obPlayer).size() == 0) {
-//                return true;
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
-
-    public boolean modifyPlayer(Player obPlayer) {
-        if (obValid.isValid(obPlayer))
+    public boolean modifyPlayer(Player obPlayer) throws SQLException {
+        if (obValid.isValid(obPlayer) && repo.queryForMatching(obPlayer).isEmpty())
         {
             try {
                 int nResult = repo.update(obPlayer);
@@ -78,4 +57,32 @@ public class PlayerController {
         }
         return false;
     }
+
+    public List<Player> getAllPlayers()
+    {
+        List<Player> obReturn = new ArrayList<>();
+        try
+        {
+            obReturn = repo.queryForAll();
+        }
+
+        catch (SQLException e)
+        {
+
+        }
+
+        return obReturn;
+    }
+
+    public Player getPlayerByName(String sName)
+    {
+        List<Player> obReference = getAllPlayers().stream().filter(x -> (x.getsFirstName() + " " + x.getsLastName()).equals(sName)).collect(Collectors.toList());
+        return obReference.get(obReference.size() - 1);
+    }
+
+    public List<Player> getPlayerByNumber(int sNum)
+    {
+        return getAllPlayers().stream().filter(x -> x.getnPlayerNumber() == sNum).collect(Collectors.toList());
+    }
+
 }

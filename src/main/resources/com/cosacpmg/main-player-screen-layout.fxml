@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PlayerViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PlayerViewController">
    <center>
       <Pane prefHeight="160.0" prefWidth="1366.0" BorderPane.alignment="CENTER">
          <children>
@@ -14,11 +18,17 @@
                      <image>
                         <Image url="@img/addButton.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fx:id="btnPlayerEdit" fitHeight="100.0" fitWidth="95.0" onMouseClicked="#switchModifyScene" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/editButton.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                </children>
             </HBox>
@@ -31,13 +41,16 @@
       </Pane>
    </center>
    <bottom>
-      <ImageView fx:id="btnPlayerCancel" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fx:id="btnPlayerCancel" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#closeWindow" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
             <Image url="@img/cancelBtn.png" />
          </image>
          <BorderPane.margin>
             <Insets bottom="30.0" />
          </BorderPane.margin>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
    </bottom>
 </BorderPane>

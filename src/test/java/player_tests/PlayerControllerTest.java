@@ -1,6 +1,8 @@
-package playerController_tests;
+package player_tests;
 
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
 import org.junit.*;
 import org.junit.Assert.*;
 
@@ -13,6 +15,7 @@ import static org.junit.Assert.assertSame;
 import models.*;
 import controllers.*;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class PlayerControllerTest {
@@ -22,7 +25,9 @@ public class PlayerControllerTest {
     @Before
     public void setUpMock() {
         try {
-            pc = new PlayerController( new JdbcPooledConnectionSource("jdbc:h2:mem:myDb") );
+            ConnectionSource obConn = new JdbcPooledConnectionSource("jdbc:h2:mem:myDb");
+            pc = new PlayerController(obConn );
+            TableUtils.clearTable(obConn, Player.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,7 +87,7 @@ public class PlayerControllerTest {
     }
 
     @Test
-    public void testModifyPlayerWithValidInfo() {
+    public void testModifyPlayerWithValidInfo() throws SQLException {
         Player player1 = new Player();
         player1.setsFirstName("Timmy");
         player1.setsLastName("Jackson");
@@ -104,7 +109,7 @@ public class PlayerControllerTest {
     }
 
     @Test
-    public void testModifyPlayerWithIdenticalInfo() {
+    public void testModifyPlayerWithIdenticalInfo() throws SQLException {
         Player player1 = new Player();
         player1.setsFirstName("Timmy");
         player1.setsLastName("Jackson");
@@ -115,5 +120,31 @@ public class PlayerControllerTest {
 
         pc.createPlayer(player1);
         assertSame("Passed Player Object exists in database return false", pc.modifyPlayer(player1), false);
+    }
+
+    @Test
+    public void testDatabaseList()
+    {
+        Player player1 = new Player();
+        player1.setsFirstName("Timmy");
+        player1.setsLastName("Jackson");
+        player1.setnPlayerNumber(24);
+        player1.setsPosition("Right Wing");
+        player1.setsParentInfo("Linda Jackson");
+        player1.setsEmergencyContact("306-456-7892");
+
+        Player player2 = new Player();
+        player2.setsFirstName("Ernesto");
+        player2.setsLastName("Basoalto");
+        player2.setnPlayerNumber(65);
+        player2.setsPosition("Left Wing");
+        player2.setsParentInfo("Bryce Barrie");
+        player2.setsEmergencyContact("306-699-6999");
+
+        pc.createPlayer(player1);
+        pc.createPlayer(player2);
+
+        assertSame(pc.getAllPlayers().size(), 2);
+
     }
 }

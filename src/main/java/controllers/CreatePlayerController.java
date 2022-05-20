@@ -65,7 +65,6 @@ public class CreatePlayerController implements Initializable
         obPlayer.setsParentInfo(sParent);
         obPlayer.setsEmergencyContact(sContact);
 
-        System.out.println(obPlayer.toString());
 
         HashMap<String, String> listOfErrors = obValid.getErrors(obPlayer);
 
@@ -112,9 +111,9 @@ public class CreatePlayerController implements Initializable
         else
         {
             alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error has occured");
+            alert.setTitle("Error has occurred");
             alert.setHeaderText(null);
-            alert.setContentText("The entry entry has already existed. Check your start date and end date if it is filled with a certain tournament. Press OK to cancel");
+            alert.setContentText("The entry entry has already existed. Ensure that your entry is unique");
         }
 
         Optional<ButtonType> result = alert.showAndWait();
@@ -126,5 +125,13 @@ public class CreatePlayerController implements Initializable
             obMainStage.show();
         }
 
+    }
+
+    public void cancel(MouseEvent mouseEvent) throws IOException
+    {
+        FXMLLoader mainLoader =  new FXMLLoader(PlayerView.class.getResource("main-player-screen-layout.fxml"));
+        Stage obMainStage = (Stage) btnPlayerAddCancel.getScene().getWindow();
+        obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
+        obMainStage.show();
     }
 }
