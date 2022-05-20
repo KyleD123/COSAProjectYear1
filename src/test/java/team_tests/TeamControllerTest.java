@@ -92,11 +92,14 @@ public class TeamControllerTest
 
         Team team2 = new Team();
         team2.setCoachName("Kyle");
+        team2.setTeamName("Saskatoon Jets");
+
+        assertTrue(tc.createTeam(team2));
+        assertTrue(tc.createTeam(team1));
+
         team2.setTeamName("Saskatoon Blades");
 
-        tc.createTeam(team1);
-
-        assertSame("Passed Team Object exists in database return false", tc.modifyTeam(team2), false);
+        assertFalse("Passed Team Object exists in database return false", tc.modifyTeam(team2));
     }
 
 

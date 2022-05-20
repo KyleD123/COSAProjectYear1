@@ -81,6 +81,7 @@ public class ModifyTeamController implements Initializable {
         try
         {
             toBeEdited.setTeamName(txtNameEdit.getText());
+            toBeEdited.setCoachName(txtCoachName.getText());
 
             HashMap<String, String> listOfErrors = obValid.getErrors(toBeEdited);
 
