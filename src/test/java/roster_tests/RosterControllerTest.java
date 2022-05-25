@@ -9,13 +9,12 @@ import org.junit.Assert.*;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-
 import models.*;
 import controllers.*;
 
 import java.sql.SQLException;
+
+import static org.junit.Assert.*;
 
 public class RosterControllerTest {
 
@@ -32,13 +31,47 @@ public class RosterControllerTest {
         }
     }
 
+    /**
+     * tests the functionality of adding a player to a team
+     */
     @Test
-    public void testAddPlayerToTeam() {
+    public void testAddPlayerToTeam()
+    {
+    Player player = new Player();
+    Team team = new Team();
+    assertTrue("successfully added player to team", rc.addPlayerToTeam(player,team));
 
     }
 
     @Test
-    public void testAddExistingPlayertoTeam() {
+    public void testAddExistingPlayerToTeam()
+    {
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Team team = new Team();
+
+
+        assertTrue("successfully added player to team return Player", rc.addPlayerToTeam(player1,team));
+
+        assertFalse("passed player already exists return false", rc.addPlayerToTeam(player2,team) );
+
+
+    }
+
+    @Test
+    public void  testAdd16thPlayerToTeam(){
+
+    }
+
+    @Test
+    public void testAddFinalPlayerToTeam()
+    {
+
+    }
+
+    @Test
+    public void  testAddFirstPlayerToTeam()
+    {
 
     }
 
