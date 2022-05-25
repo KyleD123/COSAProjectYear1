@@ -84,4 +84,13 @@ public class Tournament implements Serializable
         return getnTournamentID() + "";
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tournament that = (Tournament) o;
+        return nTournamentID == that.nTournamentID;
+    }
+
 }

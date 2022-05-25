@@ -6,13 +6,13 @@ import java.util.Date;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-//import models.custom_validation.CompareAwayHomeTeam;
-//import models.custom_validation.TwoHourGap;
+import models.custom_constraints.CompareAwayHomeTeam;
+import models.custom_constraints.TwoHourGap;
 import org.hibernate.validator.constraints.Range;
 import javax.validation.constraints.NotNull;
 
-//@TwoHourGap
-//@CompareAwayHomeTeam
+@TwoHourGap
+@CompareAwayHomeTeam
 @DatabaseTable(tableName = "games")
 public class Game implements Serializable
 {

@@ -30,22 +30,22 @@ public class GameTest {
     private static Team obTeam1;
     private static Team obTeam2;
 
-//    private void assertTwoHourError(String expProperty, String expMsg, Object expValue)
-//    {
-//        Set<ConstraintViolation<Game>> constraintViolations = valid.validate(obGame);
-//
-//        assertEquals(1, constraintViolations.size());
-//
-//        ConstraintViolation<Game> violation = constraintViolations.iterator().next();
-//
-//        assertEquals(expProperty, violation.getPropertyPath().toString());
-//
-//        assertEquals(expMsg, violation.getMessage());
-//
-//        Game obRef = (Game) violation.getInvalidValue();
-//
-//        assertEquals(expValue, obRef.getEndTime());
-//    }
+    private void assertTwoHourError(String expProperty, String expMsg, Object expValue)
+    {
+        Set<ConstraintViolation<Game>> constraintViolations = valid.validate(obGame);
+
+        assertEquals(1, constraintViolations.size());
+
+        ConstraintViolation<Game> violation = constraintViolations.iterator().next();
+
+        assertEquals(expProperty, violation.getPropertyPath().toString());
+
+        assertEquals(expMsg, violation.getMessage());
+
+        Game obRef = (Game) violation.getInvalidValue();
+
+        assertEquals(expValue, obRef.getnEndTime());
+    }
 
     private void assertInvalidSchedule(String expProperty, String expMsg, Object expValue) {
         Set<ConstraintViolation<Game>> constraintViolations = valid.validate(obGame);
@@ -118,7 +118,64 @@ public class GameTest {
 
     @Test
     public void testCreateGameOutsideBoundary() {
-        obGame.setnEndTime(obGame.getnStartTime() + 201);
-        assertEquals(0, valid.validate(obGame).size());
+        int endTime = obGame.getnStartTime() + 201;
+        obGame.setnEndTime(endTime);
+        assertTwoHourError("", "The end date is over two hours based on the requested time", endTime);
+    }
+
+    /**
+     * Exception Test
+     * END TIME IS BEFORE THE START TIME
+     *
+     * INVALID
+     */
+    @Test
+    public void testCreateSchedulePastEndTime()
+    {
+        int endTime = 600;
+        obGame.setnEndTime(endTime);
+        assertTwoHourError("", "Past End Time is selected", endTime);
+    }
+
+    /**
+     * EXCEPTION TEST
+     * Start Date is not defined (But really, this is automatically added based on the tournament screen anyway based on the Tournament end and startdate)
+     *
+     * INVALID
+     */
+    @Test
+    public void testCreateScheduleWithoutEventDate()
+    {
+        Date obDate = null;
+        obGame.setdEventDate(obDate);
+        assertInvalidSchedule("dEventDate", "There must be a Event Date!", obDate);
+    }
+
+    /**
+     * EXCEPTION
+     * Tournament is not added to the schedule object as a sort of reference.
+     *
+     * INVALID
+     */
+    @Test
+    public void testCreateScheduleWithoutTournament()
+    {
+        Tournament obTournament = null;
+        obGame.settTournament(obTournament);
+        assertInvalidSchedule("tTournament", "There must be a tournament tied to this schedule", obTournament);
+    }
+
+    /**
+     * EXCEPTION
+     * You did not specify a location for this schedule.
+     *
+     * INVALID
+     */
+    @Test
+    public void testCreateScheduleWithoutLocation()
+    {
+        String location = null;
+        obGame.setsLocation(location);
+        assertInvalidSchedule("sLocation", "Provide a location and rink!", location);
     }
 }
