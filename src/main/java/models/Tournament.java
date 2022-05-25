@@ -3,10 +3,10 @@ package models;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import models.custom_constraints.AfterStartDate;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -16,72 +16,72 @@ public class Tournament implements Serializable
 {
     //ano's
     @DatabaseField(generatedId = true, unique = true)
-    private int tournamentId;
+    private int nTournamentID;
 
     //annotations for tournament name
     @DatabaseField(canBeNull = true)
     @Size(max = 40, min = 0, message="Character length limit exceeded")
-    private String tournamentName;
+    private String sTournamentName;
 
     //ano's for start date
     @DatabaseField(canBeNull = false)
     @NotNull(message = "Empty Date Entered")
     @Future(message = "Past date entered")
-    private Date startDate;
+    private Date dStartDate;
 
     //ano's for end data (MAKE A CUSTOM VALIDATION FOR DAY AFTER THE START DATE)
     @DatabaseField(canBeNull = false)
     @NotNull(message = "Empty Date Entered")
     @Future(message = "Past date entered")
 //    @AfterStartDate(message = "Date must be after one day after the start date")
-    private Date endDate;
+    private Date dEndDate;
 
     public Tournament()
     {
 
     }
 
-    public int getTournamentId() { return this.tournamentId; }
+    public int getnTournamentID() { return this.nTournamentID; }
 
-    public void setTournamentId(int nId)
+    public void setnTournamentID(int nId)
     {
-        this.tournamentId = nId;
+        this.nTournamentID = nId;
     }
 
-    public String getTournamentName()
+    public String getsTournamentName()
     {
-        return tournamentName;
+        return sTournamentName;
     }
 
-    public void setTournamentName(String sName)
+    public void setsTournamentName(String sName)
     {
-        this.tournamentName = sName;
+        this.sTournamentName = sName;
     }
 
-    public Date getStartDate()
+    public Date getdStartDate()
     {
-        return this.startDate;
+        return this.dStartDate;
     }
 
-    public void setStartDate(Date start)
+    public void setdStartDate(Date start)
     {
-        this.startDate = start;
+        this.dStartDate = start;
     }
 
-    public Date getEndDate()
+    public Date getdEndDate()
     {
-        return this.endDate;
+        return this.dEndDate;
     }
 
-    public void setEndDate(Date end)
+    public void setdEndDate(Date end)
     {
-        this.endDate = end;
+        this.dEndDate = end;
     }
 
     @Override
     public String toString()
     {
-        return getTournamentId() + "";
+        return getnTournamentID() + "";
     }
 
 }

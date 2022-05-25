@@ -13,13 +13,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Tournament;
 
-import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -87,11 +84,11 @@ public class TournamentViewController implements Initializable
         txtTournamentInfoTitle.setText("Information for Tournament ID " + nID);
 
 
-        Date dStart = nShow.getStartDate();
-        Date dEnd = nShow.getEndDate();
+        Date dStart = nShow.getdStartDate();
+        Date dEnd = nShow.getdEndDate();
         DateFormat canadianDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        txtTournamentName.setText(nShow.getTournamentName() == null ? "" : nShow.getTournamentName());
+        txtTournamentName.setText(nShow.getsTournamentName() == null ? "" : nShow.getsTournamentName());
         txtStartDate.setText(canadianDateFormat.format(dStart));
         txtEndDate.setText(canadianDateFormat.format(dEnd));
     }

@@ -37,10 +37,10 @@ public class DatabaseConnectionTest
         tommorow.setTime(today.getTime() + (1000*60*60*24));
         today.setTime(today.getTime() + (1000*60*60*24));
 
-        obStuff.setStartDate(today);
-        obStuff.setEndDate(tommorow);
+        obStuff.setdStartDate(today);
+        obStuff.setdEndDate(tommorow);
 
-        obStuff.setTournamentName("Brycelandia");
+        obStuff.setsTournamentName("Brycelandia");
 
         System.out.println(tournValid.isTournValid(obStuff));
         if (tournValid.isTournValid(obStuff))

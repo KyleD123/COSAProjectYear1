@@ -96,9 +96,9 @@ public class CreateTournamentController implements Initializable
             Instant instant2 = Instant.from(nEndLocale.atStartOfDay(ZoneId.systemDefault()));
 
             Tournament obTemp = new Tournament();
-            obTemp.setStartDate(Date.from(instant));
-            obTemp.setEndDate(Date.from(instant2));
-            obTemp.setTournamentName(txtName.getText());
+            obTemp.setdStartDate(Date.from(instant));
+            obTemp.setdEndDate(Date.from(instant2));
+            obTemp.setsTournamentName(txtName.getText());
 
 
             HashMap<String, String> listOfErrors = obValid.getErrors(obTemp);

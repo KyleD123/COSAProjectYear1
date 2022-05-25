@@ -1,6 +1,5 @@
 package tournament_tests;
 
-import javafx.util.converter.LocalDateTimeStringConverter;
 import models.*;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -69,13 +68,13 @@ public class TournamentTest
     public void setUpValidTournament()
     {
         obTourn = new Tournament();
-        obTourn.setTournamentName("Penguins");
+        obTourn.setsTournamentName("Penguins");
         startDate = new Date();
         startDate.setTime(startDate.getTime() + (1000*60*60*24));
         endDate = new Date();
         endDate.setTime(startDate.getTime() + (1000*60*60*24));
-        obTourn.setStartDate(startDate);
-        obTourn.setEndDate(endDate);
+        obTourn.setdStartDate(startDate);
+        obTourn.setdEndDate(endDate);
     }
 
  //Tests
@@ -88,7 +87,7 @@ public class TournamentTest
     public void testTournamentPastStartDate()
     {
         startDate.setTime(startDate.getTime() - (1000*60*60*24));
-        obTourn.setStartDate(startDate);
+        obTourn.setdStartDate(startDate);
         assertInvalidTournament("startDate","Past date entered", startDate);
     }
 
@@ -99,7 +98,7 @@ public class TournamentTest
     public void testTournamentPastEndDate()
     {
         endDate.setTime(startDate.getTime() - (1000*60*60*25));
-        obTourn.setEndDate(endDate);
+        obTourn.setdEndDate(endDate);
         assertInvalidTournament("endDate", "Past date entered", endDate);
     }
 
@@ -109,8 +108,8 @@ public class TournamentTest
     @Test
     public void testTournamentBlankStartDate()
     {
-        obTourn.setStartDate(null);
-        assertInvalidTournament("startDate", "Empty Date Entered", obTourn.getStartDate());
+        obTourn.setdStartDate(null);
+        assertInvalidTournament("startDate", "Empty Date Entered", obTourn.getdStartDate());
 
     }
 
@@ -120,8 +119,8 @@ public class TournamentTest
     @Test
     public void testTournamentBlankEndDate()
     {
-        obTourn.setEndDate(null);
-        assertInvalidTournament("endDate", "Empty Date Entered", obTourn.getEndDate());
+        obTourn.setdEndDate(null);
+        assertInvalidTournament("endDate", "Empty Date Entered", obTourn.getdEndDate());
     }
 
     /**
@@ -131,7 +130,7 @@ public class TournamentTest
     public void testTournamentValidStartDate()
     {
         startDate.setTime(startDate.getTime() + (1000*60*60*168));
-        obTourn.setStartDate(startDate);
+        obTourn.setdStartDate(startDate);
         assertEquals(0, valid.validate(obTourn).size());
     }
 
@@ -142,7 +141,7 @@ public class TournamentTest
     public void testTournamentValidEndDate()
     {
         endDate.setTime(startDate.getTime() + (1000*60*60*48));
-        obTourn.setEndDate(endDate);
+        obTourn.setdEndDate(endDate);
         assertEquals(0, valid.validate(obTourn).size());
     }
 
@@ -155,7 +154,7 @@ public class TournamentTest
     public void testTournamentNameAboveLimit()
     {
         String sName = repeatW(41);
-        obTourn.setTournamentName(sName);
+        obTourn.setsTournamentName(sName);
         assertInvalidTournament("tournamentName", "Character length limit exceeded", sName);
 
     }
@@ -167,7 +166,7 @@ public class TournamentTest
     public void testTournamentNameWithinLimit()
     {
         String sName = repeatW(40);
-        obTourn.setTournamentName(sName);
+        obTourn.setsTournamentName(sName);
         assertEquals(0, valid.validate(obTourn).size());
     }
 
@@ -177,7 +176,7 @@ public class TournamentTest
     @Test
     public void testBlankTournamentName()
     {
-        obTourn.setTournamentName("");
+        obTourn.setsTournamentName("");
         assertEquals(0, valid.validate(obTourn).size());
     }
 
@@ -187,7 +186,7 @@ public class TournamentTest
     @Test
     public void testValidTournamentName()
     {
-        obTourn.setTournamentName("Bryce Javanians");
+        obTourn.setsTournamentName("Bryce Javanians");
         assertEquals(0, valid.validate(obTourn).size());
         System.out.println(valid.validate(obTourn));
 
