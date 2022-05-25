@@ -42,6 +42,9 @@ public class Player implements Serializable {
     @Pattern(regexp = "[0-9]?[-]?[0-9]{3}[-][0-9]{3}[-][0-9]{4}", message = "Improper Phone Number Format")
     private String sEmergencyContact;
 
+    //Add Player List
+    //Add Team object attribute
+
     public Player() {
     }
 
