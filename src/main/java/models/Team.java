@@ -7,7 +7,7 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 
-@DatabaseTable(tableName = "team")
+@DatabaseTable(tableName = "teams")
 public class Team implements Serializable {
 
     //Team ID Field - Auto Increment in the Database

@@ -32,6 +32,10 @@ public class Player implements Serializable {
     @NotEmpty(message = "Player Position is Required")
     private String sPosition;
 
+    @DatabaseField(canBeNull = true)
+    @Size(max = 40, message = "Team Name Too Long")
+    private String sTeamName;
+
     @DatabaseField(canBeNull = false)
     @Size(max = 30, message = "Player Parent Info Too Long")
     @NotEmpty(message = "Player Parent Info is Required")
@@ -73,6 +77,10 @@ public class Player implements Serializable {
         this.sPosition = sPosition;
     }
 
+    public String getsTeamName() { return sTeamName; }
+
+    public void setsTeamName(String sTeamName) { this.sTeamName = sTeamName;}
+
     public String getsParentInfo() {
         return sParentInfo;
     }
@@ -103,6 +111,7 @@ public class Player implements Serializable {
         this.setsLastName(player.getsLastName());
         this.setnPlayerNumber(player.getnPlayerNumber());
         this.setsPosition(player.getsPosition());
+        this.setsTeamName(player.getsTeamName());
         this.setsParentInfo(player.getsParentInfo());
         this.setsEmergencyContact(player.getsEmergencyContact());
     }
