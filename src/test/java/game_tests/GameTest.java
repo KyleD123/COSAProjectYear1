@@ -16,6 +16,12 @@ import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * PURPOSE: THE PURPOSE OF THIS JUNIT TEST IS TO VERIFY THAT THE ESSENTIAL FUNCTIONALITIES OF THE GAME OBJECT IS
+ * WORKING BEFORE PASSING OF TO THE DATABASE.
+ *
+ * @author TEAM GREEN
+ */
 public class GameTest {
     private static ValidatorFactory valFac;
     private static Validator valid;
@@ -30,6 +36,17 @@ public class GameTest {
     private static Team obTeam1;
     private static Team obTeam2;
 
+    /**
+     * THIS METHOD, ASSERTTWOHOURERROR, IS A SPECIAL TYPE OF METHOD THAT ALLOWS US TO CATCH
+     * A VALIDATION ERROR FOR A GAME OBJECT WHEN THEIR START TIME AND END TIME GOES OVER
+     * THE TWO HOUR EXPECTATIONS FOR A SINGLE GAME.
+     *
+     * THIS CAN BE USED TO CHECK IF THE END TIME IS WAY BEFORE THE START TIME. FOR EXAMPLE, 9AM FOR THE END TIME,
+     * 11 AM FOR THE START TIME.
+     * @param expProperty - this takes in nothing since this method expects a Game object as a reference rather than an individual field.
+     * @param expMsg - Our expected message that the TwoHourGap annotation will display
+     * @param expValue - Takes in the game's end time as a reference that our expected error value would be.
+     */
     private void assertTwoHourError(String expProperty, String expMsg, Object expValue)
     {
         Set<ConstraintViolation<Game>> constraintViolations = valid.validate(obGame);
@@ -47,6 +64,15 @@ public class GameTest {
         assertEquals(expValue, obRef.getnEndTime());
     }
 
+    /**
+     * BASED ON THE GIVEN CLASS EXAMPLE, THIS METHOD CATCHES AN EXPECTED VALIDATION ERROR IF ANY OF THE FIELDS
+     * IN THE GAME OBJECT HAS CREATED AN ERROR BASED ON THE FIELDS THAT WE HAVE DELIBERATELY MADE IT INCORRECT TO
+     * FAIL THE VALIDATION
+     *
+     * @param expProperty - THE EXPECTED PROPERTY OF THE GAME OBJECT TO FAIL
+     * @param expMsg - IS THE EXPECTED MESSAGE THAT RETURNS FROM THAT ERROR IS EQUALS TO OUR EXPECTED ERROR MESSAGE
+     * @param expValue - EXPECTED VALUE OBJECT THAT MADE THE GAME OBJECT NOT VALID.
+     */
     private void assertInvalidSchedule(String expProperty, String expMsg, Object expValue) {
         Set<ConstraintViolation<Game>> constraintViolations = valid.validate(obGame);
 
@@ -62,6 +88,10 @@ public class GameTest {
 
     }
 
+    /**
+     * BEFORE STARTING UP THIS TESTING CLASS, THIS ENSURES THAT THE VALIDATOR HAS BEEN SET UP PROPERLY
+     * TO ACCEPT VALIDATIONS CHECKS FOR THE GAME OBJECTS.
+     */
     @BeforeClass
     public static void setUpValidator() {
         valFac = Validation.buildDefaultValidatorFactory();
@@ -69,7 +99,8 @@ public class GameTest {
     }
 
     /**
-     * This will set up a valid game, a valid pair team( same pool id) and set up schedule.
+     * BEFORE EVERY TEST, THIS METHOD CREATES A VALID UNIQUE GAME TO ENSURE THAT EVERYTIME WE ENTER THIS GAME OBJECT TO THE DATABASE,
+     * IT IS VALIDATED BEFORE WE CAN MALICIOUSLY MODIFY IT.
      */
     @Before
     public void setUpValidSchedule() {
@@ -105,17 +136,34 @@ public class GameTest {
         obGame.setsLocation("ACT Centre Rink A");
     }
 
+    /**
+     * NORMAL TEST
+     *
+     * THIS METHOD CREATES A VALID GAME TO VERIFIES THAT OUR VALIDATOR WORKS AS EXPECTED
+     */
     @Test
     public void testCreateValidGame() {
         assertEquals(0, valid.validate(obGame).size());
     }
 
+    /**
+     * BOUNDARY TEST
+     *
+     * THIS METHODS CREATES A VALID GAME TO VERIFY IF THE VALIDATOR WILL STILL ACCEPT AN END TIME WITHIN THE EXPECTED
+     * BOUNDARY RANGE OF TWO HOURS
+     */
     @Test
     public void testCreateGameWithinBoundary() {
         obGame.setnEndTime(obGame.getnStartTime() + 199);
         assertEquals(0, valid.validate(obGame).size());
     }
 
+    /**
+     * EXCEPTION TEST
+     *
+     * THIS METHOD CREATES AN INVALID GAME TO VERIFY IF THE VALIDATOR WILL CATCH THE ERROR WHEN WE SCHEDULED A GAME
+     * THAT IS OVER TWO HOURS OF THE EXPECTED DURATION.
+     */
     @Test
     public void testCreateGameOutsideBoundary() {
         int endTime = obGame.getnStartTime() + 201;
@@ -125,9 +173,9 @@ public class GameTest {
 
     /**
      * Exception Test
-     * END TIME IS BEFORE THE START TIME
      *
-     * INVALID
+     * THIS METHOD CREATES AN INVALID GAME TO VERIFY IF THE VALIDATOR WILL CATCH THE ERROR WHEN WE SCHEDULE A GAME WITH
+     * A END TIME WAY BEFORE THE START TIME.
      */
     @Test
     public void testCreateSchedulePastEndTime()
@@ -139,9 +187,8 @@ public class GameTest {
 
     /**
      * EXCEPTION TEST
-     * Start Date is not defined (But really, this is automatically added based on the tournament screen anyway based on the Tournament end and startdate)
+     * THIS METHOD CREATES AN INVALID GAME TO VERIFY IF THE VALIDATOR WILL CATCH THE ERROR IF WE DONT HAVE A NULL EVENT DATE.
      *
-     * INVALID
      */
     @Test
     public void testCreateScheduleWithoutEventDate()
@@ -153,7 +200,7 @@ public class GameTest {
 
     /**
      * EXCEPTION
-     * Tournament is not added to the schedule object as a sort of reference.
+     * THIS METHOD CREATES AN INVALID GAME TO VERIFY IF THE VALIDATOR WILL CATCH THE ERROR IF WE DID NOT ADD A TOURNAMENT AS A REFERENCE FOR THE GAME TO TIE ON.
      *
      * INVALID
      */
@@ -167,7 +214,7 @@ public class GameTest {
 
     /**
      * EXCEPTION
-     * You did not specify a location for this schedule.
+     * THIS METHOD CREATES AN INVALID GAME TO VERIFY IF THE VALIDATOR WILL CATCH THE ERROR IF WE DID NOT SPECIFY A LOCATION FOR OUR OBJECTION
      *
      * INVALID
      */

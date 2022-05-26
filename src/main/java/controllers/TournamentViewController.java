@@ -7,7 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -21,8 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class TournamentViewController implements Initializable
-{
+public class TournamentViewController implements Initializable {
     @FXML
     private ImageView btnAdd, cancelBtn, btnEdit;
 
@@ -32,14 +32,13 @@ public class TournamentViewController implements Initializable
     @FXML
     private Label txtTournamentName, txtStartDate, txtEndDate, txtTournamentInfoTitle;
 
-    private Stage obMainStage  = new Stage();
+    private Stage obMainStage = new Stage();
 
     private TournamentController tournControl;
 
     @FXML
     @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
+    public void initialize(URL location, ResourceBundle resources) {
         ConnectionSource dbConn = null;
         try {
             dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
@@ -52,25 +51,22 @@ public class TournamentViewController implements Initializable
     }
 
 
-    public void switchCreateScene(MouseEvent mouseEvent) throws Exception
-    {
+    public void switchCreateScene(MouseEvent mouseEvent) throws Exception {
 
         FXMLLoader newScene = new FXMLLoader(TournamentView.class.getResource("add-tournament-screen-layout.fxml"));
         obMainStage = (Stage) btnAdd.getScene().getWindow();
-        obMainStage.setScene(new Scene(newScene.load(), 1366,768));
+        obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();
     }
 
-    public void switchModifyScene(MouseEvent mouseEvent) throws Exception
-    {
+    public void switchModifyScene(MouseEvent mouseEvent) throws Exception {
         FXMLLoader newScene = new FXMLLoader(TournamentView.class.getResource("modify-tournament-screen-layout.fxml"));
         obMainStage = (Stage) btnEdit.getScene().getWindow();
-        obMainStage.setScene(new Scene(newScene.load(), 1366,768));
+        obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();
     }
 
-    public void populateDropDownMenu()
-    {
+    public void populateDropDownMenu() {
 
         List<Tournament> list = tournControl.getAllTournament();
         cBoxIds.getItems().addAll(list);
@@ -91,6 +87,9 @@ public class TournamentViewController implements Initializable
         txtTournamentName.setText(nShow.getsTournamentName() == null ? "" : nShow.getsTournamentName());
         txtStartDate.setText(canadianDateFormat.format(dStart));
         txtEndDate.setText(canadianDateFormat.format(dEnd));
+    }
+
+    public void switchCreateScheduleScene() {
     }
 
 }

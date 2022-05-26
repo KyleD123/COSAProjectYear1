@@ -73,4 +73,10 @@ public class MainWindow extends Application
         newWindow.show();
     }
 
+    @FXML
+    public void populateScheduleTable(javafx.event.ActionEvent actionEvent)
+    {
+
+    }
+
 }
