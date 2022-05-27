@@ -5,7 +5,6 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import controllers.GameController;
 import models.Game;
-import controllers.GameController;
 import models.Team;
 import models.Tournament;
 import org.junit.Before;
@@ -39,38 +38,14 @@ public class GameControllerTest
     @Before
     public void setUpMockDb()
     {
-        try
-        {
-            ConnectionSource obConn = new JdbcConnectionSource("jdbc:h2:mem:myDb");
-            gameController = new GameController(obConn);
-            TableUtils.clearTable(obConn, Game.class);
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Before starting any test, this method creates a valid Game. It firstly initiates the required Tournament object (with its start and end date),
-     * initiates two different teams, and initiate a game based on the given initiated Tournament and two teams object.
-     */
-    @Before
-    public void setUpValidTournament()
-    {
         obTourn = new Tournament();
         obTourn.setsTournamentName("Super Kids Brawling");
 
         Date startDate = new Date();
-        startDate.setHours(6);
-        startDate.setMinutes(0);
-        startDate.setSeconds(0);
         startDate.setTime(startDate.getTime() + (1000*60*60*24));
-        Date endDate = new Date();
 
-        endDate.setTime(startDate.getTime() + (1000*60*60*24));
         obTourn.setdStartDate(startDate);
-        obTourn.setdEndDate(endDate);
+        obTourn.setdEndDate(new Date(startDate.getTime() + (1000*60*60*24)));
 
         obTeam1 = new Team();
         obTeam1.setTeamName("Saskatoonian Bruhlers");
@@ -90,6 +65,28 @@ public class GameControllerTest
         obGame.settAwayTeam(obTeam2);
         obGame.settTournament(obTourn);
         obGame.setsLocation("ACT Centre Rink B");
+
+        try
+        {
+            ConnectionSource obConn = new JdbcConnectionSource("jdbc:h2:mem:myDb");
+            gameController = new GameController(obConn);
+            TableUtils.clearTable(obConn, Game.class);
+
+
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Before starting any test, this method creates a valid Game. It firstly initiates the required Tournament object (with its start and end date),
+     * initiates two different teams, and initiate a game based on the given initiated Tournament and two teams object.
+     */
+    @Before
+    public void setUpValidTournament()
+    {
     }
 
     /**
@@ -100,7 +97,7 @@ public class GameControllerTest
     @Test
     public void testCreateValidOneGame()
     {
-        assertSame("Sucessfully added game", gameController.scheduleGame(obGame), true);
+        assertSame("Sucessfully added game", gameController.createGame(obGame), true);
     }
 
     /**
@@ -112,15 +109,15 @@ public class GameControllerTest
     @Test
     public void testCreateValidDifferentGames()
     {
-        Team obTeam1 = new Team();
-        obTeam1.setTeamName("Regina Bruhlers");
-        obTeam1.setCoachName("Coach Kyle");
-        obTeam1.setTeamID(1);
+        Team obTeam3 = new Team();
+        obTeam3.setTeamName("Regina Bruhlers");
+        obTeam3.setCoachName("Coach Kyle");
+        obTeam3.setTeamID(3);
 
-        Team obTeam2 = new Team();
-        obTeam1.setTeamName("Swift Current Mawlers");
-        obTeam1.setCoachName("Coach Kale");
-        obTeam1.setTeamID(2);
+        Team obTeam4 = new Team();
+        obTeam4.setTeamName("Swift Current Mawlers");
+        obTeam4.setCoachName("Coach Kale");
+        obTeam4.setTeamID(4);
 
         obTourn.setsTournamentName("Southeners Bruhmoment");
         Date startDate = new Date();
@@ -136,14 +133,14 @@ public class GameControllerTest
         obTourn.setdEndDate(endDate);
 
         Game obGame2 = new Game();
-        obGame2.setdEventDate(obTourn.getdStartDate());
-        obGame2.settHomeTeam(obTeam1);
-        obGame2.settAwayTeam(obTeam2);
+        obGame2.setdEventDate(endDate);
+        obGame2.settHomeTeam(obTeam3);
+        obGame2.settAwayTeam(obTeam4);
         obGame2.settTournament(obTourn);
         obGame2.setsLocation("Archibald Rink A");
 
-        assertSame("Sucessfully added game", gameController.scheduleGame(obGame), true);
-        assertSame("Sucessfully added game", gameController.scheduleGame(obGame2), true);
+        assertSame("Sucessfully added game", gameController.createGame(obGame), true);
+        assertSame("Sucessfully added game", gameController.createGame(obGame2), true);
     }
 
     /**
@@ -166,7 +163,7 @@ public class GameControllerTest
         obGame.settHomeTeam(obTeam1);
         obGame.settAwayTeam(obTeam1);
 
-        assertSame("Same home and away team return false", gameController.scheduleGame(obGame), false);
+        assertSame("Same home and away team return false", gameController.createGame(obGame), false);
 
     }
 
@@ -189,8 +186,8 @@ public class GameControllerTest
         obGame2.settTournament(obTourn);
         obGame2.setsLocation("ACT Centre Rink A"); //Instead of ACT Centre Rink B, we changed it to ACT Centre Rink A.
 
-        assertSame("Sucessfully added game", gameController.scheduleGame(obGame), true);
-        assertSame("Sucessfully added game", gameController.scheduleGame(obGame2), true);
+        assertSame("Sucessfully added game", gameController.createGame(obGame), true);
+        assertSame("Sucessfully added game", gameController.createGame(obGame2), true);
     }
 
     /**
@@ -225,40 +222,10 @@ public class GameControllerTest
         obGame2.settTournament(obTourn);
         obGame2.setsLocation(obGame.getsLocation());
 
-        assertSame("Sucessfully added game", gameController.scheduleGame(obGame), true);
-        assertSame("conflicting schedule return false", gameController.scheduleGame(obGame2), false);
+        assertSame("Sucessfully added game", gameController.createGame(obGame), true);
+        assertSame("conflicting schedule return false", gameController.createGame(obGame2), false);
     }
 
-    /**
-     * EXCEPTION
-     *
-     * THIS METHOD VERIFIES IF THE DB WILL GRACEFULLY REJECTS ADDING A GAME OBJECT THAT HAS THE SAME FIELD PROPERTIES
-     * SUCH AS ITS EVENT DATE, START TIME , END TIME, TOURNAMENT, LOCATION, AND EVEN THEIR HOME AND AWAY TEAM WITH THE PREVIOUS ENTRY.
-     * BUT HAS DIFFERENT TOURNAMENT.
-     *
-     * THE IDEA IS THAT FACILITATOR CANNOT SCHEDULE A GAME THAT IS CONFLICTING WITH ANOTHER GAME NO MATTER WHAT THEIR HOME AND AWAY TEAM IS, OR THEIR
-     * CONTRASTING TOURNAMENT. THEY CAN DO IT HOWEVER IF THEY CHOOSE A DIFFERENT LOCATION
-     */
-    @Test
-    public void testSaveGameWithAllSameFieldsExceptTournament()
-    {
-        Tournament obTourn2 = new Tournament();
-        obTourn2.setsTournamentName("Super Kids Stuff");
-        obTourn2.setnTournamentID(1);
-        obTourn2.setdStartDate(obTourn.getdStartDate());
-        obTourn2.setdEndDate(obTourn.getdEndDate());
-
-        //NOTE THE USAGE OF THE SAME PROPERTIES THROUGH OBGAME'S GETTERS.
-        Game obGame2 = new Game();
-        obGame2.setdEventDate(obGame.getdEventDate());
-        obGame2.settHomeTeam(obTeam1);
-        obGame2.settAwayTeam(obTeam2);
-        obGame2.settTournament(obTourn2); //INSTEAD OF THE ORIGINAL TOURNAMENT, WE ARE CREATING A NEW TOURNAMENT.
-        obGame2.setsLocation(obGame.getsLocation());
-
-        assertSame("Sucessfully added game", gameController.scheduleGame(obGame), true);
-        assertSame("conflicting schedule return false", gameController.scheduleGame(obGame2), false);
-    }
 
 
     /**
@@ -271,24 +238,26 @@ public class GameControllerTest
      * THEIR SAME TOURNAMENT AS LONG THEY ARE SCHEDULED EITHER THE NEXT DAY OR THE DAY BEFORE.
      */
     @Test
-    public void testSaveGameWithSameFieldsButDifferentDay()
+    public void testSaveGameWithSameFieldsButDifferentDay() throws SQLException
     {
         Date diffDate = new Date();
-        diffDate.setHours(6);
-        diffDate.setMinutes(0);
-        diffDate.setSeconds(0);
-        diffDate.setTime(diffDate.getTime() + (1000*60*60*48)); //SETTING THE DATE ONE DAY AFTER TODAY
+
+        diffDate.setTime(diffDate.getTime() + (1000*60*60*72)); //SETTING THE DATE ONE DAY AFTER TODAY
+        obTourn.setsTournamentName("Southeners Bruhmoment");
+        obTourn.setdStartDate(diffDate);
+        obTourn.setdEndDate(new Date(diffDate.getTime() + (1000*60*60*126)));
+
 
         //NOTE THE USAGE OF THE SAME PROPERTIES THROUGH OBGAME'S GETTERS.
         Game obGame2 = new Game();
-        obGame2.setdEventDate(diffDate); //NOTE THE SETTING OF THE DAY USING THE DIFF DATE
+        obGame2.setdEventDate(new Date(diffDate.getTime() + (1000*60*60*24))); //NOTE THE SETTING OF THE DAY USING THE DIFF DATE
         obGame2.settHomeTeam(obTeam1);
         obGame2.settAwayTeam(obTeam2);
         obGame2.settTournament(obTourn);
         obGame2.setsLocation(obGame.getsLocation());
 
-        assertSame("Sucessfully added game", gameController.scheduleGame(obGame), true);
-        assertSame("Sucessfully added game", gameController.scheduleGame(obGame2), true);
+        assertSame("Sucessfully added game", gameController.createGame(obGame), true);
+        assertSame("Sucessfully added game", gameController.isUnique(obGame2), true);
     }
 
     /**
@@ -302,21 +271,40 @@ public class GameControllerTest
     @Test
     public void testSaveGameList() throws SQLException
     {
-        Date diffDate = new Date();
-        diffDate.setHours(6);
-        diffDate.setMinutes(0);
-        diffDate.setSeconds(0);
-        diffDate.setTime(diffDate.getTime() + (1000*60*60*48));
+
+        Team obTeam3 = new Team();
+        obTeam3.setTeamName("Regina Bruhlers");
+        obTeam3.setCoachName("Coach Kyle");
+        obTeam3.setTeamID(3);
+
+        Team obTeam4 = new Team();
+        obTeam4.setTeamName("Swift Current Mawlers");
+        obTeam4.setCoachName("Coach Kale");
+        obTeam4.setTeamID(4);
+
+        obTourn.setsTournamentName("Southeners Bruhmoment");
+        Date startDate = new Date();
+        startDate.setHours(6);
+        startDate.setMinutes(0);
+        startDate.setSeconds(0);
+        startDate.setTime(startDate.getTime());
+        startDate.setTime(startDate.getTime() + (1000*60*60*48));
+        Date endDate = new Date();
+
+        endDate.setTime(startDate.getTime() + (1000*60*60*72));
+        obTourn.setdStartDate(startDate);
+        obTourn.setdEndDate(endDate);
 
         Game obGame2 = new Game();
-        obGame2.setdEventDate(diffDate);
-        obGame2.settHomeTeam(obTeam1);
-        obGame2.settAwayTeam(obTeam2);
+        obGame2.setdEventDate(endDate);
+        obGame2.settHomeTeam(obTeam3);
+        obGame2.settAwayTeam(obTeam4);
         obGame2.settTournament(obTourn);
-        obGame2.setsLocation(obGame.getsLocation());
+        obGame2.setsLocation("Archibald Rink A");
 
-        gameController.scheduleGame(obGame);
-        gameController.scheduleGame(obGame2);
+
+        gameController.createGame(obGame);
+        gameController.createGame(obGame2);
 
         assertEquals(gameController.getAllSchedule().size(), 2);
 
