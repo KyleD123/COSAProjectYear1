@@ -26,7 +26,7 @@ public class Game implements Serializable
 
     @DatabaseField(canBeNull = false)
     @NotNull(message = "There must be a Event Date!")
-    private LocalDateTime dEventDate;
+    private Date dEventDate;
 
     @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
     @NotNull(message = "There must be a tournament tied to this schedule")
@@ -69,9 +69,9 @@ public class Game implements Serializable
         this.tHomeTeam = obTeam;
     }
 
-    public LocalDateTime getdEventDate() {return this.dEventDate;}
+    public Date getdEventDate() {return this.dEventDate;}
 
-    public void setdEventDate(LocalDateTime obDate)
+    public void setdEventDate(Date obDate)
     {
         this.dEventDate = obDate;
     }

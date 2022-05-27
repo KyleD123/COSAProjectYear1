@@ -11,6 +11,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -105,14 +106,16 @@ public class GameTest {
      * IT IS VALIDATED BEFORE WE CAN MALICIOUSLY MODIFY IT.
      */
     @Before
-    public void setUpValidSchedule() {
+    public void setUpValidSchedule()
+    {
         obTourn = new Tournament();
         obTourn.setsTournamentName("Super Kids Brawling");
 
         startDate = new Date();
-        startDate.setTime(startDate.getTime() + (1000 * 60 * 60 * 24));
+        startDate.setHours(6);
+        startDate.setMinutes(0);
+        startDate.setTime(startDate.getTime());
         endDate = new Date();
-
         endDate.setTime(startDate.getTime() + (1000 * 60 * 60 * 24));
         obTourn.setdStartDate(startDate);
         obTourn.setdEndDate(endDate);
@@ -129,8 +132,7 @@ public class GameTest {
 
         obGame = new Game();
         //initiating methods
-        LocalDateTime ldt = LocalDateTime.ofInstant(obTourn.getdStartDate().toInstant(), ZoneId.systemDefault());
-        obGame.setdEventDate(ldt);
+        obGame.setdEventDate(obTourn.getdStartDate());
         obGame.settHomeTeam(obTeam1);
         obGame.settAwayTeam(obTeam2);
         obGame.settTournament(obTourn);
@@ -145,45 +147,6 @@ public class GameTest {
     @Test
     public void testCreateValidGame() {
         assertEquals(0, valid.validate(obGame).size());
-    }
-
-    /**
-     * BOUNDARY TEST
-     *
-     * THIS METHODS CREATES A VALID GAME TO VERIFY IF THE VALIDATOR WILL STILL ACCEPT AN END TIME WITHIN THE EXPECTED
-     * BOUNDARY RANGE OF TWO HOURS
-     */
-    @Test
-    public void testCreateGameWithinBoundary() {
-        obGame.setnEndTime(obGame.getnStartTime() + 199);
-        assertEquals(0, valid.validate(obGame).size());
-    }
-
-    /**
-     * EXCEPTION TEST
-     *
-     * THIS METHOD CREATES AN INVALID GAME TO VERIFY IF THE VALIDATOR WILL CATCH THE ERROR WHEN WE SCHEDULED A GAME
-     * THAT IS OVER TWO HOURS OF THE EXPECTED DURATION.
-     */
-    @Test
-    public void testCreateGameOutsideBoundary() {
-        int endTime = obGame.getnStartTime() + 201;
-        obGame.setnEndTime(endTime);
-        assertTwoHourError("", "The end date is over two hours based on the requested time", endTime);
-    }
-
-    /**
-     * Exception Test
-     *
-     * THIS METHOD CREATES AN INVALID GAME TO VERIFY IF THE VALIDATOR WILL CATCH THE ERROR WHEN WE SCHEDULE A GAME WITH
-     * A END TIME WAY BEFORE THE START TIME.
-     */
-    @Test
-    public void testCreateSchedulePastEndTime()
-    {
-        int endTime = 600;
-        obGame.setnEndTime(endTime);
-        assertTwoHourError("", "Past End Time is selected", endTime);
     }
 
     /**

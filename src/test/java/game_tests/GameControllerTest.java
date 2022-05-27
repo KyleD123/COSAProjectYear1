@@ -62,6 +62,9 @@ public class GameControllerTest
         obTourn.setsTournamentName("Super Kids Brawling");
 
         Date startDate = new Date();
+        startDate.setHours(6);
+        startDate.setMinutes(0);
+        startDate.setSeconds(0);
         startDate.setTime(startDate.getTime() + (1000*60*60*24));
         Date endDate = new Date();
 
@@ -75,16 +78,14 @@ public class GameControllerTest
         obTeam1.setTeamID(1);
 
         obTeam2 = new Team();
-        obTeam1.setTeamName("Regina Trashers");
-        obTeam1.setCoachName("Coach Tass");
-        obTeam1.setTeamID(2);
+        obTeam2.setTeamName("Regina Trashers");
+        obTeam2.setCoachName("Coach Tass");
+        obTeam2.setTeamID(2);
 
         //Setting up a game here
         obGame = new Game();
         //initiating methods
         obGame.setdEventDate(obTourn.getdStartDate());
-        obGame.setnStartTime(900);
-        obGame.setnEndTime(1100);
         obGame.settHomeTeam(obTeam1);
         obGame.settAwayTeam(obTeam2);
         obGame.settTournament(obTourn);
@@ -123,6 +124,10 @@ public class GameControllerTest
 
         obTourn.setsTournamentName("Southeners Bruhmoment");
         Date startDate = new Date();
+        startDate.setHours(6);
+        startDate.setMinutes(0);
+        startDate.setSeconds(0);
+        startDate.setTime(startDate.getTime());
         startDate.setTime(startDate.getTime() + (1000*60*60*48));
         Date endDate = new Date();
 
@@ -132,8 +137,6 @@ public class GameControllerTest
 
         Game obGame2 = new Game();
         obGame2.setdEventDate(obTourn.getdStartDate());
-        obGame2.setnStartTime(1100);
-        obGame2.setnEndTime(1300);
         obGame2.settHomeTeam(obTeam1);
         obGame2.settAwayTeam(obTeam2);
         obGame2.settTournament(obTourn);
@@ -181,8 +184,6 @@ public class GameControllerTest
     {
         Game obGame2 = new Game();
         obGame2.setdEventDate(obTourn.getdStartDate());
-        obGame2.setnStartTime(1100);
-        obGame2.setnEndTime(1300);
         obGame2.settHomeTeam(obTeam1);
         obGame2.settAwayTeam(obTeam2);
         obGame2.settTournament(obTourn);
@@ -219,8 +220,6 @@ public class GameControllerTest
         //NOTE THE USAGE OF THE SAME PROPERTIES THROUGH OBGAME'S GETTERS.
         Game obGame2 = new Game();
         obGame2.setdEventDate(obGame.getdEventDate());
-        obGame2.setnStartTime(obGame.getnStartTime());
-        obGame2.setnEndTime(obGame.getnEndTime());
         obGame2.settHomeTeam(obTeam3); //ADDING OUR FIRST UNIQUE TEAM
         obGame2.settAwayTeam(obTeam4);//ADDING OUR SECOND UNIQUE TEAM
         obGame2.settTournament(obTourn);
@@ -244,21 +243,14 @@ public class GameControllerTest
     public void testSaveGameWithAllSameFieldsExceptTournament()
     {
         Tournament obTourn2 = new Tournament();
-        obTourn2.setsTournamentName("Super Kids Brawling");
-
-        Date startDate = new Date();
-        startDate.setTime(startDate.getTime() + (1000*60*60*24));
-        Date endDate = new Date();
-
-        endDate.setTime(startDate.getTime() + (1000*60*60*24));
-        obTourn2.setdStartDate(startDate);
-        obTourn2.setdEndDate(endDate);
+        obTourn2.setsTournamentName("Super Kids Stuff");
+        obTourn2.setnTournamentID(1);
+        obTourn2.setdStartDate(obTourn.getdStartDate());
+        obTourn2.setdEndDate(obTourn.getdEndDate());
 
         //NOTE THE USAGE OF THE SAME PROPERTIES THROUGH OBGAME'S GETTERS.
         Game obGame2 = new Game();
         obGame2.setdEventDate(obGame.getdEventDate());
-        obGame2.setnStartTime(obGame.getnStartTime());
-        obGame2.setnEndTime(obGame.getnEndTime());
         obGame2.settHomeTeam(obTeam1);
         obGame2.settAwayTeam(obTeam2);
         obGame2.settTournament(obTourn2); //INSTEAD OF THE ORIGINAL TOURNAMENT, WE ARE CREATING A NEW TOURNAMENT.
@@ -282,13 +274,14 @@ public class GameControllerTest
     public void testSaveGameWithSameFieldsButDifferentDay()
     {
         Date diffDate = new Date();
+        diffDate.setHours(6);
+        diffDate.setMinutes(0);
+        diffDate.setSeconds(0);
         diffDate.setTime(diffDate.getTime() + (1000*60*60*48)); //SETTING THE DATE ONE DAY AFTER TODAY
 
         //NOTE THE USAGE OF THE SAME PROPERTIES THROUGH OBGAME'S GETTERS.
         Game obGame2 = new Game();
         obGame2.setdEventDate(diffDate); //NOTE THE SETTING OF THE DAY USING THE DIFF DATE
-        obGame2.setnStartTime(obGame.getnStartTime());
-        obGame2.setnEndTime(obGame.getnEndTime());
         obGame2.settHomeTeam(obTeam1);
         obGame2.settAwayTeam(obTeam2);
         obGame2.settTournament(obTourn);
@@ -310,12 +303,13 @@ public class GameControllerTest
     public void testSaveGameList() throws SQLException
     {
         Date diffDate = new Date();
+        diffDate.setHours(6);
+        diffDate.setMinutes(0);
+        diffDate.setSeconds(0);
         diffDate.setTime(diffDate.getTime() + (1000*60*60*48));
 
         Game obGame2 = new Game();
         obGame2.setdEventDate(diffDate);
-        obGame2.setnStartTime(obGame.getnStartTime());
-        obGame2.setnEndTime(obGame.getnEndTime());
         obGame2.settHomeTeam(obTeam1);
         obGame2.settAwayTeam(obTeam2);
         obGame2.settTournament(obTourn);
