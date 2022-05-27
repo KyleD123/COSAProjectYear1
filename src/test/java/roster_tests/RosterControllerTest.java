@@ -39,7 +39,7 @@ public class RosterControllerTest {
     {
     Player player = new Player();
     Team team = new Team();
-    assertTrue("successfully added player to team", rc.addPlayerToTeam(player,team));
+    assertSame("successfully added player to team", rc.addPlayerToTeam(player,team), true);
 
     }
 

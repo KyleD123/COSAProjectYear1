@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <ImageView fitHeight="327.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@img/r0Qls.png" />
+         </image></ImageView>
+   </center>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <ListView prefHeight="321.0" prefWidth="100.0" />
+         </children></VBox>
+   </left>
+   <top>
+      <HBox prefHeight="69.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Button" />
+            <HBox prefHeight="100.0" prefWidth="409.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TextField />
+                        <TextField />
+                        <TextField />
+                     </children></VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TextField />
+                        <TextField />
+                        <TextField />
+                     </children></VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TextField />
+                        <TextField />
+                        <TextField />
+                     </children></VBox>
+                  <VBox prefHeight="75.0" prefWidth="101.0">
+                     <children>
+                        <TextField prefHeight="25.0" prefWidth="94.0" />
+                        <TextField />
+                        <TextField />
+                     </children></VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TextField />
+                        <TextField />
+                        <TextField />
+                     </children></VBox>
+               </children>
+            </HBox>
+            <ImageView fitHeight="73.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="60.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/saveBtn.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="60.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/cancelBtn.png" />
+               </image>
+            </ImageView>
+         </children></HBox>
+   </bottom>
+</BorderPane>

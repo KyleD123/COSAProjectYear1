@@ -14,7 +14,8 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class TournamentControllerTests
+public class
+TournamentControllerTests
 {
 
     private static TournamentController tournControl;
