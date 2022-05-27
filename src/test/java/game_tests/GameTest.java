@@ -11,6 +11,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Set;
 
@@ -61,7 +63,7 @@ public class GameTest {
 
         Game obRef = (Game) violation.getInvalidValue();
 
-        assertEquals(expValue, obRef.getnEndTime());
+        assertEquals(expValue, obRef.getdEventDate());
     }
 
     /**
@@ -127,9 +129,8 @@ public class GameTest {
 
         obGame = new Game();
         //initiating methods
-        obGame.setdEventDate(obTourn.getdStartDate());
-        obGame.setnStartTime(900);
-        obGame.setnEndTime(1100);
+        LocalDateTime ldt = LocalDateTime.ofInstant(obTourn.getdStartDate().toInstant(), ZoneId.systemDefault());
+        obGame.setdEventDate(ldt);
         obGame.settHomeTeam(obTeam1);
         obGame.settAwayTeam(obTeam2);
         obGame.settTournament(obTourn);

@@ -35,7 +35,7 @@ public class TournamentController
         boolean isCreated = false; // false indicates not created
         try
         {
-            if (tV.isTournValid(obTourn) && repo.queryForEq("startDate", obTourn.getdStartDate()).size() == 0)
+            if (tV.isTournValid(obTourn) && repo.queryForEq("dStartDate", obTourn.getdStartDate()).size() == 0)
             {
                 int result = repo.create(obTourn);
 

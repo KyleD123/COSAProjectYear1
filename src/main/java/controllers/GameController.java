@@ -65,10 +65,8 @@ public class GameController
         //Check if there's a date equals to the obGames date. If there's no entry for this tourmanent about the request date, that means that date has not been filled up yet.
         for (int i = 0; i <= obRef.size() - 1; i++)
         {
-            if (obRef.get(i).getdEventDate().equals(obGame.getdEventDate()))
+            if (obGame.getdEventDate().isAfter(obRef.get(i).getdEventDate().plusHours(1).plusMinutes(59)))
             {
-                if (obRef.get(i).getnStartTime() == obGame.getnStartTime())
-                {
                     if (obRef.get(i).gettTournament().equals(obGame.gettTournament()))
                     {
                         if (obRef.get(i).getsLocation().equals(obGame.getsLocation()))
@@ -76,7 +74,6 @@ public class GameController
                             return false;
                         }
                     }
-                }
             }
         }
 

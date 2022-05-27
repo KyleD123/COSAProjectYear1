@@ -88,7 +88,7 @@ public class TournamentTest
     {
         startDate.setTime(startDate.getTime() - (1000*60*60*24));
         obTourn.setdStartDate(startDate);
-        assertInvalidTournament("startDate","Past date entered", startDate);
+        assertInvalidTournament("dStartDate","Past date entered", startDate);
     }
 
     /**
@@ -99,7 +99,7 @@ public class TournamentTest
     {
         endDate.setTime(startDate.getTime() - (1000*60*60*25));
         obTourn.setdEndDate(endDate);
-        assertInvalidTournament("endDate", "Past date entered", endDate);
+        assertInvalidTournament("dEndDate", "Past date entered", endDate);
     }
 
     /**
@@ -109,7 +109,7 @@ public class TournamentTest
     public void testTournamentBlankStartDate()
     {
         obTourn.setdStartDate(null);
-        assertInvalidTournament("startDate", "Empty Date Entered", obTourn.getdStartDate());
+        assertInvalidTournament("dStartDate", "Empty Date Entered", obTourn.getdStartDate());
 
     }
 
@@ -120,7 +120,7 @@ public class TournamentTest
     public void testTournamentBlankEndDate()
     {
         obTourn.setdEndDate(null);
-        assertInvalidTournament("endDate", "Empty Date Entered", obTourn.getdEndDate());
+        assertInvalidTournament("dEndDate", "Empty Date Entered", obTourn.getdEndDate());
     }
 
     /**
@@ -155,7 +155,7 @@ public class TournamentTest
     {
         String sName = repeatW(41);
         obTourn.setsTournamentName(sName);
-        assertInvalidTournament("tournamentName", "Character length limit exceeded", sName);
+        assertInvalidTournament("sTournamentName", "Character length limit exceeded", sName);
 
     }
 
