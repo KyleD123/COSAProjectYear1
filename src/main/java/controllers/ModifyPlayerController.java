@@ -1,6 +1,6 @@
 package controllers;
 
-import com.cosacpmg.PlayerView;
+import com.cosacpmg.MainWindow;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import javafx.fxml.FXML;
@@ -20,8 +20,6 @@ import models.PlayerValidator;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -128,7 +126,7 @@ public class ModifyPlayerController implements Initializable
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK)
         {
-            FXMLLoader mainLoader =  new FXMLLoader(PlayerView.class.getResource("main-player-screen-layout.fxml"));
+            FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-player-screen-layout.fxml"));
             Stage obMainStage = (Stage) btnModifyCancel.getScene().getWindow();
             obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
             obMainStage.show();
@@ -138,7 +136,7 @@ public class ModifyPlayerController implements Initializable
 
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
-        FXMLLoader mainLoader =  new FXMLLoader(PlayerView.class.getResource("main-player-screen-layout.fxml"));
+        FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-player-screen-layout.fxml"));
         Stage obMainStage = (Stage) btnModifyCancel.getScene().getWindow();
         obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
         obMainStage.show();

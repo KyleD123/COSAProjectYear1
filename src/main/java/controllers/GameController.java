@@ -3,13 +3,16 @@ package controllers;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
+import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import models.Game;
 import models.GameValidator;
 import models.Tournament;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -83,10 +86,15 @@ public class GameController
 //            }
 //        }
 
-        QueryBuilder<Game, Long> qb1 = repo.queryBuilder();
+        List<Game> lstGame = repo.queryBuilder().where().eq("tTournament_id", obGame.gettTournament().getnTournamentID())
+                .or().eq("sLocation", obGame.getsLocation())
+                .and().eq("dEventDate", obGame.getdEventDate())
+                .and().eq("tAwayTeam_id", obGame.gettAwayTeam().getTeamID())
+                .and().eq("tHomeTeam_id", obGame.gettHomeTeam().getTeamID()).query();
 
 
-        return true;
+
+        return lstGame.size() == 0;
     }
 
     public List<Game> getAllSchedule() throws SQLException

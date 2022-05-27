@@ -1,6 +1,6 @@
 package controllers;
 
-import com.cosacpmg.PlayerView;
+import com.cosacpmg.MainWindow;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import javafx.fxml.FXML;
@@ -68,7 +68,7 @@ public class MinPlayerEntryController implements Initializable
         Stage obMainStage = (Stage) btnPlayerSelectEnter.getScene().getWindow();
         obMainStage.close();
 
-        FXMLLoader loader = new FXMLLoader(PlayerView.class.getResource("modify-player-screen-layout.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainWindow.class.getResource("modify-player-screen-layout.fxml"));
         Parent root = loader.load();
         ModifyPlayerController obPlayerEntry = loader.getController();
 
@@ -80,7 +80,7 @@ public class MinPlayerEntryController implements Initializable
 
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
-        FXMLLoader mainLoader =  new FXMLLoader(PlayerView.class.getResource("main-player-screen-layout.fxml"));
+        FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-player-screen-layout.fxml"));
         Stage obMainStage = (Stage) btnPlayerSelectEnter.getScene().getWindow();
         obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
         obMainStage.show();

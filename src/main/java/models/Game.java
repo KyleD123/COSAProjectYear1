@@ -18,17 +18,17 @@ public class Game implements Serializable
     @DatabaseField(generatedId = true, unique = true)
     private long lGameID;
 
-    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
+    @DatabaseField(canBeNull = false, foreign = true)
     private Team tAwayTeam;
 
-    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
+    @DatabaseField(canBeNull = false, foreign = true)
     private Team tHomeTeam;
 
     @DatabaseField(canBeNull = false)
     @NotNull(message = "There must be a Event Date!")
     private Date dEventDate;
 
-    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
+    @DatabaseField(canBeNull = false, foreign = true)
     @NotNull(message = "There must be a tournament tied to this schedule")
     private Tournament tTournament;
 

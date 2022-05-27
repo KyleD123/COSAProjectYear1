@@ -1,6 +1,6 @@
 package controllers;
 
-import com.cosacpmg.TournamentView;
+import com.cosacpmg.MainWindow;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import javafx.fxml.FXML;
@@ -53,14 +53,14 @@ public class TournamentViewController implements Initializable {
 
     public void switchCreateScene(MouseEvent mouseEvent) throws Exception {
 
-        FXMLLoader newScene = new FXMLLoader(TournamentView.class.getResource("add-tournament-screen-layout.fxml"));
+        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("add-tournament-screen-layout.fxml"));
         obMainStage = (Stage) btnAdd.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();
     }
 
     public void switchModifyScene(MouseEvent mouseEvent) throws Exception {
-        FXMLLoader newScene = new FXMLLoader(TournamentView.class.getResource("modify-tournament-screen-layout.fxml"));
+        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("modify-tournament-screen-layout.fxml"));
         obMainStage = (Stage) btnEdit.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();
