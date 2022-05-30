@@ -3,16 +3,20 @@ package controllers;
 import com.cosacpmg.MainWindow;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import models.Player;
 import models.Team;
 
 import java.io.IOException;
@@ -35,8 +39,12 @@ public class TeamViewController implements Initializable
     @FXML
     private Label lblTeamID;
 
+    @FXML
+    private ListView lstPlayers;
+
     private Stage obMainStage = new Stage();
     private TeamController teamControl;
+    private PlayerController playerControl;
 
     private String sValue;
 
@@ -87,13 +95,22 @@ public class TeamViewController implements Initializable
 
     public void switchRosterScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("roster-window-view.fxml"));
+        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("manage-roster-layout.fxml"));
 //        obMainStage = (Stage) btnRoster.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();
 
         sValue = cboName.getValue().toString();
         obCurrentTeam = sValue;
+
+
+        ObservableList<Player> ListOfPlayer = FXCollections.observableArrayList(playerControl.getAllPlayers());
+
+//        lstPlayers.setItems(ListOfPlayer);
+
+        ListView <Player> lstPlayers = new ListView<Player>(ListOfPlayer);
+        lstPlayers.setItems(ListOfPlayer);
+
     }
 
     public void populateDropDownMenu()
