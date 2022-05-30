@@ -20,47 +20,38 @@
                <font>
                   <Font size="24.0" />
                </font></Button>
-            <HBox prefHeight="85.0" prefWidth="1057.0" spacing="50.0">
+            <FlowPane prefHeight="85.0" prefWidth="1150.0" style="-fx-border-color: black; -fx-border-width: 2;">
                <children>
-                  <VBox prefHeight="85.0" prefWidth="101.0" spacing="5.0">
-                     <children>
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                     </children></VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
-                     <children>
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                     </children></VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
-                     <children>
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                     </children></VBox>
-                  <VBox prefHeight="75.0" prefWidth="101.0" spacing="5.0">
-                     <children>
-                        <TextField prefHeight="25.0" prefWidth="94.0" />
-                        <TextField />
-                        <TextField />
-                     </children></VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
-                     <children>
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                     </children></VBox>
+
+                  <TextField fx:id="txtPlayer1" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer2" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer3" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer4" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer5" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer6" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer7" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer8" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer9" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer10" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer11" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer12" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer13" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer14" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+                  <TextField fx:id="txtPlayer15" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+
                </children>
                <padding>
-                  <Insets bottom="10.0" left="180.0" right="150.0" top="10.0" />
+                  <Insets bottom="5.0" left="150.0" right="100.0" top="5.0" />
                </padding>
-            </HBox>
-            <ImageView fitHeight="73.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true" translateY="40.0">
+            </FlowPane>
+            <ImageView fitHeight="73.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/saveBtn.png" />
-               </image></ImageView>
+                  <Image url="@img/trashBtn.png" />
+               </image>
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin>
+            </ImageView>
          </children>
       </HBox>
    </top>
@@ -69,17 +60,18 @@
          <children>
             <ImageView fitHeight="60.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/cancelBtn.png" />
+                  <Image url="@img/homeBtn.png" />
                </image>
             </ImageView>
          </children></HBox>
    </bottom>
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="611.0" fitWidth="604.0" layoutX="218.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/halfRink.png" />
+
                </image>
             </ImageView>
             <Label layoutX="351.0" layoutY="411.0" style="-fx-background-color: white;" text="Right Defense" textAlignment="CENTER">
@@ -87,38 +79,38 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="351.0" layoutY="453.0" />
+            <VBox fx:id="vRightDefense" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="445.0" />
             <Label layoutX="279.0" layoutY="274.0" style="-fx-background-color: white;" text="Goalie" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="238.0" layoutY="316.0" />
+            <VBox fx:id="vGoalie" layoutY="184.0" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="315.0" />
             <Label layoutX="359.0" layoutY="134.0" style="-fx-background-color: white;" text="Left Defense" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="351.0" layoutY="185.0" prefWidth="149.0" />
+            <VBox fx:id="vLeftDefense" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="169.0" />
             <Label layoutX="626.0" layoutY="134.0" style="-fx-background-color: white;" text="Left Wing" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="603.0" layoutY="185.0" />
+            <VBox fx:id="vLeftWing" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="169.0" />
             <Label layoutX="618.0" layoutY="411.0" style="-fx-background-color: white;" text="Right Wing">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="603.0" layoutY="453.0" />
-            <Label layoutX="704.0" layoutY="274.0" style="-fx-background-color: white;" text="Center" textAlignment="CENTER">
+            <VBox fx:id="vRightWing" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="445.0" />
+            <Label layoutX="694.0" layoutY="274.0" style="-fx-background-color: white;" text="Center" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="665.0" layoutY="316.0" />
+            <VBox fx:id="vCenter" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="315.0" />
          </children>
-      </Pane>
+      </AnchorPane>
    </center>
 </BorderPane>
