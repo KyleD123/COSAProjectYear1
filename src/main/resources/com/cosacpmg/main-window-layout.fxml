@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cosacpmg.MainWindow">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainWindowController">
     <top>
         <VBox alignment="CENTER" prefWidth="681.0" style="-fx-background-color: #eeeeee;" BorderPane.alignment="CENTER">
             <children>
@@ -57,7 +68,7 @@
     <bottom>
         <Pane prefHeight="58.0" prefWidth="637.0" style="-fx-background-color: #eeeeee;" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="48.0" fitWidth="175.0" layoutX="263.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="48.0" fitWidth="175.0" layoutX="596.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@img/escheduler_logo.png" />
                     </image>
@@ -68,5 +79,34 @@
     <cursor>
         <Cursor fx:constant="DEFAULT" />
     </cursor>
+    <center>
+        <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <TableView fx:id="tblGames" layoutX="22.0" layoutY="69.0" mouseTransparent="true" prefHeight="433.0" prefWidth="1316.0">
+                    <columns>
+                        <TableColumn fx:id="colGameID" editable="false" prefWidth="143.0" text="Game ID">
+                            <cellValueFactory><PropertyValueFactory property="lGameID" /></cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colHomeTeam" editable="false" prefWidth="137.0" text="HOME TEAM">
+                            <cellValueFactory><PropertyValueFactory property="tHomeTeam" /></cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colAwayTeam" editable="false" prefWidth="267.0" text="AWAY TEAM">
+                            <cellValueFactory><PropertyValueFactory property="tAwayTeam" /></cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colEventDate" editable="false" prefWidth="333.0" text="EVENT DATE AND START TIME">
+                            <cellValueFactory><PropertyValueFactory property="dEventDate" /></cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colLocations" editable="false" prefWidth="434.0" text="LOCATION">
+                            <cellValueFactory><PropertyValueFactory property="sLocation" /></cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+                <Label layoutX="22.0" layoutY="14.0" text="Select a Tournament to view their Scheduled Games">
+                    <font>
+                        <Font name="Franklin Gothic Demi" size="12.0" />
+                    </font></Label>
+                <ComboBox fx:id="cmbTournamentBox" layoutX="22.0" layoutY="33.0"  prefHeight="25.0" prefWidth="1315.0" promptText="Tournament ID" />
+            </children>
+        </Pane>
+    </center>
 </BorderPane>
-

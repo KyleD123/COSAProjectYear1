@@ -1,6 +1,6 @@
 package controllers;
 
-import com.cosacpmg.TournamentView;
+import com.cosacpmg.MainWindow;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import javafx.fxml.FXML;
@@ -135,7 +135,7 @@ public class CreateTournamentController implements Initializable
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK)
             {
-                FXMLLoader mainLoader =  new FXMLLoader(TournamentView.class.getResource("main-tournament-layout.fxml"));
+                FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-tournament-layout.fxml"));
                 Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
                 obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
                 obMainStage.show();
@@ -152,7 +152,7 @@ public class CreateTournamentController implements Initializable
      */
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
-        FXMLLoader mainLoader =  new FXMLLoader(TournamentView.class.getResource("main-tournament-layout.fxml"));
+        FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-tournament-layout.fxml"));
         Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
         obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
         obMainStage.show();
@@ -188,7 +188,7 @@ public class CreateTournamentController implements Initializable
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK)
         {
-            FXMLLoader mainLoader =  new FXMLLoader(TournamentView.class.getResource("main-tournament-layout.fxml"));
+            FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-tournament-layout.fxml"));
             Stage obMainStage = (Stage) cancelBtn.getScene().getWindow();
             obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
             obMainStage.show();

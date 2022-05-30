@@ -39,7 +39,7 @@ public class PlayerControllerTest {
         player1.setsFirstName("Timmy");
         player1.setsLastName("Jackson");
         player1.setnPlayerNumber(24);
-        player1.setsPosition("Right Wing");
+//        player1.setsPosition("Right Wing");
         player1.setsParentInfo("Linda Jackson");
         player1.setsEmergencyContact("306-456-7892");
 
@@ -47,7 +47,7 @@ public class PlayerControllerTest {
         player2.setsFirstName("Tommy");
         player2.setsLastName("Jackson");
         player2.setnPlayerNumber(42);
-        player2.setsPosition("Left Wing");
+//        player2.setsPosition("Left Wing");
         player2.setsParentInfo("Linda Jackson");
         player2.setsEmergencyContact("306-456-7892");
 
@@ -66,7 +66,7 @@ public class PlayerControllerTest {
         player1.setsFirstName("Timmy");
         player1.setsLastName("Jackson");
         player1.setnPlayerNumber(24);
-        player1.setsPosition("Right Wing");
+//        player1.setsPosition("Right Wing");
         player1.setsParentInfo("Linda Jackson");
         player1.setsEmergencyContact("306-456-7892");
 
@@ -74,7 +74,7 @@ public class PlayerControllerTest {
         player2.setsFirstName("Timmy");
         player2.setsLastName("Jackson");
         player2.setnPlayerNumber(24);
-        player2.setsPosition("Right Wing");
+//        player2.setsPosition("Right Wing");
         player2.setsParentInfo("Linda Jackson");
         player2.setsEmergencyContact("306-456-7892");
 
@@ -92,7 +92,7 @@ public class PlayerControllerTest {
         player1.setsFirstName("Timmy");
         player1.setsLastName("Jackson");
         player1.setnPlayerNumber(24);
-        player1.setsPosition("Right Wing");
+//        player1.setsPosition("Right Wing");
         player1.setsParentInfo("Linda Jackson");
         player1.setsEmergencyContact("306-456-7892");
 
@@ -100,7 +100,7 @@ public class PlayerControllerTest {
         player2.setsFirstName("Timmy");
         player2.setsLastName("Jackson");
         player2.setnPlayerNumber(26);
-        player2.setsPosition("Right Wing");
+//        player2.setsPosition("Right Wing");
         player2.setsParentInfo("Linda Jackson");
         player2.setsEmergencyContact("306-456-7892");
 
@@ -114,7 +114,7 @@ public class PlayerControllerTest {
         player1.setsFirstName("Timmy");
         player1.setsLastName("Jackson");
         player1.setnPlayerNumber(24);
-        player1.setsPosition("Right Wing");
+//        player1.setsPosition("Right Wing");
         player1.setsParentInfo("Linda Jackson");
         player1.setsEmergencyContact("306-456-7892");
 
@@ -129,7 +129,7 @@ public class PlayerControllerTest {
         player1.setsFirstName("Timmy");
         player1.setsLastName("Jackson");
         player1.setnPlayerNumber(24);
-        player1.setsPosition("Right Wing");
+//        player1.setsPosition("Right Wing");
         player1.setsParentInfo("Linda Jackson");
         player1.setsEmergencyContact("306-456-7892");
 
@@ -137,7 +137,7 @@ public class PlayerControllerTest {
         player2.setsFirstName("Ernesto");
         player2.setsLastName("Basoalto");
         player2.setnPlayerNumber(65);
-        player2.setsPosition("Left Wing");
+//        player2.setsPosition("Left Wing");
         player2.setsParentInfo("Bryce Barrie");
         player2.setsEmergencyContact("306-699-6999");
 

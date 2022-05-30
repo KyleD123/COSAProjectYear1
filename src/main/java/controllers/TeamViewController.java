@@ -1,6 +1,6 @@
 package controllers;
 
-import com.cosacpmg.TeamView;
+import com.cosacpmg.MainWindow;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import javafx.fxml.FXML;
@@ -60,7 +60,7 @@ public class TeamViewController implements Initializable
 
     public void switchCreateScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(TeamView.class.getResource("add-team-window.fxml"));
+        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("add-team-window.fxml"));
         obMainStage = (Stage) btnAdd.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();
@@ -68,7 +68,7 @@ public class TeamViewController implements Initializable
 
     public void switchModifyScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(TeamView.class.getResource("edit-team-window.fxml"));
+        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("edit-team-window.fxml"));
         obMainStage = (Stage) btnEdit.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366,768));
         obMainStage.show();

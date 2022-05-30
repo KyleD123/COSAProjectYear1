@@ -1,5 +1,5 @@
 package controllers;
-import com.cosacpmg.PlayerView;
+import com.cosacpmg.MainWindow;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import javafx.fxml.FXML;
@@ -52,7 +52,7 @@ public class CreatePlayerController implements Initializable
     {
         String sFirstName = txtFirstAdd.getText();
         String sLastName = txtLastAdd.getText();
-        String sPosition = txtPositionAdd.getText();
+//        String sPosition = txtPositionAdd.getText();
         int nPlayerNum = Integer.parseInt(txtNumAdd.getText());
         String sParent = txtParentAdd.getText();
         String sContact = txtContactAdd.getText();
@@ -60,7 +60,7 @@ public class CreatePlayerController implements Initializable
         Player obPlayer = new Player();
         obPlayer.setsFirstName(sFirstName);
         obPlayer.setsLastName(sLastName);
-        obPlayer.setsPosition(sPosition);
+//        obPlayer.setsPosition(sPosition);
         obPlayer.setnPlayerNumber(nPlayerNum);
         obPlayer.setsParentInfo(sParent);
         obPlayer.setsEmergencyContact(sContact);
@@ -71,14 +71,14 @@ public class CreatePlayerController implements Initializable
         {
             txtFirstAdd.setText(null);
             txtLastAdd.setText(null);
-            txtPositionAdd.setText(null);
+//            txtPositionAdd.setText(null);
             txtNumAdd.setText(null);
             txtParentAdd.setText(null);
             txtContactAdd.setText(null);
 
             lblError1.setText(listOfErrors.get("sFirstName"));
             lblError2.setText(listOfErrors.get("sLastName"));
-            lblError3.setText(listOfErrors.get("sPosition"));
+//            lblError3.setText(listOfErrors.get("sPosition"));
             lblError4.setText(listOfErrors.get("nPlayerNumber"));
             lblError5.setText(listOfErrors.get("sParentInfo"));
             lblError6.setText(listOfErrors.get("sEmergencyContact"));
@@ -88,7 +88,7 @@ public class CreatePlayerController implements Initializable
         {
             lblError1.setText("");
             lblError2.setText("");
-            lblError3.setText("");
+//            lblError3.setText("");
             lblError4.setText("");
             lblError5.setText("");
             lblError6.setText("");
@@ -118,7 +118,7 @@ public class CreatePlayerController implements Initializable
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK)
         {
-            FXMLLoader mainLoader =  new FXMLLoader(PlayerView.class.getResource("main-player-screen-layout.fxml"));
+            FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-player-screen-layout.fxml"));
             Stage obMainStage = (Stage) btnPlayerAddCancel.getScene().getWindow();
             obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
             obMainStage.show();
@@ -128,7 +128,7 @@ public class CreatePlayerController implements Initializable
 
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
-        FXMLLoader mainLoader =  new FXMLLoader(PlayerView.class.getResource("main-player-screen-layout.fxml"));
+        FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-player-screen-layout.fxml"));
         Stage obMainStage = (Stage) btnPlayerAddCancel.getScene().getWindow();
         obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
         obMainStage.show();
