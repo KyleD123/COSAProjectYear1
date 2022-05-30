@@ -38,14 +38,13 @@ public class TeamViewController implements Initializable
     private Stage obMainStage = new Stage();
     private TeamController teamControl;
 
-    @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
         ConnectionSource databaseConn = null;
         try
         {
-            databaseConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
+            databaseConn = new JdbcPooledConnectionSource(MainWindow.CONNECT_STRING);
 
         }
         catch (SQLException e)

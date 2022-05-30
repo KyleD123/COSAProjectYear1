@@ -36,13 +36,12 @@ public class TournamentViewController implements Initializable
 
     private TournamentController tournControl;
 
-    @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
         ConnectionSource dbConn = null;
         try {
-            dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
+            dbConn = new JdbcPooledConnectionSource(MainWindow.CONNECT_STRING);
         } catch (SQLException e) {
             e.printStackTrace();
         }

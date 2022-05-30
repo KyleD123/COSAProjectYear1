@@ -9,6 +9,8 @@ import javafx.stage.*;
 import java.io.IOException;
 public class MainWindow extends Application
 {
+
+    public static final String CONNECT_STRING = "jdbc:sqlite:eSchedule.db";
     private static Stage obStage;
     @Override
     public void start(Stage stage) throws IOException {

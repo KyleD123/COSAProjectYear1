@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
 public class MainWindowController implements Initializable
 {
 
-    public static final String CONNECT_STRING = "jdbc:sqlite:eSchedule.db";
+    public static final String CONNECT_STRING = MainWindow.CONNECT_STRING;
     private ConnectionSource dbConn;
 
 //    private  GameController obGameControl;

@@ -1,15 +1,22 @@
 package controllers;
 
 import com.cosacpmg.MainWindow;
+import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class PlayerViewController {
+
+public class PlayerViewController implements Initializable {
 
     @FXML
     private ImageView btnPlayerAdd, btnPlayerEdit, btnPlayerCancel;
@@ -42,15 +49,14 @@ public class PlayerViewController {
         obMainStage.close();
     }
 
-//    @FXML
-//    @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//        ConnectionSource databaseConn = null;
-//        try {
-//            databaseConn = new JdbcPooledConnectionSource("jdbc:sqlite:players.db");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        playerController = new PlayerController(databaseConn);
-//    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        ConnectionSource databaseConn = null;
+        try {
+            databaseConn = new JdbcPooledConnectionSource(MainWindow.CONNECT_STRING);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        playerController = new PlayerController(databaseConn);
+    }
 }
