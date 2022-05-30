@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Tournament;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -24,7 +25,7 @@ import java.util.ResourceBundle;
 
 public class TournamentViewController implements Initializable {
     @FXML
-    private ImageView btnAdd, cancelBtn, btnEdit;
+    private ImageView btnAdd, cancelBtn, btnEdit, btnCreateSchedule;
 
     @FXML
     private ComboBox cBoxIds;
@@ -74,11 +75,10 @@ public class TournamentViewController implements Initializable {
     }
 
 
-    public void changeInformation(javafx.event.ActionEvent actionEvent) {
-        int nID = Integer.parseInt(cBoxIds.getValue().toString());
-        Tournament nShow = tournControl.getTournamentById((long) nID);
-        txtTournamentInfoTitle.setText("Information for Tournament ID " + nID);
-
+    public void changeInformation(javafx.event.ActionEvent actionEvent)
+    {
+        Tournament nShow = tournControl.getTournamentById((long) ((Tournament) cBoxIds.getValue()).getnTournamentID());
+        txtTournamentInfoTitle.setText("Information for Tournament ID " + nShow.getnTournamentID());
 
         Date dStart = nShow.getdStartDate();
         Date dEnd = nShow.getdEndDate();
@@ -87,9 +87,25 @@ public class TournamentViewController implements Initializable {
         txtTournamentName.setText(nShow.getsTournamentName() == null ? "" : nShow.getsTournamentName());
         txtStartDate.setText(canadianDateFormat.format(dStart));
         txtEndDate.setText(canadianDateFormat.format(dEnd));
+
+        if (btnCreateSchedule.isVisible() == false)
+        {
+            btnCreateSchedule.setVisible(true);
+        }
     }
 
-    public void switchCreateScheduleScene() {
+    public void switchCreateScheduleScene() throws IOException
+    {
+        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("create-game-screen-layout.fxml"));
+        obMainStage = (Stage) btnCreateSchedule.getScene().getWindow();
+        obMainStage.setScene(new Scene(newScene.load(), 1366,768));
+        obMainStage.show();
+
+        Tournament tournSelected = tournControl.getTournamentById((long) ((Tournament) cBoxIds.getValue()).getnTournamentID());
+
+        CreateGameController obPassInControl = newScene.getController();
+        obPassInControl.setTournamentReference(tournSelected);
+        obPassInControl.initalizeLayoutContents();
     }
 
 }

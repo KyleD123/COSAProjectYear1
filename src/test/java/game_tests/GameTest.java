@@ -11,9 +11,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.Set;
 
@@ -64,7 +61,7 @@ public class GameTest {
 
         Game obRef = (Game) violation.getInvalidValue();
 
-        assertEquals(expValue, obRef.getdEventDate());
+        assertEquals(expValue, obRef.getDEventDate());
     }
 
     /**
@@ -132,11 +129,11 @@ public class GameTest {
 
         obGame = new Game();
         //initiating methods
-        obGame.setdEventDate(obTourn.getdStartDate());
-        obGame.settHomeTeam(obTeam1);
-        obGame.settAwayTeam(obTeam2);
-        obGame.settTournament(obTourn);
-        obGame.setsLocation("ACT Centre Rink A");
+        obGame.setDEventDate(obTourn.getdStartDate());
+        obGame.setTHomeTeam(obTeam1);
+        obGame.setTAwayTeam(obTeam2);
+        obGame.setTTournament(obTourn);
+        obGame.setSLocation("ACT Centre Rink A");
     }
 
     /**
@@ -158,7 +155,7 @@ public class GameTest {
     public void testCreateScheduleWithoutEventDate()
     {
         Date obDate = null;
-        obGame.setdEventDate(obDate);
+        obGame.setDEventDate(obDate);
         assertInvalidSchedule("dEventDate", "There must be a Event Date!", obDate);
     }
 
@@ -172,7 +169,7 @@ public class GameTest {
     public void testCreateScheduleWithoutTournament()
     {
         Tournament obTournament = null;
-        obGame.settTournament(obTournament);
+        obGame.setTTournament(obTournament);
         assertInvalidSchedule("tTournament", "There must be a tournament tied to this schedule", obTournament);
     }
 
@@ -186,7 +183,7 @@ public class GameTest {
     public void testCreateScheduleWithoutLocation()
     {
         String location = null;
-        obGame.setsLocation(location);
+        obGame.setSLocation(location);
         assertInvalidSchedule("sLocation", "Provide a location and rink!", location);
     }
 }

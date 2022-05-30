@@ -40,58 +40,58 @@ public class Game implements Serializable
     {
     }
 
-    public long getlGameID()
+    public long getLGameID()
     {
         return this.lGameID;
     }
 
-    public void setlGameID(long lGameID)
+    public void setLGameID(long lGameID)
     {
         this.lGameID = lGameID;
     }
 
-    public Team gettAwayTeam() {
+    public Team getTAwayTeam() {
         return tAwayTeam;
     }
 
-    public void settAwayTeam(Team obTeam)
+    public void setTAwayTeam(Team obTeam)
     {
         this.tAwayTeam = obTeam;
     }
 
-    public Team gettHomeTeam()
+    public Team getTHomeTeam()
     {
         return tHomeTeam;
     }
 
-    public void settHomeTeam(Team obTeam)
+    public void setTHomeTeam(Team obTeam)
     {
         this.tHomeTeam = obTeam;
     }
 
-    public Date getdEventDate() {return this.dEventDate;}
+    public Date getDEventDate() {return this.dEventDate;}
 
-    public void setdEventDate(Date obDate)
+    public void setDEventDate(Date obDate)
     {
         this.dEventDate = obDate;
     }
 
-    public Tournament gettTournament()
+    public Tournament getTTournament()
     {
         return this.tTournament;
     }
 
-    public void settTournament(Tournament tTournament)
+    public void setTTournament(Tournament tTournament)
     {
         this.tTournament = tTournament;
     }
 
-    public String getsLocation()
+    public String getSLocation()
     {
         return this.sLocation;
     }
 
-    public void setsLocation(String sLocation)
+    public void setSLocation(String sLocation)
     {
         this.sLocation = sLocation;
     }

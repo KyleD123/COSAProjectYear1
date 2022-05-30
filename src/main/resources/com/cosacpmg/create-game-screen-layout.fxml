@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateGameController">
+    <top>
+        <Pane prefHeight="135.0" prefWidth="1366.0" style="-fx-background-color: #D3D3D3;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="73.0" fitWidth="500.0" layoutX="25.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@img/createScheduleTag.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="lblDetermineTourn" alignment="TOP_LEFT" layoutX="25.0" layoutY="97.0" text="Creating Scheduled Game for Tournament">
+                    <font>
+                        <Font name="Franklin Gothic Medium" size="20.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+    </top>
+    <center>
+        <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox layoutX="416.0" layoutY="108.0" prefHeight="60.0" prefWidth="530.0" spacing="80.0">
+                    <children>
+                        <VBox prefHeight="61.0" prefWidth="220.0" spacing="10.0">
+                            <children>
+                                <Label text="Date of Game">
+                                    <font>
+                                        <Font name="Franklin Gothic Heavy" size="15.0" />
+                                    </font>
+                                </Label>
+                                <DatePicker fx:id="dpSelectDate" prefHeight="30.0" prefWidth="222.0" />
+                            </children>
+                        </VBox>
+                        <VBox alignment="TOP_RIGHT" prefHeight="61.0" prefWidth="231.0" spacing="14.0">
+                            <children>
+                                <Label text="Time of Game">
+                                    <font>
+                                        <Font name="Franklin Gothic Heavy" size="15.0" />
+                                    </font>
+                                </Label>
+                                <ComboBox fx:id="cmbSelectTime" prefHeight="25.0" prefWidth="229.0" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox layoutX="416.0" layoutY="212.0" prefHeight="60.0" prefWidth="530.0" spacing="80.0">
+                    <children>
+                        <VBox prefHeight="61.0" prefWidth="231.0" spacing="14.0">
+                            <children>
+                                <Label text="Home Team">
+                                    <font>
+                                        <Font name="Franklin Gothic Heavy" size="15.0" />
+                                    </font>
+                                </Label>
+                                <ComboBox fx:id="cmbSelectHomeTeam" prefHeight="25.0" prefWidth="229.0" />
+                            </children>
+                        </VBox>
+                        <Label prefHeight="63.0" prefWidth="75.0" text="VS">
+                            <font>
+                                <Font name="Franklin Gothic Heavy" size="12.0" />
+                            </font>
+                        </Label>
+                        <VBox alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="241.0" spacing="14.0">
+                            <children>
+                                <Label text="Away Team">
+                                    <font>
+                                        <Font name="Franklin Gothic Heavy" size="15.0" />
+                                    </font>
+                                </Label>
+                                <ComboBox fx:id="cmbSelectAwayTeam" prefHeight="25.0" prefWidth="229.0" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                <VBox layoutX="416.0" layoutY="317.0" prefHeight="56.0" prefWidth="534.0" spacing="14.0">
+                    <children>
+                        <Label text="Location">
+                            <font>
+                                <Font name="Franklin Gothic Heavy" size="15.0" />
+                            </font>
+                        </Label>
+                        <ComboBox fx:id="cmbSelectLocation" prefHeight="25.0" prefWidth="535.0" />
+                    </children>
+                </VBox>
+                <HBox layoutX="474.0" layoutY="439.0" prefHeight="51.0" prefWidth="418.0" spacing="20.0">
+                    <children>
+                        <ImageView fx:id="saveBtn" fitHeight="52.0" fitWidth="206.0" onMouseClicked="#saveGame" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/saveBtn.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="cancelBtn" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#cancel" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/cancelBtn.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+                <Label fx:id="lblError1" layoutX="416.0" layoutY="168.0" prefHeight="20.0" prefWidth="220.0" textFill="RED">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label fx:id="lblError2" alignment="CENTER_RIGHT" layoutX="717.0" layoutY="168.0" prefHeight="20.0" prefWidth="233.0" textFill="RED">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label fx:id="lblError3" alignment="CENTER" layoutX="415.0" layoutY="272.0" prefHeight="21.0" prefWidth="535.0" textFill="RED">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Label fx:id="lblError4" alignment="CENTER" layoutX="415.0" layoutY="380.0" prefHeight="20.0" prefWidth="536.0" textFill="RED">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="338.0" layoutY="510.0" text="Every schedule created has been allocated with two hours in par with the average hockey game duration.">
+                    <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+    </center>
+</BorderPane>

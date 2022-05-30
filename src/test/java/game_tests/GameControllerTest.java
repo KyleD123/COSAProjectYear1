@@ -60,11 +60,11 @@ public class GameControllerTest
         //Setting up a game here
         obGame = new Game();
         //initiating methods
-        obGame.setdEventDate(obTourn.getdStartDate());
-        obGame.settHomeTeam(obTeam1);
-        obGame.settAwayTeam(obTeam2);
-        obGame.settTournament(obTourn);
-        obGame.setsLocation("ACT Centre Rink B");
+        obGame.setDEventDate(obTourn.getdStartDate());
+        obGame.setTHomeTeam(obTeam1);
+        obGame.setTAwayTeam(obTeam2);
+        obGame.setTTournament(obTourn);
+        obGame.setSLocation("ACT Centre Rink B");
 
         try
         {
@@ -133,11 +133,11 @@ public class GameControllerTest
         obTourn.setdEndDate(endDate);
 
         Game obGame2 = new Game();
-        obGame2.setdEventDate(endDate);
-        obGame2.settHomeTeam(obTeam3);
-        obGame2.settAwayTeam(obTeam4);
-        obGame2.settTournament(obTourn);
-        obGame2.setsLocation("Archibald Rink A");
+        obGame2.setDEventDate(endDate);
+        obGame2.setTHomeTeam(obTeam3);
+        obGame2.setTAwayTeam(obTeam4);
+        obGame2.setTTournament(obTourn);
+        obGame2.setSLocation("Archibald Rink A");
 
         assertSame("Sucessfully added game", gameController.createGame(obGame), true);
         assertSame("Sucessfully added game", gameController.createGame(obGame2), true);
@@ -160,8 +160,8 @@ public class GameControllerTest
         //THIS PART SETS UP HOME AND AWAY TEAM FOR THE SASKATOONIAN BRUHLERS. HOWEVER, THE CUSTOM ANNOTATIONS FOR THE GAME OBJECT
         //WILL DETECT THAT THE HOME AND AWAY FIELDS IN THE GAME OBJECT ARE IDENTICAL AND WILL THROW OUT AN ERROR INTO THE
         //GAMEVALIDATOR'S ISVALID METHOD.
-        obGame.settHomeTeam(obTeam1);
-        obGame.settAwayTeam(obTeam1);
+        obGame.setTHomeTeam(obTeam1);
+        obGame.setTAwayTeam(obTeam1);
 
         assertSame("Same home and away team return false", gameController.createGame(obGame), false);
 
@@ -180,11 +180,11 @@ public class GameControllerTest
     public void testSaveGameWithSameDateTimeTournamentButDifferentLocation()
     {
         Game obGame2 = new Game();
-        obGame2.setdEventDate(obTourn.getdStartDate());
-        obGame2.settHomeTeam(obTeam1);
-        obGame2.settAwayTeam(obTeam2);
-        obGame2.settTournament(obTourn);
-        obGame2.setsLocation("ACT Centre Rink A"); //Instead of ACT Centre Rink B, we changed it to ACT Centre Rink A.
+        obGame2.setDEventDate(obTourn.getdStartDate());
+        obGame2.setTHomeTeam(obTeam1);
+        obGame2.setTAwayTeam(obTeam2);
+        obGame2.setTTournament(obTourn);
+        obGame2.setSLocation("ACT Centre Rink A"); //Instead of ACT Centre Rink B, we changed it to ACT Centre Rink A.
 
         assertSame("Sucessfully added game", gameController.createGame(obGame), true);
         assertSame("Sucessfully added game", gameController.createGame(obGame2), true);
@@ -216,11 +216,11 @@ public class GameControllerTest
 
         //NOTE THE USAGE OF THE SAME PROPERTIES THROUGH OBGAME'S GETTERS.
         Game obGame2 = new Game();
-        obGame2.setdEventDate(obGame.getdEventDate());
-        obGame2.settHomeTeam(obTeam3); //ADDING OUR FIRST UNIQUE TEAM
-        obGame2.settAwayTeam(obTeam4);//ADDING OUR SECOND UNIQUE TEAM
-        obGame2.settTournament(obTourn);
-        obGame2.setsLocation(obGame.getsLocation());
+        obGame2.setDEventDate(obGame.getDEventDate());
+        obGame2.setTHomeTeam(obTeam3); //ADDING OUR FIRST UNIQUE TEAM
+        obGame2.setTAwayTeam(obTeam4);//ADDING OUR SECOND UNIQUE TEAM
+        obGame2.setTTournament(obTourn);
+        obGame2.setSLocation(obGame.getSLocation());
 
         assertSame("Sucessfully added game", gameController.createGame(obGame), true);
         assertSame("conflicting schedule return false", gameController.createGame(obGame2), false);
@@ -250,11 +250,11 @@ public class GameControllerTest
 
         //NOTE THE USAGE OF THE SAME PROPERTIES THROUGH OBGAME'S GETTERS.
         Game obGame2 = new Game();
-        obGame2.setdEventDate(new Date(diffDate.getTime() + (1000*60*60*24))); //NOTE THE SETTING OF THE DAY USING THE DIFF DATE
-        obGame2.settHomeTeam(obTeam1);
-        obGame2.settAwayTeam(obTeam2);
-        obGame2.settTournament(obTourn);
-        obGame2.setsLocation(obGame.getsLocation());
+        obGame2.setDEventDate(new Date(diffDate.getTime() + (1000*60*60*24))); //NOTE THE SETTING OF THE DAY USING THE DIFF DATE
+        obGame2.setTHomeTeam(obTeam1);
+        obGame2.setTAwayTeam(obTeam2);
+        obGame2.setTTournament(obTourn);
+        obGame2.setSLocation(obGame.getSLocation());
 
         assertSame("Sucessfully added game", gameController.createGame(obGame), true);
         assertSame("Sucessfully added game", gameController.isUnique(obGame2), true);
@@ -296,11 +296,11 @@ public class GameControllerTest
         obTourn.setdEndDate(endDate);
 
         Game obGame2 = new Game();
-        obGame2.setdEventDate(endDate);
-        obGame2.settHomeTeam(obTeam3);
-        obGame2.settAwayTeam(obTeam4);
-        obGame2.settTournament(obTourn);
-        obGame2.setsLocation("Archibald Rink A");
+        obGame2.setDEventDate(endDate);
+        obGame2.setTHomeTeam(obTeam3);
+        obGame2.setTAwayTeam(obTeam4);
+        obGame2.setTTournament(obTourn);
+        obGame2.setSLocation("Archibald Rink A");
 
 
         gameController.createGame(obGame);

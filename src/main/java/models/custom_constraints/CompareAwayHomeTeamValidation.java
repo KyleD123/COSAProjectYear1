@@ -16,7 +16,7 @@ public class CompareAwayHomeTeamValidation implements
 
     @Override
     public boolean isValid(Game value, ConstraintValidatorContext context) {
-        if (value.gettAwayTeam().getTeamID() == value.gettHomeTeam().getTeamID())
+        if (value.getTAwayTeam().getTeamID() == value.getTHomeTeam().getTeamID())
         {
             return false;
         }
