@@ -6,7 +6,10 @@ import com.j256.ormlite.support.ConnectionSource;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 import models.Player;
 import models.PlayerValidator;
@@ -85,27 +88,29 @@ public class ManageRosterController implements Initializable
     //Drag and Drop Methods
     //Create separate Methods - Drag and Drop Amounts
 
+
+    //** Current Impediment is figuring out which source the end user would be grabbing from **
     @FXML
-    public void setOnDragDetected(MouseDragEvent e)
+    public void setOnDragDetected(MouseEvent mouseEvent)
     {
-        
+       // Dragboard dragboard = source.startDragAndDrop(TransferMode.ANY);
 
     }
 
     @FXML
-    public void setOnDragOver(MouseDragEvent e)
-    {
-
-    }
-
-    @FXML
-    public void setOnDragDropped(MouseDragEvent e)
+    public void setOnDragOver(MouseEvent mouseEvent)
     {
 
     }
 
     @FXML
-    public void setOnDraggedDone(MouseDragEvent e)
+    public void setOnDragDropped(MouseEvent mouseEvent)
+    {
+
+    }
+
+    @FXML
+    public void setOnDraggedDone(MouseDragEvent mouseEvent)
     {
 
     }

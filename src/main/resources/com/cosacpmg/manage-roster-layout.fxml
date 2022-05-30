@@ -48,6 +48,9 @@
                     <image>
                         <Image url="@img/trashBtn.png" />
                     </image>
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin>
             </ImageView>
             </children>
         </HBox>
@@ -100,7 +103,7 @@
                         <Font size="24.0" />
                     </font>
                 </Label>
-            <VBox fx:id="vRightWing" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="445.0" />
+            <VBox fx:id="vRightWing" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="445.0" />
                 <Label layoutX="694.0" layoutY="274.0" style="-fx-background-color: white;" text="Center" textAlignment="CENTER">
                     <font>
                         <Font size="24.0" />
