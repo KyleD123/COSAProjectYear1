@@ -32,9 +32,9 @@ public class Player implements Serializable {
     @NotEmpty(message = "Player Position is Required")
     private String sPosition;
 
-    @DatabaseField(canBeNull = true, foreign = true)
+    @DatabaseField(canBeNull = true)
     @Size(max = 40, message = "Team Name Too Long")
-    private Team sTeamName;
+    private String sTeamName;
 
     @DatabaseField(canBeNull = false)
     @Size(max = 30, message = "Player Parent Info Too Long")

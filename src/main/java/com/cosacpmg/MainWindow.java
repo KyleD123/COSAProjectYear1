@@ -33,7 +33,7 @@ public class MainWindow extends Application
     @FXML
     public void openTeamWindow(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader mainLoader = new FXMLLoader(TeamView.class.getResource("team-window.fxml"));
+        FXMLLoader mainLoader = new FXMLLoader(MainWindow.class.getResource("team-window.fxml"));
         Scene obMainScene = new Scene(mainLoader.load());
         Stage newWindow = new Stage();
         newWindow.setTitle("eSchedule - Team");
@@ -49,7 +49,7 @@ public class MainWindow extends Application
     @FXML
     public void openPlayerWindow(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader mainLoader = new FXMLLoader(PlayerView.class.getResource("main-player-screen-layout.fxml"));
+        FXMLLoader mainLoader = new FXMLLoader(MainWindow.class.getResource("main-player-screen-layout.fxml"));
         Scene obMainScene = new Scene(mainLoader.load());
         Stage newWindow = new Stage();
         newWindow.setTitle("eSchedule - Tournament");
@@ -65,7 +65,7 @@ public class MainWindow extends Application
     @FXML
     public void openTournamentWindow(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader mainLoader = new FXMLLoader(TournamentView.class.getResource("main-tournament-layout.fxml"));
+        FXMLLoader mainLoader = new FXMLLoader(MainWindow.class.getResource("main-tournament-layout.fxml"));
         Scene obMainScene = new Scene(mainLoader.load());
         Stage newWindow = new Stage();
         newWindow.setTitle("eSchedule - Tournament");

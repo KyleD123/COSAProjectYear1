@@ -1,6 +1,6 @@
 package controllers;
 
-import com.cosacpmg.TournamentView;
+import com.cosacpmg.MainWindow;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import javafx.fxml.FXML;
@@ -13,13 +13,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Tournament;
 
-import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -58,7 +55,7 @@ public class TournamentViewController implements Initializable
     public void switchCreateScene(MouseEvent mouseEvent) throws Exception
     {
 
-        FXMLLoader newScene = new FXMLLoader(TournamentView.class.getResource("add-tournament-screen-layout.fxml"));
+        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("add-tournament-screen-layout.fxml"));
         obMainStage = (Stage) btnAdd.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366,768));
         obMainStage.show();
@@ -66,7 +63,7 @@ public class TournamentViewController implements Initializable
 
     public void switchModifyScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(TournamentView.class.getResource("modify-tournament-screen-layout.fxml"));
+        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("modify-tournament-screen-layout.fxml"));
         obMainStage = (Stage) btnEdit.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366,768));
         obMainStage.show();
