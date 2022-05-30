@@ -10,7 +10,7 @@
    <left>
       <VBox prefHeight="688.0" prefWidth="161.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView prefHeight="586.0" prefWidth="161.0" />
+            <ListView fx:id="lstTeamList" prefHeight="586.0" prefWidth="161.0" />
          </children></VBox>
    </left>
    <top>

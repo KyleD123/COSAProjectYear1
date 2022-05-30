@@ -15,4 +15,9 @@ public class RosterController {
     {
     return true;
     }
+
+    public boolean removePlayerFromTeam(Player obPlayer)
+    {
+        return true;
+    }
 }
