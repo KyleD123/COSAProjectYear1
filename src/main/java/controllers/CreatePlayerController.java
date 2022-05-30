@@ -53,6 +53,7 @@ public class CreatePlayerController implements Initializable
         String sFirstName = txtFirstAdd.getText();
         String sLastName = txtLastAdd.getText();
         String sPosition = txtPositionAdd.getText();
+        String sTeamName = "";
         int nPlayerNum = Integer.parseInt(txtNumAdd.getText());
         String sParent = txtParentAdd.getText();
         String sContact = txtContactAdd.getText();
@@ -61,6 +62,7 @@ public class CreatePlayerController implements Initializable
         obPlayer.setsFirstName(sFirstName);
         obPlayer.setsLastName(sLastName);
         obPlayer.setsPosition(sPosition);
+        obPlayer.setsTeamName(sTeamName);
         obPlayer.setnPlayerNumber(nPlayerNum);
         obPlayer.setsParentInfo(sParent);
         obPlayer.setsEmergencyContact(sContact);

@@ -23,17 +23,19 @@ import static org.junit.Assert.*;
  */
 public class RosterControllerTest {
 
-    private static RosterController rc;
+    private static PlayerController pc;
 
     @Before
     public void setUpMock() {
         try {
             ConnectionSource obConn = new JdbcPooledConnectionSource("jdbc:h2:mem:myDb");
-            rc = new RosterController(obConn );
+            pc = new PlayerController(obConn );
             TableUtils.clearTable(obConn, Player.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        Team team1 = new Team();
+        
     }
 
     /**
@@ -45,9 +47,9 @@ public class RosterControllerTest {
     @Test
     public void testAddPlayerToTeam()
     {
-    Player player = new Player();
-    Team team = new Team();
-    assertSame("successfully added player to team", rc.addPlayerToTeam(player,team), true);
+
+
+    assertSame("successfully added player to team", pc.(player), true);
 
     }
 
@@ -62,12 +64,12 @@ public class RosterControllerTest {
     {
         Player player1 = new Player();
         Player player2 = new Player();
-        Team team = new Team();
 
 
-        assertTrue("successfully added player to team return Player", rc.addPlayerToTeam(player1,team));
 
-        assertFalse("passed player already exists return false", rc.addPlayerToTeam(player2,team));
+        assertTrue("successfully added player to team return Player", pc.modifyPlayer(player1));
+
+        assertFalse("passed player already exists return false", pc.modifyPlayer(player2));
 
 
     }
@@ -82,9 +84,8 @@ public class RosterControllerTest {
     public void  testAdd16thPlayerToTeam()
     {
         Player player = new Player();
-        Team team = new Team();
 
-        assertFalse("max players reached, return false", rc.addPlayerToTeam(player, team));
+        assertFalse("max players reached, return false", pc.modifyPlayer(player));
 
     }
 
@@ -98,9 +99,9 @@ public class RosterControllerTest {
     public void testAddFinalPlayerToTeam()
     {
         Player player = new Player();
-        Team team = new Team();
 
-        assertTrue("successfully added Player to Team, return Player", rc.addPlayerToTeam(player, team));
+
+        assertTrue("successfully added Player to Team, return Player", pc.modifyPlayer(player));
     }
 
     /**
@@ -113,9 +114,9 @@ public class RosterControllerTest {
     public void  testAddFirstPlayerToTeam()
     {
         Player player = new Player();
-        Team team = new Team();
 
-        assertTrue("successfully added Player to Team, return Player", rc.addPlayerToTeam(player, team));
+
+        assertTrue("successfully added Player to Team, return Player", pc.modifyPlayer(player));
     }
 
     /**
@@ -128,10 +129,12 @@ public class RosterControllerTest {
     public void testRemovePlayerFromTeam()
     {
         Player player = new Player();
-        Team team = new Team();
 
-        rc.addPlayerToTeam(player, team);
-        assertTrue("successfully removed Player from Team, return Player", rc.removePlayerFromTeam(player));
+
+        pc.modifyPlayer(player);
+        assertTrue("successfully removed Player from Team, return Player", pc.removePlayerFromTeam(player));
     }
+
+
 
 }
