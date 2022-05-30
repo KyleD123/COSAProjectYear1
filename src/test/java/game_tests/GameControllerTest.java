@@ -179,10 +179,20 @@ public class GameControllerTest
     @Test
     public void testSaveGameWithSameDateTimeTournamentButDifferentLocation()
     {
+        Team obTeam3 = new Team();
+        obTeam3.setTeamName("Regina Bruhlers");
+        obTeam3.setCoachName("Coach Kyle");
+        obTeam3.setTeamID(3);
+
+        Team obTeam4 = new Team();
+        obTeam4.setTeamName("Swift Current Mawlers");
+        obTeam4.setCoachName("Coach Kale");
+        obTeam4.setTeamID(4);
+
         Game obGame2 = new Game();
         obGame2.setDEventDate(obTourn.getdStartDate());
-        obGame2.setTHomeTeam(obTeam1);
-        obGame2.setTAwayTeam(obTeam2);
+        obGame2.setTHomeTeam(obTeam3);
+        obGame2.setTAwayTeam(obTeam4);
         obGame2.setTTournament(obTourn);
         obGame2.setSLocation("ACT Centre Rink A"); //Instead of ACT Centre Rink B, we changed it to ACT Centre Rink A.
 

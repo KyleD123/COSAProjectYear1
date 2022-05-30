@@ -55,7 +55,7 @@ public class CreateGameController implements Initializable
         ConnectionSource dbConn = null;
         try
         {
-            dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
+            dbConn = new JdbcPooledConnectionSource(MainWindow.CONNECT_STRING);
             teamControl = new TeamController(dbConn);
             gameController = new GameController(dbConn);
             obValid = new GameValidator();

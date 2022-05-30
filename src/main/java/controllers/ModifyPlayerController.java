@@ -46,7 +46,7 @@ public class ModifyPlayerController implements Initializable
     {
         ConnectionSource databaseConn = null;
         try {
-            databaseConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
+            databaseConn = new JdbcPooledConnectionSource(MainWindow.CONNECT_STRING);
         } catch (SQLException e) {
             e.printStackTrace();
         }

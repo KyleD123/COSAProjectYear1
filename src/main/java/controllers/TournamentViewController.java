@@ -42,7 +42,7 @@ public class TournamentViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         ConnectionSource dbConn = null;
         try {
-            dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
+            dbConn = new JdbcPooledConnectionSource(MainWindow.CONNECT_STRING);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -69,6 +69,7 @@ public class TournamentViewController implements Initializable {
 
     public void populateDropDownMenu() {
 
+        cBoxIds.getItems().clear();
         List<Tournament> list = tournControl.getAllTournament();
         cBoxIds.getItems().addAll(list);
 
@@ -103,6 +104,8 @@ public class TournamentViewController implements Initializable {
         obTournStage.setOnCloseRequest(e -> {
             try {
                 ((MainWindowController) MainWindow.mainLoader.getController()).populateScheduleTable(null);
+
+
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }

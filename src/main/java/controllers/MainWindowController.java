@@ -29,14 +29,15 @@ import java.util.ResourceBundle;
 public class MainWindowController implements Initializable
 {
 
-    public static final String CONNECT_STRING = "jdbc:sqlite:eSchedule.db";
+    public static final String CONNECT_STRING = MainWindow.CONNECT_STRING;
+
     private ConnectionSource dbConn;
 
     private  GameController obGameControl;
 
-    private TournamentController obTournamentControl;
+    private  TournamentController obTournamentControl;
     @FXML
-    private ComboBox cmbTournamentBox;
+    private  ComboBox cmbTournamentBox;
 
     @FXML
     private TableView<Game> tblGames;
@@ -67,9 +68,16 @@ public class MainWindowController implements Initializable
         }
 
         //This is where it displays all of the lists of the tournament
+        populateComboTournaments();
+
+
+    }
+    @FXML
+    public void populateComboTournaments()
+    {
+        cmbTournamentBox.getItems().clear();
         List<Tournament> obList = obTournamentControl.getAllTournament();
         cmbTournamentBox.getItems().addAll(obList);
-
     }
 
     /**

@@ -58,9 +58,9 @@
         </VBox>
     </top>
     <bottom>
-        <Pane prefHeight="84.0" prefWidth="1366.0" style="-fx-background-color: #eeeeee;" BorderPane.alignment="CENTER">
+        <Pane prefHeight="67.0" prefWidth="1366.0" style="-fx-background-color: #eeeeee;" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="48.0" fitWidth="175.0" layoutX="596.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="48.0" fitWidth="175.0" layoutX="596.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@img/escheduler_logo.png" />
                     </image>
