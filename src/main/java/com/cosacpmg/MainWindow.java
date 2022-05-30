@@ -21,11 +21,13 @@ public class MainWindow extends Application
 {
     public static final String CONNECT_STRING = "jdbc:sqlite:eSchedule.db";
     private ConnectionSource dbConn;
+    public static FXMLLoader mainLoader;
 
     @Override
     public void start(Stage stage) throws IOException, SQLException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("main-window-layout.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1366, 768);
+        this.mainLoader = fxmlLoader;
         stage.setTitle("eSchedule");
         stage.setResizable(false);
         stage.setScene(scene);

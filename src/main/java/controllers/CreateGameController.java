@@ -19,6 +19,8 @@ import models.Tournament;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
@@ -37,7 +39,7 @@ public class CreateGameController implements Initializable
     private ComboBox cmbSelectTime, cmbSelectHomeTeam, cmbSelectAwayTeam, cmbSelectLocation;
 
     @FXML
-    private Label lblError1, lblError2, lblError3, lblError4, lblDetermineTourn;
+    private Label lblError1, lblError2, lblError3, lblError4, lblDetermineTourn, lblTournDateInfo;
 
     private TeamController teamControl;
     private GameController gameController;
@@ -72,6 +74,8 @@ public class CreateGameController implements Initializable
     public void initalizeLayoutContents()
     {
         lblDetermineTourn.setText("Creating Scheduled Game for Tournament " + obTournamentReference.getnTournamentID() + " - " + obTournamentReference.getsTournamentName());
+        DateFormat canadianDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        lblTournDateInfo.setText("Tournament Date: " + canadianDateFormat.format(obTournamentReference.getdStartDate()) + " to " + canadianDateFormat.format(obTournamentReference.getdEndDate()));
 
         //Setting up the time
         ArrayList<String> timeAllocated = new ArrayList<>();
@@ -112,6 +116,10 @@ public class CreateGameController implements Initializable
     public void saveGame(MouseEvent mouseEvent) throws IOException
     {
         Game obTempGame = new Game();
+        lblError1.setText("");
+        lblError2.setText("");
+        lblError3.setText("");
+        lblError4.setText("");
         try
         {
             ZoneId defaultZoneId = ZoneId.systemDefault();
@@ -123,7 +131,7 @@ public class CreateGameController implements Initializable
             //If not, continue on.
             if (obDateConv.before(obTournamentReference.getdStartDate()) || obDateConv.after(obTournamentReference.getdEndDate()))
             {
-                lblError1.setText("Selected date does not fall within the Tournament's scheduled dates");
+                lblError1.setText("Date must be within the Tournament's scheduled dates");
             }
 
             else
@@ -132,7 +140,7 @@ public class CreateGameController implements Initializable
                 //This part of the code is NOT commented out. It may seem it looks like it is commented out, but it is a date object's deprecated method
                 if (!ACCEPTABLE_DAYS.contains(obDateConv.getDay()))
                 {
-                    lblError1.setText("The selected date must be between Fri, Sat, or Sun.");
+                    lblError1.setText("The selected date must be between Friday - Sunday");
                 }
 
                 else

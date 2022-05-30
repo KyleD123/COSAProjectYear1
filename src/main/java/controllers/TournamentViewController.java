@@ -33,7 +33,7 @@ public class TournamentViewController implements Initializable {
     @FXML
     private Label txtTournamentName, txtStartDate, txtEndDate, txtTournamentInfoTitle;
 
-    private Stage obMainStage = new Stage();
+    private Stage obTournStage = new Stage();
 
     private TournamentController tournControl;
 
@@ -55,16 +55,16 @@ public class TournamentViewController implements Initializable {
     public void switchCreateScene(MouseEvent mouseEvent) throws Exception {
 
         FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("add-tournament-screen-layout.fxml"));
-        obMainStage = (Stage) btnAdd.getScene().getWindow();
-        obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
-        obMainStage.show();
+        obTournStage = (Stage) btnAdd.getScene().getWindow();
+        obTournStage.setScene(new Scene(newScene.load(), 1366, 768));
+        obTournStage.show();
     }
 
     public void switchModifyScene(MouseEvent mouseEvent) throws Exception {
         FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("modify-tournament-screen-layout.fxml"));
-        obMainStage = (Stage) btnEdit.getScene().getWindow();
-        obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
-        obMainStage.show();
+        obTournStage = (Stage) btnEdit.getScene().getWindow();
+        obTournStage.setScene(new Scene(newScene.load(), 1366, 768));
+        obTournStage.show();
     }
 
     public void populateDropDownMenu() {
@@ -96,14 +96,21 @@ public class TournamentViewController implements Initializable {
 
     public void switchCreateScheduleScene() throws IOException
     {
-        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("create-game-screen-layout.fxml"));
-        obMainStage = (Stage) btnCreateSchedule.getScene().getWindow();
-        obMainStage.setScene(new Scene(newScene.load(), 1366,768));
-        obMainStage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("create-game-screen-layout.fxml"));
+        obTournStage = (Stage) btnCreateSchedule.getScene().getWindow();
+        obTournStage.setScene(new Scene(fxmlLoader.load(), 1366,768));
+        obTournStage.show();
+        obTournStage.setOnCloseRequest(e -> {
+            try {
+                ((MainWindowController) MainWindow.mainLoader.getController()).populateScheduleTable(null);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        });
 
         Tournament tournSelected = tournControl.getTournamentById((long) ((Tournament) cBoxIds.getValue()).getnTournamentID());
 
-        CreateGameController obPassInControl = newScene.getController();
+        CreateGameController obPassInControl = fxmlLoader.getController();
         obPassInControl.setTournamentReference(tournSelected);
         obPassInControl.initalizeLayoutContents();
     }
