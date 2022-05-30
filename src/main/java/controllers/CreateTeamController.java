@@ -94,7 +94,7 @@ public class CreateTeamController implements Initializable
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK)
             {
-                FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("team-window.fxml"));
+                FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-team-layout.fxml"));
                 Stage obMainStage = (Stage) btnCancel.getScene().getWindow();
                 obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
                 obMainStage.show();
@@ -109,7 +109,7 @@ public class CreateTeamController implements Initializable
      */
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
-        FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("team-window.fxml"));
+        FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-team-layout.fxml"));
         Stage obMainStage = (Stage) btnCancel.getScene().getWindow();
         obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
         obMainStage.show();
@@ -144,7 +144,7 @@ public class CreateTeamController implements Initializable
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK)
         {
-            FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("team-window.fxml"));
+            FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-team-layout.fxml"));
             Stage obMainStage = (Stage) btnCancel.getScene().getWindow();
             obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
             obMainStage.show();
