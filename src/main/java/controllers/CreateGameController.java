@@ -44,6 +44,7 @@ public class CreateGameController implements Initializable
 
     private GameValidator obValid;
 
+    private static ArrayList<Integer> ACCEPTABLE_DAYS;
 
     @FXML
     @Override
@@ -100,6 +101,11 @@ public class CreateGameController implements Initializable
         locations.add("Lions RINK B");
         cmbSelectLocation.getItems().addAll(locations);
 
+        ACCEPTABLE_DAYS = new ArrayList<>();
+        ACCEPTABLE_DAYS.add(0);
+        ACCEPTABLE_DAYS.add(5);
+        ACCEPTABLE_DAYS.add(6);
+
 
     }
 
@@ -112,39 +118,62 @@ public class CreateGameController implements Initializable
             LocalDate dateSelect = dpSelectDate.getValue();
             Date obDateConv = Date.from(dateSelect.atStartOfDay(defaultZoneId).toInstant());
 
-            String getTimeAsString = cmbSelectTime.getValue().toString();
-
-            //This part of the code is NOT commented out. It may seems it looks like it is commented out, but it is a date object's deprecated method
-            //The purpose of this is to set the time of this date's object into an appropriate time base on given hour of the user.
-            obDateConv.setHours(Integer.parseInt(getTimeAsString.substring(0, getTimeAsString.indexOf(":"))));
-
-            //This part creates a temporary game
-            obTempGame.setTHomeTeam((Team) cmbSelectHomeTeam.getValue());
-            obTempGame.setTAwayTeam((Team) cmbSelectAwayTeam.getValue());
-            obTempGame.setDEventDate(obDateConv);
-            obTempGame.setTTournament(obTournamentReference);
-            obTempGame.setSLocation(cmbSelectLocation.getValue().toString());
-
-            //This creates a series of errors message if it detects that a user placed have invalid information
-            HashMap<String, String> listOfErrors = obValid.getErrors(obTempGame);
-
-            //If the annotations have errors, then it shows what kind of error you made.
-            if (listOfErrors.size() > 0)
+            //This portion checks if the date you have selected is before the tournament start date or after the tournament end date.
+            //If its before or after, show up an error.
+            //If not, continue on.
+            if (obDateConv.before(obTournamentReference.getdStartDate()) || obDateConv.after(obTournamentReference.getdEndDate()))
             {
-                lblError1.setText(listOfErrors.get("dEventDate"));
-                lblError3.setText(listOfErrors.get(""));
-                lblError4.setText(listOfErrors.get("sLocation"));
+                lblError1.setText("Selected date does not fall within the Tournament's scheduled dates");
             }
 
-            //if all works, then lets send it to the database, show a prompt, and when you click close, and we go back to the mainTournamentWindow
             else
             {
-                lblError1.setText("");
-                lblError2.setText("");
-                lblError3.setText("");
-                lblError4.setText("");
-                responsePrompt(gameController.createGame(obTempGame));
+                //The client has said to only schedule games that falls in Friday, Saturday, Sunday
+                //This part of the code is NOT commented out. It may seem it looks like it is commented out, but it is a date object's deprecated method
+                if (!ACCEPTABLE_DAYS.contains(obDateConv.getDay()))
+                {
+                    lblError1.setText("The selected date must be between Fri, Sat, or Sun.");
+                }
+
+                else
+                {
+                    String getTimeAsString = cmbSelectTime.getValue().toString();
+
+                    //This part of the code is NOT commented out. It may seem it looks like it is commented out, but it is a date object's deprecated method
+                    //The purpose of this is to set the time of this date's object into an appropriate time base on given hour of the user.
+                    obDateConv.setHours(Integer.parseInt(getTimeAsString.substring(0, getTimeAsString.indexOf(":"))));
+
+                    //This part creates a temporary game
+                    obTempGame.setTHomeTeam((Team) cmbSelectHomeTeam.getValue());
+                    obTempGame.setTAwayTeam((Team) cmbSelectAwayTeam.getValue());
+                    obTempGame.setDEventDate(obDateConv);
+                    obTempGame.setTTournament(obTournamentReference);
+                    obTempGame.setSLocation(cmbSelectLocation.getValue().toString());
+
+                    //This creates a series of errors message if it detects that a user placed have invalid information
+                    HashMap<String, String> listOfErrors = obValid.getErrors(obTempGame);
+
+                    //If the annotations have errors, then it shows what kind of error you made.
+                    if (listOfErrors.size() > 0)
+                    {
+                        lblError1.setText(listOfErrors.get("dEventDate"));
+                        lblError3.setText(listOfErrors.get(""));
+                        lblError4.setText(listOfErrors.get("sLocation"));
+                    }
+
+                    //if all works, then lets send it to the database, show a prompt, and when you click close, and we go back to the mainTournamentWindow
+                    else
+                    {
+                        lblError1.setText("");
+                        lblError2.setText("");
+                        lblError3.setText("");
+                        lblError4.setText("");
+                        responsePrompt(gameController.createGame(obTempGame));
+                    }
+                }
+
             }
+
 
         }
 
