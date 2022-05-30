@@ -52,7 +52,7 @@ public class CreatePlayerController implements Initializable
     {
         String sFirstName = txtFirstAdd.getText();
         String sLastName = txtLastAdd.getText();
-        String sPosition = txtPositionAdd.getText();
+//        String sPosition = txtPositionAdd.getText();
         String sTeamName = "";
         int nPlayerNum = Integer.parseInt(txtNumAdd.getText());
         String sParent = txtParentAdd.getText();
@@ -61,7 +61,7 @@ public class CreatePlayerController implements Initializable
         Player obPlayer = new Player();
         obPlayer.setsFirstName(sFirstName);
         obPlayer.setsLastName(sLastName);
-        obPlayer.setsPosition(sPosition);
+//        obPlayer.setsPosition(sPosition);
         obPlayer.setsTeamName(sTeamName);
         obPlayer.setnPlayerNumber(nPlayerNum);
         obPlayer.setsParentInfo(sParent);
@@ -73,14 +73,14 @@ public class CreatePlayerController implements Initializable
         {
             txtFirstAdd.setText(null);
             txtLastAdd.setText(null);
-            txtPositionAdd.setText(null);
+//            txtPositionAdd.setText(null);
             txtNumAdd.setText(null);
             txtParentAdd.setText(null);
             txtContactAdd.setText(null);
 
             lblError1.setText(listOfErrors.get("sFirstName"));
             lblError2.setText(listOfErrors.get("sLastName"));
-            lblError3.setText(listOfErrors.get("sPosition"));
+//            lblError3.setText(listOfErrors.get("sPosition"));
             lblError4.setText(listOfErrors.get("nPlayerNumber"));
             lblError5.setText(listOfErrors.get("sParentInfo"));
             lblError6.setText(listOfErrors.get("sEmergencyContact"));
@@ -90,7 +90,7 @@ public class CreatePlayerController implements Initializable
         {
             lblError1.setText("");
             lblError2.setText("");
-            lblError3.setText("");
+//            lblError3.setText("");
             lblError4.setText("");
             lblError5.setText("");
             lblError6.setText("");

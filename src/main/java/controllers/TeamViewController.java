@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 public class TeamViewController implements Initializable
 {
     @FXML
-    private ImageView btnAdd, btnSave, btnCancel, btnEdit;
+    private ImageView btnAdd, btnSave, btnCancel, btnEdit, btnRoster;
 
     @FXML
     private TextField txtName, txtNameEdit;
@@ -44,7 +44,6 @@ public class TeamViewController implements Initializable
 
     private Stage obMainStage = new Stage();
     private TeamController teamControl;
-    private PlayerController playerControl;
 
     private String sValue;
 
@@ -72,7 +71,7 @@ public class TeamViewController implements Initializable
 
     public void switchCreateScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("add-team-window.fxml"));
+        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("add-main-team-layout.fxml"));
         obMainStage = (Stage) btnAdd.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();
@@ -80,7 +79,7 @@ public class TeamViewController implements Initializable
 
     public void switchModifyScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("edit-team-window.fxml"));
+        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("edit-main-team-layout.fxml"));
         obMainStage = (Stage) btnEdit.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366,768));
         obMainStage.show();
@@ -96,20 +95,12 @@ public class TeamViewController implements Initializable
     public void switchRosterScene(MouseEvent mouseEvent) throws Exception
     {
         FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("manage-roster-layout.fxml"));
-//        obMainStage = (Stage) btnRoster.getScene().getWindow();
+        obMainStage = (Stage) btnRoster.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();
 
         sValue = cboName.getValue().toString();
         obCurrentTeam = sValue;
-
-
-        ObservableList<Player> ListOfPlayer = FXCollections.observableArrayList(playerControl.getAllPlayers());
-
-//        lstPlayers.setItems(ListOfPlayer);
-
-        ListView <Player> lstPlayers = new ListView<Player>(ListOfPlayer);
-        lstPlayers.setItems(ListOfPlayer);
 
     }
 
@@ -127,7 +118,7 @@ public class TeamViewController implements Initializable
 
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
-        FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("team-window.fxml"));
+        FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-team-layout.fxml"));
         obMainStage = (Stage) btnCancel.getScene().getWindow();
         obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
         obMainStage.close();

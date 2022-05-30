@@ -34,7 +34,7 @@
          </image>
       </ImageView>
       <ComboBox fx:id="cboName" layoutX="648.0" layoutY="118.0" prefHeight="64.0" prefWidth="200.0" />
-      <ImageView fx:id="btnCreateRoster" fitHeight="150.0" fitWidth="200.0" layoutX="619.0" layoutY="300.0" onMouseClicked="#switchRosterScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnRoster" fitHeight="150.0" fitWidth="200.0" layoutX="619.0" layoutY="300.0" onMouseClicked="#switchRosterScene" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/createRosterButton.png" />
          </image>

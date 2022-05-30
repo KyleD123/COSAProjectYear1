@@ -33,7 +33,7 @@ public class MainWindow extends Application
     @FXML
     public void openTeamWindow(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader mainLoader = new FXMLLoader(MainWindow.class.getResource("team-window.fxml"));
+        FXMLLoader mainLoader = new FXMLLoader(MainWindow.class.getResource("main-team-layout.fxml"));
         Scene obMainScene = new Scene(mainLoader.load());
         Stage newWindow = new Stage();
         newWindow.setTitle("eSchedule - Team");

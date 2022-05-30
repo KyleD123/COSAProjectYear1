@@ -27,9 +27,8 @@ public class Player implements Serializable {
     @Max(value = 99, message = "Player Number must be 1 or 2 digits")
     private int nPlayerNumber;
 
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(canBeNull = true)
     @Size(max = 20, message = "Player Position Too Long")
-    @NotEmpty(message = "Player Position is Required")
     private String sPosition;
 
     @DatabaseField(canBeNull = true)
@@ -114,5 +113,10 @@ public class Player implements Serializable {
         this.setsTeamName(player.getsTeamName());
         this.setsParentInfo(player.getsParentInfo());
         this.setsEmergencyContact(player.getsEmergencyContact());
+    }
+
+    @Override
+    public String toString() {
+        return nPlayerNumber + ": " + sFirstName + " " + sLastName;
     }
 }
