@@ -16,9 +16,6 @@ public class PlayerViewController {
 
     private Stage obMainStage = new Stage();
 
-    private PlayerController playerController;
-
-
 
     public void switchCreateScene(MouseEvent mouseEvent) throws Exception
     {
@@ -41,16 +38,4 @@ public class PlayerViewController {
         obMainStage = (Stage) btnPlayerEdit.getScene().getWindow();
         obMainStage.close();
     }
-
-//    @FXML
-//    @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//        ConnectionSource databaseConn = null;
-//        try {
-//            databaseConn = new JdbcPooledConnectionSource("jdbc:sqlite:players.db");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        playerController = new PlayerController(databaseConn);
-//    }
 }

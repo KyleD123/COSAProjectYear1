@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 
 public class TournamentViewController implements Initializable {
     @FXML
-    private ImageView btnAdd, cancelBtn, btnEdit, btnCreateSchedule;
+    private ImageView btnAdd, btnEdit, btnCreateSchedule, btnTournamentCancel;
 
     @FXML
     private ComboBox cBoxIds;
@@ -67,6 +67,19 @@ public class TournamentViewController implements Initializable {
         obTournStage.show();
     }
 
+    public void closeWindow(MouseEvent mouseEvent) throws Exception
+    {
+        obTournStage = (Stage) btnTournamentCancel.getScene().getWindow();
+        obTournStage.close();
+
+        try {
+             ((MainWindowController) MainWindow.mainLoader.getController()).populateScheduleTable(null);
+             ((MainWindowController) MainWindow.mainLoader.getController()).populateComboTournaments();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void populateDropDownMenu() {
 
         cBoxIds.getItems().clear();
@@ -101,15 +114,6 @@ public class TournamentViewController implements Initializable {
         obTournStage = (Stage) btnCreateSchedule.getScene().getWindow();
         obTournStage.setScene(new Scene(fxmlLoader.load(), 1366,768));
         obTournStage.show();
-        obTournStage.setOnCloseRequest(e -> {
-            try {
-                ((MainWindowController) MainWindow.mainLoader.getController()).populateScheduleTable(null);
-
-
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        });
 
         Tournament tournSelected = tournControl.getTournamentById((long) ((Tournament) cBoxIds.getValue()).getnTournamentID());
 

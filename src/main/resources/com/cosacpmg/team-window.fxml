@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -32,6 +33,9 @@
          <image>
             <Image url="@img/cancelBtn.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ComboBox fx:id="cboName" layoutX="648.0" layoutY="118.0" prefHeight="64.0" prefWidth="200.0" />
    </children>

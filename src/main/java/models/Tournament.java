@@ -81,7 +81,7 @@ public class Tournament implements Serializable
     @Override
     public String toString()
     {
-        return getnTournamentID() + "";
+        return getnTournamentID() + " " + (getsTournamentName().equals("") ? "" : getsTournamentName());
     }
 
     @Override
