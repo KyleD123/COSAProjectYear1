@@ -9,7 +9,7 @@ public class Roster
 
     private TextField txtGoalie, txtRightDefense, txtLeftDefense, txtRightWing, txtLeftWing, txtCenter;
 
-    
+
 
 
 }
