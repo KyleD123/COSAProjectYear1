@@ -80,6 +80,7 @@ public class CreateGameController implements Initializable
         //Setting up the time
         ArrayList<String> timeAllocated = new ArrayList<>();
 
+        //Adds in the time with the :00 in the end in two hour increments
         for (int i = 6; i <= 21; i+=2)
         {
             timeAllocated.add(Integer.toString(i) + ":00");
@@ -105,17 +106,28 @@ public class CreateGameController implements Initializable
         locations.add("Lions RINK B");
         cmbSelectLocation.getItems().addAll(locations);
 
+        //This portion is for populating the arraylist of days that are considered acceotable to our
+        //Client's requirement
         ACCEPTABLE_DAYS = new ArrayList<>();
         ACCEPTABLE_DAYS.add(0);
         ACCEPTABLE_DAYS.add(5);
         ACCEPTABLE_DAYS.add(6);
-
-
     }
 
+    /**
+     * This saveGame method is a mouse event handler that takes in the values of the comboboxes and textvalues
+     * and translate them into an appropriate game object.
+     *
+     * If it's validated to be correct, then it calls the GameController database controller to add it in.
+     * If it's not, then it throws a series of error for the labels.
+     * @param mouseEvent
+     * @throws IOException
+     */
     public void saveGame(MouseEvent mouseEvent) throws IOException
     {
         Game obTempGame = new Game();
+
+        //This is where it removes the exisitng labels if its filled out.
         lblError1.setText("");
         lblError2.setText("");
         lblError3.setText("");
@@ -185,7 +197,7 @@ public class CreateGameController implements Initializable
 
         }
 
-        //Catches any blanks in their fields
+        //Catches any blanks in their fields as they return NullPointerException when adding information into the objects.
         catch (NullPointerException exp)
         {
             if (dpSelectDate.getValue() == null)
@@ -261,6 +273,7 @@ public class CreateGameController implements Initializable
             obMainStage.show();
         }
     }
+
 
     public void setTournamentReference(Tournament obRef)
     {

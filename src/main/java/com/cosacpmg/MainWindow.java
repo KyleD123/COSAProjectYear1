@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 
+
 public class MainWindow extends Application
 {
     public static final String CONNECT_STRING = "jdbc:sqlite:eSchedule.db";

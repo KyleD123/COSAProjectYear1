@@ -7,6 +7,10 @@ import javax.validation.ValidatorFactory;
 import java.util.HashMap;
 import java.util.Set;
 
+/**
+ * Purpose: The purpose of this class is to help validate the game object.
+ * Author: Project Green
+ */
 public class GameValidator
 {
     private ValidatorFactory validFac;
