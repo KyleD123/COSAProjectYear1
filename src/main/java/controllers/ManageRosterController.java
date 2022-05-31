@@ -14,6 +14,7 @@ import models.Player;
 import models.PlayerValidator;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -25,7 +26,7 @@ import java.util.ResourceBundle;
 public class ManageRosterController implements Initializable
 {
     @FXML
-    private Text txtPlayer1,txtPlayer2,txtPlayer3,txtPlayer4,txtPlayer5, txtPlayer6, txtPlayer7,txtPlayer8,txtPlayer9,txtPlayer10,txtPlayer11,txtPlayer12,txtPlayer13,txtPlayer14,txtPlayer15;
+    private Text txtPlayer1,txtPlayer2;
 
     @FXML
     private FlowPane fpBench;
@@ -41,8 +42,10 @@ public class ManageRosterController implements Initializable
     private Player obCurrentPlayer;
 
     public HashMap<Text, Player> playerMap = new HashMap<>();
-    private TextField src;
-    private VBox target;
+
+    private VBox target = new VBox();
+
+    private PlayerValidator obValid;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -55,7 +58,7 @@ public class ManageRosterController implements Initializable
         }
 
         playerController = new PlayerController(databaseConn);
-
+        obValid = new PlayerValidator();
 
         fakePlayer.setsFirstName("Kyle");
         fakePlayer.setsLastName("Doerksen");
@@ -65,21 +68,10 @@ public class ManageRosterController implements Initializable
 
         playerMap.put(txtPlayer1, fakePlayer);
         playerMap.put(txtPlayer2, fakePlayer);
-        playerMap.put(txtPlayer3, fakePlayer);
-        playerMap.put(txtPlayer4, fakePlayer);
-        playerMap.put(txtPlayer5, fakePlayer);
-        playerMap.put(txtPlayer6, fakePlayer);
-        playerMap.put(txtPlayer7, fakePlayer);
+
 
         txtPlayer1.setText(playerMap.get(txtPlayer1).getsFirstName() + ", " + playerMap.get(txtPlayer1).getsLastName());
         txtPlayer2.setText(playerMap.get(txtPlayer2).getsFirstName() + ", " + playerMap.get(txtPlayer2).getsLastName());
-        txtPlayer3.setText(playerMap.get(txtPlayer3).getsFirstName() + ", " + playerMap.get(txtPlayer3).getsLastName());
-        txtPlayer4.setText(playerMap.get(txtPlayer4).getsFirstName() + ", " + playerMap.get(txtPlayer4).getsLastName());
-        txtPlayer5.setText(playerMap.get(txtPlayer5).getsFirstName() + ", " + playerMap.get(txtPlayer5).getsLastName());
-        txtPlayer6.setText(playerMap.get(txtPlayer6).getsFirstName() + ", " + playerMap.get(txtPlayer6).getsLastName());
-        txtPlayer7.setText(playerMap.get(txtPlayer7).getsFirstName() + ", " + playerMap.get(txtPlayer7).getsLastName());
-
-
 
     }
     //Create instances of the other controllers to set things (Call the data controllers and set values_
@@ -130,7 +122,7 @@ public class ManageRosterController implements Initializable
                 p.setsPosition("Goalie");
                 source.setText(str);
                 vGoalie.getChildren().add(source);
-
+                target = vGoalie;
                 break;
             }
             case "vLeftDefense":
@@ -138,6 +130,7 @@ public class ManageRosterController implements Initializable
                 p.setsPosition("Left Defense");
                 source.setText(str);
                 vLeftDefense.getChildren().add(source);
+                target = vLeftDefense;
                 break;
             }
             case "vRightDefense":
@@ -145,6 +138,7 @@ public class ManageRosterController implements Initializable
                 p.setsPosition("Right Defense");
                 source.setText(str);
                 vRightDefense.getChildren().add(source);
+                target = vRightDefense;
                 break;
             }
             case "vLeftWing":
@@ -152,6 +146,7 @@ public class ManageRosterController implements Initializable
                 p.setsPosition("Left Wing");
                 source.setText(str);
                 vLeftWing.getChildren().add(source);
+                target = vLeftWing;
                 break;
             }
             case "vRightWing":
@@ -159,6 +154,7 @@ public class ManageRosterController implements Initializable
                 p.setsPosition("Right Wing");
                 source.setText(str);
                 vRightWing.getChildren().add(source);
+                target = vRightWing;
                 break;
             }
             case "vCenter":
@@ -166,6 +162,7 @@ public class ManageRosterController implements Initializable
                 p.setsPosition("Center");
                 source.setText(str);
                 vCenter.getChildren().add(source);
+                target = vCenter;
                 break;
             }
         }
@@ -176,12 +173,34 @@ public class ManageRosterController implements Initializable
     }
 
     @FXML
-    public void setOnDraggedDone(MouseDragEvent e)
-    {
+    public void setOnDragDone(MouseDragEvent e) throws SQLException, IOException {
         Text txt = (Text)e.getSource();
         fpBench.getChildren().remove(txt);
+
+        Player player = playerMap.get(txt);
+
+        modifyPosition(player);
     }
 
 
+
+    public void modifyPosition(Player player) throws IOException, SQLException {
+
+        player.setsPosition(target.getId());
+
+        HashMap<String, String> listOfErrors = obValid.getErrors(player);
+        //If the annotations have errors, then it shows what kind of error you made.
+        if (listOfErrors.size() > 0)
+        {
+            lblError3.setText(listOfErrors.get("sPosition"));
+        }
+        else
+        {
+            lblError3.setText("");
+
+//            responsePrompt(playerController.modifyPlayer(player));
+            
+        }
+    }
 
 }

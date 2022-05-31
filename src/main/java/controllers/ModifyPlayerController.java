@@ -96,7 +96,6 @@ public class ModifyPlayerController implements Initializable
             lblError4.setText(listOfErrors.get("sParentInfo"));
             lblError5.setText(listOfErrors.get("sEmergencyContact"));
         }
-
         else
         {
             lblError1.setText("");
@@ -107,6 +106,8 @@ public class ModifyPlayerController implements Initializable
             responsePrompt(playerController.modifyPlayer(obPlayerEdit));
         }
     }
+
+
 
     public void responsePrompt(boolean status) throws IOException
     {
