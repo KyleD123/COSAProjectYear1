@@ -8,8 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseDragEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -20,6 +20,7 @@ import models.PlayerValidator;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -41,9 +42,9 @@ public class ManageRosterController implements Initializable
 
     private PlayerController playerController;
     private PlayerValidator obValid;
+    int nCounter =1;
 
-
-    public HashMap<TextField, Player> playerMap = new HashMap<>();
+    public HashMap<Text, Player> playerMap = new HashMap<>();
     private TextField src;
     private VBox target;
 
@@ -74,13 +75,14 @@ public class ManageRosterController implements Initializable
         fakePlayer.setnPlayerNumber(45);
         fakePlayer.setsParentInfo("Mother");
 
-        playerMap.put(txtPlayer1, fakePlayer);
-        playerMap.put(txtPlayer2, fakePlayer);
-        playerMap.put(txtPlayer3, fakePlayer);
-        playerMap.put(txtPlayer4, fakePlayer);
-        playerMap.put(txtPlayer5, fakePlayer);
-        playerMap.put(txtPlayer6, fakePlayer);
-        playerMap.put(txtPlayer7, fakePlayer);
+
+//        playerMap.put(txtPlayer1, fakePlayer);
+//        playerMap.put(txtPlayer2, fakePlayer);
+//        playerMap.put(txtPlayer3, fakePlayer);
+//        playerMap.put(txtPlayer4, fakePlayer);
+//        playerMap.put(txtPlayer5, fakePlayer);
+//        playerMap.put(txtPlayer6, fakePlayer);
+//        playerMap.put(txtPlayer7, fakePlayer);
 
 
 
@@ -94,10 +96,12 @@ public class ManageRosterController implements Initializable
      */
     public void populateListView()
     {
-        ObservableList<Player> ListOfPlayer = FXCollections.observableArrayList(playerControl.getAllPlayers());
+        PlayerList.getItems().clear();
+        List<Player> ListOfPlayer = playerControl.getAllPlayers();
 
-//        ListOfPlayer = (ObservableList<Player>) ListOfPlayer.stream().filter(x -> x.getsTeamName().equals("")).collect(Collectors.toList());
+        ListOfPlayer=ListOfPlayer.stream().filter(x -> x.getsTeamName().equals("")).collect(Collectors.toList());
         PlayerList.getItems().addAll(ListOfPlayer);
+
 
     }
 
@@ -105,20 +109,31 @@ public class ManageRosterController implements Initializable
      * This method is to add the selected player from the listview to the flowpane (bench) at the top, assigning the player a team by setting the
      * sTeamName in player object to be what the team value is from the selected dropdown before
      */
-    public void addPlayerToTeam()
-    {
+    public void addPlayerToTeam() throws SQLException {
         Player obSelected = PlayerList.getSelectionModel().getSelectedItem();
         Text obPlayer = new Text();
         obPlayer.setText(obSelected.toString());
-        obPlayer.setOnDragDetected(event -> {setOnDragDetected((MouseDragEvent) event);});
-        obPlayer.setOnDragOver(event -> {setOnDragOver((MouseDragEvent)event);});
-        obPlayer.setOnDragDropped(event -> {setOnDragDropped((MouseDragEvent)event);});
-        obPlayer.setOnDragDone(event -> {setOnDraggedDone((MouseDragEvent)event);});
+        obPlayer.setOnDragDetected(event -> {setOnDragDetected((MouseDragEvent)event);});
+        obPlayer.setOnDragOver(event -> {setOnDragOver(event);});
+        obPlayer.setOnDragDropped(event -> {setOnDragDropped(event);});
+        obPlayer.setOnDragDone(event -> {setOnDraggedDone(event);});
         fpBench.getChildren().add(obPlayer);
 
-        playerMap.put(,obSelected);
+        obPlayer.setId(("text"+nCounter));
+        playerMap.put(obPlayer,obSelected);
 
         obSelected.setsTeamName(TeamViewController.obCurrentTeam);
+        playerController.modifyPlayer(obSelected);
+        populateListView();
+
+        nCounter++;
+    }
+
+
+
+    public void populateTeamList()
+    {
+
     }
 
     @FXML
@@ -129,19 +144,19 @@ public class ManageRosterController implements Initializable
     }
 
     @FXML
-    public void setOnDragOver(MouseDragEvent e)
+    public void setOnDragOver(DragEvent e)
     {
 
     }
 
     @FXML
-    public void setOnDragDropped(MouseDragEvent e)
+    public void setOnDragDropped(DragEvent e)
     {
 
     }
 
     @FXML
-    public void setOnDraggedDone(MouseDragEvent e)
+    public void setOnDraggedDone(DragEvent e)
     {
 
     }

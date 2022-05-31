@@ -30,6 +30,9 @@
                <padding>
                   <Insets bottom="5.0" left="150.0" right="100.0" top="5.0" />
                </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </FlowPane>
             <ImageView fitHeight="73.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                <image>
