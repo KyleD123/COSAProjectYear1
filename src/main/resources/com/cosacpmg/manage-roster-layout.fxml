@@ -16,28 +16,15 @@
    <top>
       <HBox prefHeight="69.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnAddPlayer" mnemonicParsing="false" prefHeight="111.0" prefWidth="161.0" text="Add" textAlignment="CENTER">
+            <Button fx:id="btnAddPlayer" mnemonicParsing="false" onMouseClicked="#addPlayerToTeam" prefHeight="111.0" prefWidth="161.0" text="Add" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font></Button>
-            <FlowPane prefHeight="85.0" prefWidth="1150.0" style="-fx-border-color: black; -fx-border-width: 2;">
+            <FlowPane fx:id="fpBench" prefHeight="85.0" prefWidth="1150.0" style="-fx-border-color: black; -fx-border-width: 2;">
                <children>
-
-                  <TextField fx:id="txtPlayer1" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer2" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer3" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer4" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer5" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer6" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer7" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer8" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer9" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer10" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer11" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer12" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer13" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer14" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
-                  <TextField fx:id="txtPlayer15" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" />
+      
+                  <Text onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" text="playerName" />
+                  <Text onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" text="playerName" />
 
                </children>
                <padding>

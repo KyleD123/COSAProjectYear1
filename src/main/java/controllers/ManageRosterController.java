@@ -9,7 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import models.Player;
 import models.PlayerValidator;
 
@@ -29,7 +32,7 @@ public class ManageRosterController implements Initializable
     private PlayerController playerControl;
 
     @FXML
-    private TextField txtPlayer1,txtPlayer2,txtPlayer3,txtPlayer4,txtPlayer5, txtPlayer6, txtPlayer7,txtPlayer8,txtPlayer9,txtPlayer10,txtPlayer11,txtPlayer12,txtPlayer13,txtPlayer14,txtPlayer15;
+    private FlowPane fpBench;
 
     @FXML
     private VBox vGoalie, vLeftDefense, vRightDefense, vLeftWing, vRightWing, vCenter;
@@ -39,7 +42,6 @@ public class ManageRosterController implements Initializable
     private PlayerController playerController;
     private PlayerValidator obValid;
 
-    private Player obCurrentPlayer;
 
     public HashMap<TextField, Player> playerMap = new HashMap<>();
     private TextField src;
@@ -80,13 +82,7 @@ public class ManageRosterController implements Initializable
         playerMap.put(txtPlayer6, fakePlayer);
         playerMap.put(txtPlayer7, fakePlayer);
 
-        txtPlayer1.setText(playerMap.get(txtPlayer1).getsFirstName() + ", " + playerMap.get(txtPlayer1).getsLastName());
-        txtPlayer2.setText(playerMap.get(txtPlayer2).getsFirstName() + ", " + playerMap.get(txtPlayer2).getsLastName());
-        txtPlayer3.setText(playerMap.get(txtPlayer3).getsFirstName() + ", " + playerMap.get(txtPlayer3).getsLastName());
-        txtPlayer4.setText(playerMap.get(txtPlayer4).getsFirstName() + ", " + playerMap.get(txtPlayer4).getsLastName());
-        txtPlayer5.setText(playerMap.get(txtPlayer5).getsFirstName() + ", " + playerMap.get(txtPlayer5).getsLastName());
-        txtPlayer6.setText(playerMap.get(txtPlayer6).getsFirstName() + ", " + playerMap.get(txtPlayer6).getsLastName());
-        txtPlayer7.setText(playerMap.get(txtPlayer7).getsFirstName() + ", " + playerMap.get(txtPlayer7).getsLastName());
+
 
     }
 
@@ -105,9 +101,24 @@ public class ManageRosterController implements Initializable
 
     }
 
+    /**
+     * This method is to add the selected player from the listview to the flowpane (bench) at the top, assigning the player a team by setting the
+     * sTeamName in player object to be what the team value is from the selected dropdown before
+     */
     public void addPlayerToTeam()
     {
+        Player obSelected = PlayerList.getSelectionModel().getSelectedItem();
+        Text obPlayer = new Text();
+        obPlayer.setText(obSelected.toString());
+        obPlayer.setOnDragDetected(event -> {setOnDragDetected((MouseDragEvent) event);});
+        obPlayer.setOnDragOver(event -> {setOnDragOver((MouseDragEvent)event);});
+        obPlayer.setOnDragDropped(event -> {setOnDragDropped((MouseDragEvent)event);});
+        obPlayer.setOnDragDone(event -> {setOnDraggedDone((MouseDragEvent)event);});
+        fpBench.getChildren().add(obPlayer);
 
+        playerMap.put(,obSelected);
+
+        obSelected.setsTeamName(TeamViewController.obCurrentTeam);
     }
 
     @FXML
