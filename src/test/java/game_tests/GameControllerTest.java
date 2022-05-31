@@ -174,10 +174,10 @@ public class GameControllerTest
      * START TIME, END TIME, TOURNAMENT, AND EVEN SAME HOME AND AWAY TEAM, BUT INSTEAD OF THE SAME LOCATION, IT IS GOING
      * TO BE SET TO A SECOND LOCATION.
      *
-     * THIS SHOULD PASS AS THERE CAN BE GAME RUNNING AT THE SAME TIME AS LONG THEIR LOCATION IS SEPERATE
+     * THIS SHOULD PASS AS THERE CAN BE GAME RUNNING AT THE SAME TIME AS LONG THEIR LOCATION IS SEPARATE
      */
     @Test
-    public void testSaveGameWithSameDateTimeTournamentButDifferentLocation()
+    public void testSaveGameWithSameDateTimeTournamentButDifferentLocationAndTeams()
     {
         Team obTeam3 = new Team();
         obTeam3.setTeamName("Regina Bruhlers");
