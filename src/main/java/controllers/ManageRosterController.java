@@ -6,8 +6,10 @@ import com.j256.ormlite.support.ConnectionSource;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.*;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import models.Player;
 import models.PlayerValidator;
 
@@ -23,19 +25,22 @@ import java.util.ResourceBundle;
 public class ManageRosterController implements Initializable
 {
     @FXML
-    private TextField txtPlayer1,txtPlayer2,txtPlayer3,txtPlayer4,txtPlayer5, txtPlayer6, txtPlayer7,txtPlayer8,txtPlayer9,txtPlayer10,txtPlayer11,txtPlayer12,txtPlayer13,txtPlayer14,txtPlayer15;
+    private Text txtPlayer1,txtPlayer2,txtPlayer3,txtPlayer4,txtPlayer5, txtPlayer6, txtPlayer7,txtPlayer8,txtPlayer9,txtPlayer10,txtPlayer11,txtPlayer12,txtPlayer13,txtPlayer14,txtPlayer15;
+
+    @FXML
+    private FlowPane fpBench;
 
     @FXML
     private VBox vGoalie, vLeftDefense, vRightDefense, vLeftWing, vRightWing, vCenter;
+    private VBox[] positions = {vGoalie, vLeftDefense, vRightDefense, vLeftWing, vRightWing, vCenter};
 
     private Player fakePlayer = new Player();
 
     private PlayerController playerController;
-    private PlayerValidator obValid;
 
     private Player obCurrentPlayer;
 
-    public HashMap<TextField, Player> playerMap = new HashMap<>();
+    public HashMap<Text, Player> playerMap = new HashMap<>();
     private TextField src;
     private VBox target;
 
@@ -50,7 +55,7 @@ public class ManageRosterController implements Initializable
         }
 
         playerController = new PlayerController(databaseConn);
-        obValid = new PlayerValidator();
+
 
         fakePlayer.setsFirstName("Kyle");
         fakePlayer.setsLastName("Doerksen");
@@ -75,6 +80,7 @@ public class ManageRosterController implements Initializable
         txtPlayer7.setText(playerMap.get(txtPlayer7).getsFirstName() + ", " + playerMap.get(txtPlayer7).getsLastName());
 
 
+
     }
     //Create instances of the other controllers to set things (Call the data controllers and set values_
     //Player Controller - Because we are updating a player ONLY
@@ -88,26 +94,92 @@ public class ManageRosterController implements Initializable
     @FXML
     public void setOnDragDetected(MouseDragEvent e)
     {
-        
+//        e.getSource();
+//        e.getTarget();
+        VBox vTarget = (VBox) e.getTarget();
+        Text source = (Text) e.getSource();
+        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
+        ClipboardContent content = new ClipboardContent();
+        content.putString(source.getText());
+        db.setContent(content);
+        e.consume();
 
     }
 
     @FXML
-    public void setOnDragOver(MouseDragEvent e)
+    public void setOnDragOver(DragEvent e)
     {
-
+        if(e.getDragboard().hasString()){
+            e.acceptTransferModes(TransferMode.ANY);
+        }
     }
 
     @FXML
-    public void setOnDragDropped(MouseDragEvent e)
+    public void setOnDragDropped(DragEvent e)
     {
+        VBox vTarget = (VBox) e.getTarget();
+        Text source = (Text) e.getSource();
+        Player p = playerMap.get(source);
+        String str = e.getDragboard().getString();
+//        target.getChildren().add(new Text(str));
+
+        switch (vTarget.getId())
+        {
+            case "vGoalie":
+            {
+                p.setsPosition("Goalie");
+                source.setText(str);
+                vGoalie.getChildren().add(source);
+
+                break;
+            }
+            case "vLeftDefense":
+            {
+                p.setsPosition("Left Defense");
+                source.setText(str);
+                vLeftDefense.getChildren().add(source);
+                break;
+            }
+            case "vRightDefense":
+            {
+                p.setsPosition("Right Defense");
+                source.setText(str);
+                vRightDefense.getChildren().add(source);
+                break;
+            }
+            case "vLeftWing":
+            {
+                p.setsPosition("Left Wing");
+                source.setText(str);
+                vLeftWing.getChildren().add(source);
+                break;
+            }
+            case "vRightWing":
+            {
+                p.setsPosition("Right Wing");
+                source.setText(str);
+                vRightWing.getChildren().add(source);
+                break;
+            }
+            case "vCenter":
+            {
+                p.setsPosition("Center");
+                source.setText(str);
+                vCenter.getChildren().add(source);
+                break;
+            }
+        }
+
+        //call controller to modify player add player object in
+
 
     }
 
     @FXML
     public void setOnDraggedDone(MouseDragEvent e)
     {
-
+        Text txt = (Text)e.getSource();
+        fpBench.getChildren().remove(txt);
     }
 
 
