@@ -50,7 +50,7 @@ public class PlayerController {
 
     public boolean modifyPlayer(Player obPlayer)  {
         try {
-            if (obValid.isValid(obPlayer) && repo.queryForMatching(obPlayer).isEmpty())
+            if (obValid.isValid(obPlayer))
             {
                 int nResult = repo.update(obPlayer);
                 return nResult != 0;
@@ -61,7 +61,6 @@ public class PlayerController {
         return false;
     }
 
-
     public List<Player> getAllPlayers()
     {
         List<Player> obReturn = new ArrayList<>();
@@ -69,12 +68,10 @@ public class PlayerController {
         {
             obReturn = repo.queryForAll();
         }
-
         catch (SQLException e)
         {
 
         }
-
         return obReturn;
     }
 

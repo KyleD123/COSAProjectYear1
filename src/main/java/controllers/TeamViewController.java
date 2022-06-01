@@ -71,7 +71,7 @@ public class TeamViewController implements Initializable
 
     public void switchCreateScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("add-main-team-layout.fxml"));
+        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("add-team-window.fxml"));
         obMainStage = (Stage) btnAdd.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();

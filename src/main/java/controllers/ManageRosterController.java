@@ -14,7 +14,6 @@ import javafx.scene.text.Text;
 import models.Player;
 import models.PlayerValidator;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -27,9 +26,6 @@ import java.util.ResourceBundle;
  */
 public class ManageRosterController implements Initializable
 {
-    @FXML
-    private Text txtPlayer1,txtPlayer2;
-
     @FXML
     private FlowPane fpBench;
 
@@ -73,13 +69,9 @@ public class ManageRosterController implements Initializable
             fpBench.getChildren().add(txtPlayer);
             playerMap.put(txtPlayer, obPlay);
         }
-
     }
     //Create instances of the other controllers to set things (Call the data controllers and set values_
     //Player Controller - Because we are updating a player ONLY
-
-
-
 
     //Drag and Drop Methods
     //Create separate Methods - Drag and Drop Amounts
@@ -87,9 +79,6 @@ public class ManageRosterController implements Initializable
     @FXML
     public void setOnDragDetected(MouseEvent e)
     {
-//        e.getSource();
-//        e.getTarget();
-//        VBox vTarget = (VBox) e.getTarget();
         source = (Text) e.getSource();
         if(e.getSource() instanceof Text)
         {
@@ -104,7 +93,6 @@ public class ManageRosterController implements Initializable
         content.putString(source.getText());
         db.setContent(content);
         e.consume();
-
     }
 
     @FXML
@@ -117,18 +105,12 @@ public class ManageRosterController implements Initializable
 
     @FXML
     public void setOnDragDropped(DragEvent e) {
-        VBox vTarget= new VBox();
-//        vTarget.setId("asd");
         Player p = playerMap.get(source);
         String str = e.getDragboard().getString();
 
         if(e.getTarget() instanceof VBox)
         {
-            vTarget = (VBox) e.getTarget();
-
-
-
-
+            VBox vTarget = (VBox) e.getTarget();
 
             switch (vTarget.getId())
             {
@@ -163,49 +145,24 @@ public class ManageRosterController implements Initializable
                     p.setsPosition("Center");
                     break;
                 }
-
             }
-            vTarget.getChildren().add(source);
-
+            if(playerController.modifyPlayer(p))
+            {
+                vTarget.getChildren().add(source);
+            }
         }
         else
         {
             p.setsPosition(null);
-            fpBench.getChildren().add(source);
+            if(playerController.modifyPlayer(p))
+            {
+                fpBench.getChildren().add(source);
+            }
         }
-
-
-
-        //call controller to modify player add player object in
-//        if(!playerController.modifyPlayer(p))
-//        {
-//            p.setsPosition(null);
-//            //pop up alert message for fails
-//
-//        }
-//        else
-//        {
-//            fpBench.getChildren().remove(source);
-//            vTemp.getChildren().add(source);
-//
-//        }
-
-//        fpBench.getChildren().remove(source);
-
     }
 
     @FXML
     public void setOnDragDone(DragEvent e)  {
-//        Text txt = (Text)e.getSource();
-//        fpBench.getChildren().remove(txt);
-
-//        Player player = playerMap.get(txt);
-
-
+        //Does nothing
     }
-
-
-
-
-
 }
