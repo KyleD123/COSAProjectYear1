@@ -10,9 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.Player;
@@ -46,8 +46,8 @@ public class ManageRosterController implements Initializable
 
     public HashMap<Text, Player> playerMap = new HashMap<>();
 
-    List<Player> listOfPlayerOnTeam = new ArrayList<>();
-
+    private List<Player> listOfPlayerOnTeam = new ArrayList<>();
+//    private Text Text txtPlayer = new Text();
 
 
     @Override
@@ -65,7 +65,7 @@ public class ManageRosterController implements Initializable
 
         playerControl = new PlayerController(databaseConn);
         populateListView();
-        populateTeamList();
+//        populateTeamList();
 
     }
 
@@ -89,22 +89,37 @@ public class ManageRosterController implements Initializable
     /**
      * This method is to add the selected player from the listview to the flowpane (bench) at the top, assigning the player a team by setting the
      * sTeamName in player object to be what the team value is from the selected dropdown before
+     *
+     * @param
+     * @return
      */
     public void addPlayerToTeam() throws SQLException {
+
         Player obSelected = PlayerList.getSelectionModel().getSelectedItem();
-        Text obPlayer = new Text();
-        obPlayer.setText(obSelected.toString());
-        obPlayer.setOnDragDetected(event -> {setOnDragDetected((MouseDragEvent)event);});
-        obPlayer.setOnDragOver(event -> {setOnDragOver(event);});
-        obPlayer.setOnDragDropped(event -> {setOnDragDropped(event);});
-        obPlayer.setOnDragDone(event -> {setOnDraggedDone(event);});
-        obPlayer.setId(("text" + nCounter));
+        if(playerControl.modifyPlayer(obSelected))
+        {
 
-        fpBench.getChildren().add(obPlayer);
-        playerMap.put(obPlayer,obSelected);
+            Text txtPlayer = new Text();
+            txtPlayer.setText("              "+obSelected.toString()+"               ");
+            txtPlayer.setOnDragDetected(this::setOnDragDetected);
+            txtPlayer.setOnDragOver(this::setOnDragOver);
+            txtPlayer.setOnDragDropped(this::setOnDragDropped);
+            txtPlayer.setOnDragDone(this::setOnDraggedDone);
+//         txtPlayer.setOnMouseClicked(this::setOnMouseClicked);
+            txtPlayer.setId(("text" + nCounter));
 
-        obSelected.setsTeamName(TeamViewController.obCurrentTeam);
-        playerControl.modifyPlayer(obSelected);
+
+            fpBench.getChildren().add( txtPlayer);
+            playerMap.put( txtPlayer,obSelected);
+
+            obSelected.setsTeamName(TeamViewController.obCurrentTeam);
+        }
+
+        else
+        {
+
+        }
+
         populateListView();
 
         listOfPlayerOnTeam.add(obSelected);
@@ -112,6 +127,18 @@ public class ManageRosterController implements Initializable
         nCounter++;
     }
 
+    private void setOnMouseClicked(MouseEvent mouseEvent)
+    {
+
+
+    }
+
+    /**
+     * This method is used to remove a player from a team, setting the sTeamName to be null or ""
+     *
+     * @param
+     * @return
+     */
     public void removePlayerFromTeam()
     {
 
@@ -121,28 +148,33 @@ public class ManageRosterController implements Initializable
     /**
      * This method is used to repopulate a team once the program is closed or if someone goes back to the main
      * page, it will show all the players that are on that selected team again once selected
+     *
+     * @param
+     * @return
      */
-    public void populateTeamList()
-    {
-        listOfPlayerOnTeam = playerControl.getAllPlayers().stream().filter(x -> x.getsTeamName().equals(TeamViewController.obCurrentTeam.toString())).collect(Collectors.toList());
-        for (int i = 0; i<listOfPlayerOnTeam.size(); i++)
-        {
-            if (listOfPlayerOnTeam.get(i).getsTeamName().equals(TeamViewController.obCurrentTeam))
-            {
-                Player obSelected = listOfPlayerOnTeam.get(i);
-                Text obPlayer = new Text();
-                obPlayer.setText(obSelected.toString());
-                obPlayer.setOnDragDetected(event -> {setOnDragDetected((MouseDragEvent)event);});
-                obPlayer.setOnDragOver(event -> {setOnDragOver(event);});
-                obPlayer.setOnDragDropped(event -> {setOnDragDropped(event);});
-                obPlayer.setOnDragDone(event -> {setOnDraggedDone(event);});
-                obPlayer.setId(("text"+nCounter));
-
-                fpBench.getChildren().add(obPlayer);
-                playerMap.put(obPlayer,obSelected);
-            }
-        }
-    }
+//    public void populateTeamList()
+//    {
+//        listOfPlayerOnTeam = playerControl.getAllPlayers().stream().filter(x -> x.getsTeamName().equals(TeamViewController.obCurrentTeam.toString())).collect(Collectors.toList());
+//        for (int i = 0; i<listOfPlayerOnTeam.size(); i++)
+//        {
+//            if (listOfPlayerOnTeam.get(i).getsTeamName().equals(TeamViewController.obCurrentTeam))
+//            {
+//                Player obSelected = listOfPlayerOnTeam.get(i);
+//                Text txtPlayer = new Text();
+//                 txtPlayer.setText(obSelected.toString());
+//
+//                txtPlayer.setOnDragDetected(this::setOnDragDetected);
+//                txtPlayer.setOnDragOver(this::setOnDragOver);
+//                txtPlayer.setOnDragDropped(this::setOnDragDropped);
+//                txtPlayer.setOnDragDone(this::setOnDraggedDone);
+//                 txtPlayer.setOnMouseClicked(this::setOnMouseClicked);
+////                 txtPlayer.setId(("text"+nCounter));
+//
+//                fpBench.getChildren().add( txtPlayer);
+//                playerMap.put(txtPlayer,obSelected);
+//            }
+//        }
+//    }
 
     /**
      * This method is to go back to the main team window
@@ -158,7 +190,7 @@ public class ManageRosterController implements Initializable
     }
 
     @FXML
-    public void setOnDragDetected(MouseDragEvent e)
+    public void setOnDragDetected(MouseEvent event)
     {
 
 

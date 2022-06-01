@@ -22,8 +22,6 @@
                </font></Button>
             <FlowPane fx:id="fpBench" prefHeight="85.0" prefWidth="1150.0" style="-fx-border-color: black; -fx-border-width: 2;">
                <children>
-      
-                  <Text onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" text="playerName" />
                   <Text onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" text="playerName" />
 
                </children>
