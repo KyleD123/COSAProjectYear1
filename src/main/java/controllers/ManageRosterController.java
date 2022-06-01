@@ -1,24 +1,28 @@
 package controllers;
 
+import com.cosacpmg.MainWindow;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import models.Player;
-import models.PlayerValidator;
 
 
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -30,23 +34,19 @@ public class ManageRosterController implements Initializable
     @FXML
     private ListView<Player> PlayerList;
 
-    private PlayerController playerControl;
-
     @FXML
     private FlowPane fpBench;
 
     @FXML
-    private VBox vGoalie, vLeftDefense, vRightDefense, vLeftWing, vRightWing, vCenter;
+    private ImageView Home;
 
-    private Player fakePlayer = new Player();
-
-    private PlayerController playerController;
-    private PlayerValidator obValid;
     int nCounter =1;
 
+    private PlayerController playerControl;
+
     public HashMap<Text, Player> playerMap = new HashMap<>();
-    private TextField src;
-    private VBox target;
+
+    List<Player> listOfPlayerOnTeam = new ArrayList<>();
 
 
 
@@ -65,26 +65,7 @@ public class ManageRosterController implements Initializable
 
         playerControl = new PlayerController(databaseConn);
         populateListView();
-
-        playerController = new PlayerController(databaseConn);
-        obValid = new PlayerValidator();
-
-        fakePlayer.setsFirstName("Kyle");
-        fakePlayer.setsLastName("Doerksen");
-        fakePlayer.setsEmergencyContact("123-123-1234");
-        fakePlayer.setnPlayerNumber(45);
-        fakePlayer.setsParentInfo("Mother");
-
-
-//        playerMap.put(txtPlayer1, fakePlayer);
-//        playerMap.put(txtPlayer2, fakePlayer);
-//        playerMap.put(txtPlayer3, fakePlayer);
-//        playerMap.put(txtPlayer4, fakePlayer);
-//        playerMap.put(txtPlayer5, fakePlayer);
-//        playerMap.put(txtPlayer6, fakePlayer);
-//        playerMap.put(txtPlayer7, fakePlayer);
-
-
+        populateTeamList();
 
     }
 
@@ -117,23 +98,63 @@ public class ManageRosterController implements Initializable
         obPlayer.setOnDragOver(event -> {setOnDragOver(event);});
         obPlayer.setOnDragDropped(event -> {setOnDragDropped(event);});
         obPlayer.setOnDragDone(event -> {setOnDraggedDone(event);});
-        fpBench.getChildren().add(obPlayer);
+        obPlayer.setId(("text" + nCounter));
 
-        obPlayer.setId(("text"+nCounter));
+        fpBench.getChildren().add(obPlayer);
         playerMap.put(obPlayer,obSelected);
 
         obSelected.setsTeamName(TeamViewController.obCurrentTeam);
-        playerController.modifyPlayer(obSelected);
+        playerControl.modifyPlayer(obSelected);
         populateListView();
+
+        listOfPlayerOnTeam.add(obSelected);
 
         nCounter++;
     }
 
-
-
-    public void populateTeamList()
+    public void removePlayerFromTeam()
     {
 
+    }
+
+
+    /**
+     * This method is used to repopulate a team once the program is closed or if someone goes back to the main
+     * page, it will show all the players that are on that selected team again once selected
+     */
+    public void populateTeamList()
+    {
+        listOfPlayerOnTeam = playerControl.getAllPlayers().stream().filter(x -> x.getsTeamName().equals(TeamViewController.obCurrentTeam.toString())).collect(Collectors.toList());
+        for (int i = 0; i<listOfPlayerOnTeam.size(); i++)
+        {
+            if (listOfPlayerOnTeam.get(i).getsTeamName().equals(TeamViewController.obCurrentTeam))
+            {
+                Player obSelected = listOfPlayerOnTeam.get(i);
+                Text obPlayer = new Text();
+                obPlayer.setText(obSelected.toString());
+                obPlayer.setOnDragDetected(event -> {setOnDragDetected((MouseDragEvent)event);});
+                obPlayer.setOnDragOver(event -> {setOnDragOver(event);});
+                obPlayer.setOnDragDropped(event -> {setOnDragDropped(event);});
+                obPlayer.setOnDragDone(event -> {setOnDraggedDone(event);});
+                obPlayer.setId(("text"+nCounter));
+
+                fpBench.getChildren().add(obPlayer);
+                playerMap.put(obPlayer,obSelected);
+            }
+        }
+    }
+
+    /**
+     * This method is to go back to the main team window
+     * @param mouseEvent
+     * @throws IOException
+     */
+    public void goHome(MouseEvent mouseEvent) throws IOException
+    {
+        FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-team-layout.fxml"));
+        Stage obMainStage = (Stage) fpBench.getScene().getWindow();
+        obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
+        obMainStage.show();
     }
 
     @FXML

@@ -42,15 +42,4 @@ public class PlayerViewController {
         obMainStage.close();
     }
 
-//    @FXML
-//    @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//        ConnectionSource databaseConn = null;
-//        try {
-//            databaseConn = new JdbcPooledConnectionSource("jdbc:sqlite:players.db");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        playerController = new PlayerController(databaseConn);
-//    }
 }

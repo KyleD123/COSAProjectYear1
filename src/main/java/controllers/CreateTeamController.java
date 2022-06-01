@@ -107,7 +107,7 @@ public class CreateTeamController implements Initializable
      * @param mouseEvent
      * @throws IOException
      */
-    public void cancel(MouseEvent mouseEvent) throws IOException
+    public void Home(MouseEvent mouseEvent) throws IOException
     {
         FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-team-layout.fxml"));
         Stage obMainStage = (Stage) btnCancel.getScene().getWindow();

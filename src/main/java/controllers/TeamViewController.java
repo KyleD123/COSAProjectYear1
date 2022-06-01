@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -49,6 +46,8 @@ public class TeamViewController implements Initializable
 
     public static String obCurrentTeam;
 
+    Alert alert;
+
     @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -79,29 +78,47 @@ public class TeamViewController implements Initializable
 
     public void switchModifyScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("edit-team-window.fxml"));
-        obMainStage = (Stage) btnEdit.getScene().getWindow();
-        obMainStage.setScene(new Scene(newScene.load(), 1366,768));
-        obMainStage.show();
+        if (cboName.getValue() == null) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error!");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a team from the dropdown menu!");
+            alert.show();
+        }
+        else {
+            FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("edit-team-window.fxml"));
+            obMainStage = (Stage) btnEdit.getScene().getWindow();
+            obMainStage.setScene(new Scene(newScene.load(), 1366,768));
+            obMainStage.show();
 
-        ModifyTeamController obControl = newScene.getController();
-        sValue = cboName.getValue().toString();
+            ModifyTeamController obControl = newScene.getController();
+            sValue = cboName.getValue().toString();
 
-        obControl.setID(Integer.parseInt(sValue.substring(sValue.indexOf(":") + 2)));
+            obControl.setID(Integer.parseInt(sValue.substring(sValue.indexOf(":") + 2)));
 
-        obControl.populateTextFields();
+            obControl.populateTextFields();
+        }
     }
 
     public void switchRosterScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("manage-roster-layout.fxml"));
-        obMainStage = (Stage) btnRoster.getScene().getWindow();
-        obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
-        obMainStage.show();
-
         sValue = cboName.getValue().toString();
         obCurrentTeam = sValue;
 
+        if (cboName.getValue() == null) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error!");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a team from the dropdown menu!");
+            alert.show();
+        }
+        else {
+            FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("manage-roster-layout.fxml"));
+            obMainStage = (Stage) btnRoster.getScene().getWindow();
+            obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
+            obMainStage.show();
+
+        }
     }
 
     public void populateDropDownMenu()
