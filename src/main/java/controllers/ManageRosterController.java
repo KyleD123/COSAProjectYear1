@@ -3,6 +3,7 @@ package controllers;
 import com.cosacpmg.MainWindow;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -58,20 +60,19 @@ public class ManageRosterController implements Initializable
         }
 
         playerController = new PlayerController(databaseConn);
-        obValid = new PlayerValidator();
 
-        fakePlayer.setsFirstName("Kyle");
-        fakePlayer.setsLastName("Doerksen");
-        fakePlayer.setsEmergencyContact("123-123-1234");
-        fakePlayer.setnPlayerNumber(45);
-        fakePlayer.setsParentInfo("Mother");
+        List<Player> lstPlayers =  playerController.getAllPlayers();
 
-        playerMap.put(txtPlayer1, fakePlayer);
-        playerMap.put(txtPlayer2, fakePlayer);
-
-
-        txtPlayer1.setText(playerMap.get(txtPlayer1).getsFirstName() + ", " + playerMap.get(txtPlayer1).getsLastName());
-        txtPlayer2.setText(playerMap.get(txtPlayer2).getsFirstName() + ", " + playerMap.get(txtPlayer2).getsLastName());
+        for(Player obPlay : lstPlayers)
+        {
+            Text txtPlayer = new Text(obPlay.getsFirstName() + " " + obPlay.getsLastName());
+            txtPlayer.setOnDragDetected(this::setOnDragDetected);
+            txtPlayer.setOnDragOver(this::setOnDragOver);
+            txtPlayer.setOnDragDropped(this::setOnDragDropped);
+            txtPlayer.setOnDragDone(this::setOnDragDone);
+            fpBench.getChildren().add(txtPlayer);
+            playerMap.put(txtPlayer, obPlay);
+        }
 
     }
     //Create instances of the other controllers to set things (Call the data controllers and set values_
@@ -82,14 +83,22 @@ public class ManageRosterController implements Initializable
 
     //Drag and Drop Methods
     //Create separate Methods - Drag and Drop Amounts
-
+    public static Text source;
     @FXML
-    public void setOnDragDetected(MouseDragEvent e)
+    public void setOnDragDetected(MouseEvent e)
     {
 //        e.getSource();
 //        e.getTarget();
-        VBox vTarget = (VBox) e.getTarget();
-        Text source = (Text) e.getSource();
+//        VBox vTarget = (VBox) e.getTarget();
+        source = (Text) e.getSource();
+        if(e.getSource() instanceof Text)
+        {
+            source = (Text) e.getSource();
+        }
+        else if(e.getSource() instanceof VBox)
+        {
+            source = (Text)((VBox)e.getSource()).getChildren().get(0);
+        }
         Dragboard db = source.startDragAndDrop(TransferMode.ANY);
         ClipboardContent content = new ClipboardContent();
         content.putString(source.getText());
@@ -107,100 +116,96 @@ public class ManageRosterController implements Initializable
     }
 
     @FXML
-    public void setOnDragDropped(DragEvent e)
-    {
-        VBox vTarget = (VBox) e.getTarget();
-        Text source = (Text) e.getSource();
+    public void setOnDragDropped(DragEvent e) {
+        VBox vTarget= new VBox();
+//        vTarget.setId("asd");
         Player p = playerMap.get(source);
         String str = e.getDragboard().getString();
-//        target.getChildren().add(new Text(str));
 
-        switch (vTarget.getId())
+        if(e.getTarget() instanceof VBox)
         {
-            case "vGoalie":
+            vTarget = (VBox) e.getTarget();
+
+
+
+
+
+            switch (vTarget.getId())
             {
-                p.setsPosition("Goalie");
-                source.setText(str);
-                vGoalie.getChildren().add(source);
-                target = vGoalie;
-                break;
+                case "vGoalie":
+                {
+                    p.setsPosition("Goalie");
+                    break;
+                }
+                case "vLeftDefense":
+                {
+                    p.setsPosition("Left Defense");
+                    break;
+                }
+                case "vRightDefense":
+                {
+                    p.setsPosition("Right Defense");
+                    break;
+                }
+                case "vLeftWing":
+                {
+                    p.setsPosition("Left Wing");
+                    break;
+                }
+                case "vRightWing":
+                {
+                    p.setsPosition("Right Wing");
+
+                    break;
+                }
+                case "vCenter":
+                {
+                    p.setsPosition("Center");
+                    break;
+                }
+
             }
-            case "vLeftDefense":
-            {
-                p.setsPosition("Left Defense");
-                source.setText(str);
-                vLeftDefense.getChildren().add(source);
-                target = vLeftDefense;
-                break;
-            }
-            case "vRightDefense":
-            {
-                p.setsPosition("Right Defense");
-                source.setText(str);
-                vRightDefense.getChildren().add(source);
-                target = vRightDefense;
-                break;
-            }
-            case "vLeftWing":
-            {
-                p.setsPosition("Left Wing");
-                source.setText(str);
-                vLeftWing.getChildren().add(source);
-                target = vLeftWing;
-                break;
-            }
-            case "vRightWing":
-            {
-                p.setsPosition("Right Wing");
-                source.setText(str);
-                vRightWing.getChildren().add(source);
-                target = vRightWing;
-                break;
-            }
-            case "vCenter":
-            {
-                p.setsPosition("Center");
-                source.setText(str);
-                vCenter.getChildren().add(source);
-                target = vCenter;
-                break;
-            }
+            vTarget.getChildren().add(source);
+
+        }
+        else
+        {
+            p.setsPosition(null);
+            fpBench.getChildren().add(source);
         }
 
-        //call controller to modify player add player object in
 
+
+        //call controller to modify player add player object in
+//        if(!playerController.modifyPlayer(p))
+//        {
+//            p.setsPosition(null);
+//            //pop up alert message for fails
+//
+//        }
+//        else
+//        {
+//            fpBench.getChildren().remove(source);
+//            vTemp.getChildren().add(source);
+//
+//        }
+
+//        fpBench.getChildren().remove(source);
 
     }
 
     @FXML
-    public void setOnDragDone(MouseDragEvent e) throws SQLException, IOException {
-        Text txt = (Text)e.getSource();
-        fpBench.getChildren().remove(txt);
+    public void setOnDragDone(DragEvent e)  {
+//        Text txt = (Text)e.getSource();
+//        fpBench.getChildren().remove(txt);
 
-        Player player = playerMap.get(txt);
+//        Player player = playerMap.get(txt);
 
-        modifyPosition(player);
+
     }
 
 
 
-    public void modifyPosition(Player player) throws IOException, SQLException {
 
-        player.setsPosition(target.getId());
-
-        HashMap<String, String> listOfErrors = obValid.getErrors(player);
-        //If the annotations have errors, then it shows what kind of error you made.
-        if (listOfErrors.size() > 0)
-        {
-            lblError3.setText(listOfErrors.get("sPosition"));
-        }
-        else
-        {
-            lblError3.setText("");
-
-//            responsePrompt(playerController.modifyPlayer(player));
-            
-        }
-    }
 
 }

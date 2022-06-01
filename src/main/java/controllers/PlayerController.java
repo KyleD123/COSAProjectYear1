@@ -6,10 +6,13 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import models.Player;
 import models.PlayerValidator;
+import models.Team;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,18 +48,19 @@ public class PlayerController {
         return sent;
     }
 
-    public boolean modifyPlayer(Player obPlayer) throws SQLException {
-        if (obValid.isValid(obPlayer) && repo.queryForMatching(obPlayer).isEmpty())
-        {
-            try {
+    public boolean modifyPlayer(Player obPlayer)  {
+        try {
+            if (obValid.isValid(obPlayer) && repo.queryForMatching(obPlayer).isEmpty())
+            {
                 int nResult = repo.update(obPlayer);
-                return true;
-            } catch (SQLException e) {
-                e.printStackTrace();
+                return nResult != 0;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return false;
     }
+
 
     public List<Player> getAllPlayers()
     {
