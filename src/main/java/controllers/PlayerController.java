@@ -51,7 +51,7 @@ public class PlayerController {
     public boolean modifyPlayer(Player obPlayer)  {
        Team current = obPlayer.getObTeam();
         try {
-            if (obValid.isValid(obPlayer) ) //TODO: need to make sure players on same team are not in the same position
+            if (obValid.isValid(obPlayer) && isUnique(obPlayer))
             {
                 int nResult = repo.update(obPlayer);
                 return nResult != 0;
@@ -63,10 +63,35 @@ public class PlayerController {
     }
 
 
-//    public boolean isUnique(Player obPlayer)
-//    {
-//        List<Player> lstPlayer = repo.query(repo.queryBuilder().where().eq("obTeam_id", obPlayer.getObTeam().getTeamName()).or());
-//    }
+    public boolean isUnique(Player obPlayer) throws SQLException {
+        List<Player> lstPlayer = new ArrayList<>();
+
+        if (obPlayer.getObTeam() != null)
+        {
+            lstPlayer = repo.query(repo.queryBuilder().where().eq("obTeam_id", obPlayer.getObTeam().getTeamID()).and()
+                .eq("sPosition", obPlayer.getsPosition()).and().not().eq("lPlayerID", obPlayer.getlPlayerID()).prepare());
+        }
+
+        //If it = 0 true, otherwise false
+        return lstPlayer.size() == 0;
+    }
+
+    public List<Player> getAllPlayersByTeam(Team obTeam)
+    {
+        List<Player> obReturn = new ArrayList<>();
+        try
+        {
+            obReturn = repo.queryForEq("obTeam_id", obTeam.getTeamID());
+        }
+
+        catch (SQLException e)
+        {
+
+        }
+
+        return obReturn;
+    }
+
 
     public List<Player> getAllPlayers()
     {

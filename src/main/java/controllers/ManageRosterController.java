@@ -57,7 +57,7 @@ public class ManageRosterController implements Initializable
 
         playerController = new PlayerController(databaseConn);
 
-        List<Player> lstPlayers =  playerController.getAllPlayers();
+        List<Player> lstPlayers =  playerController.getAllPlayersByTeam(TeamViewController.obCurrentTeam);
 
         for(Player obPlay : lstPlayers)
         {
@@ -110,7 +110,7 @@ public class ManageRosterController implements Initializable
 
         if(e.getTarget() instanceof VBox)
         {
-            if(((VBox) e.getTarget()).getChildren().size() < 1 )
+            if(((VBox) e.getTarget()).getChildren().size() < 1)
             {
                 VBox vTarget = (VBox) e.getTarget();
 

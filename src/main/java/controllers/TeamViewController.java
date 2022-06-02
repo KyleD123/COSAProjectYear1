@@ -45,7 +45,7 @@ public class TeamViewController implements Initializable
 
     private String sValue;
 
-    public static String obCurrentTeam;
+    public static Team obCurrentTeam;
 
 
 
@@ -96,11 +96,11 @@ public class TeamViewController implements Initializable
     {
         FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("manage-roster-layout.fxml"));
 //        obMainStage = (Stage) btnRoster.getScene().getWindow();
+        obCurrentTeam = (Team) cboName.getValue();
+
         obMainStage.setScene(new Scene(newScene.load(), 1366, 768));
         obMainStage.show();
 
-        sValue = cboName.getValue().toString();
-        obCurrentTeam = sValue;
 
 
         ObservableList<Player> ListOfPlayer = FXCollections.observableArrayList(playerControl.getAllPlayers());
