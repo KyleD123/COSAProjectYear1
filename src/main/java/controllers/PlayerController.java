@@ -49,8 +49,9 @@ public class PlayerController {
     }
 
     public boolean modifyPlayer(Player obPlayer)  {
+       Team current = obPlayer.getObTeam();
         try {
-            if (obValid.isValid(obPlayer))
+            if (obValid.isValid(obPlayer) ) //TODO: need to make sure players on same team are not in the same position
             {
                 int nResult = repo.update(obPlayer);
                 return nResult != 0;
@@ -60,6 +61,12 @@ public class PlayerController {
         }
         return false;
     }
+
+
+//    public boolean isUnique(Player obPlayer)
+//    {
+//        List<Player> lstPlayer = repo.query(repo.queryBuilder().where().eq("obTeam_id", obPlayer.getObTeam().getTeamName()).or());
+//    }
 
     public List<Player> getAllPlayers()
     {

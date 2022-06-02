@@ -109,6 +109,23 @@ public class PlayerControllerTest {
     }
 
     @Test
+    public void testNoDuplicatePlayersPosition()
+    {
+        Player player1 = new Player();
+        player1.setsFirstName("Timmy");
+        player1.setsLastName("Jackson");
+        player1.setnPlayerNumber(24);
+        player1.setsPosition("Goalie");
+        player1.setObTeam(new Team());
+
+        player1.setsParentInfo("Linda Jackson");
+        player1.setsEmergencyContact("306-456-7892");
+
+        pc.createPlayer(player1);
+        assertSame("Passed Player Object exists in database return false", pc.modifyPlayer(player1), false);
+    }
+
+    @Test
     public void testModifyPlayerWithIdenticalInfo() throws SQLException {
         Player player1 = new Player();
         player1.setsFirstName("Timmy");

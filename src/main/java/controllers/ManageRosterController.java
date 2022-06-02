@@ -110,46 +110,50 @@ public class ManageRosterController implements Initializable
 
         if(e.getTarget() instanceof VBox)
         {
-            VBox vTarget = (VBox) e.getTarget();
-
-            switch (vTarget.getId())
+            if(((VBox) e.getTarget()).getChildren().size() < 1 )
             {
-                case "vGoalie":
-                {
-                    p.setsPosition("Goalie");
-                    break;
-                }
-                case "vLeftDefense":
-                {
-                    p.setsPosition("Left Defense");
-                    break;
-                }
-                case "vRightDefense":
-                {
-                    p.setsPosition("Right Defense");
-                    break;
-                }
-                case "vLeftWing":
-                {
-                    p.setsPosition("Left Wing");
-                    break;
-                }
-                case "vRightWing":
-                {
-                    p.setsPosition("Right Wing");
+                VBox vTarget = (VBox) e.getTarget();
 
-                    break;
-                }
-                case "vCenter":
+                switch (vTarget.getId())
                 {
-                    p.setsPosition("Center");
-                    break;
+                    case "vGoalie":
+                    {
+                        p.setsPosition("Goalie");
+                        break;
+                    }
+                    case "vLeftDefense":
+                    {
+                        p.setsPosition("Left Defense");
+                        break;
+                    }
+                    case "vRightDefense":
+                    {
+                        p.setsPosition("Right Defense");
+                        break;
+                    }
+                    case "vLeftWing":
+                    {
+                        p.setsPosition("Left Wing");
+                        break;
+                    }
+                    case "vRightWing":
+                    {
+                        p.setsPosition("Right Wing");
+
+                        break;
+                    }
+                    case "vCenter":
+                    {
+                        p.setsPosition("Center");
+                        break;
+                    }
+                }
+                if(playerController.modifyPlayer(p))
+                {
+                    vTarget.getChildren().add(source);
                 }
             }
-            if(playerController.modifyPlayer(p))
-            {
-                vTarget.getChildren().add(source);
-            }
+
         }
         else
         {
@@ -165,4 +169,5 @@ public class ManageRosterController implements Initializable
     public void setOnDragDone(DragEvent e)  {
         //Does nothing
     }
+
 }

@@ -136,6 +136,8 @@ public class PlayerTest {
         assertEquals(0, validator.validate(player).size());
     }
 
+
+
 //    @Test
 //    public void testPlayerPositionIsTooLong() {
 //        String invalid = repeatQ(25);
