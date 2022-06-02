@@ -172,12 +172,12 @@ public class ManageRosterController implements Initializable
         Player p = playerMap.get(source);
         String str = e.getDragboard().getString();
 
-        if(e.getTarget() instanceof VBox)
-        {
-            if(((VBox) e.getTarget()).getChildren().size() < 1)
-            {
-                VBox vTarget = (VBox) e.getTarget();
 
+        if(e.getGestureTarget() instanceof VBox)
+        {
+            VBox vTarget = (VBox) e.getGestureTarget();
+            if(vTarget.getChildren().size() < 1)
+            {
                 switch (vTarget.getId())
                 {
                     case "vGoalie":
@@ -211,39 +211,28 @@ public class ManageRosterController implements Initializable
                         p.setsPosition("Center");
                         break;
                     }
-                    case "vDelete":
-                    {
-                        p.setObTeam(null);
-                        p.setsPosition(null);
-                        break;
-                    }
                 }
-                try {
-                    if(playerController.modifyPlayer(p))
-                    {
-                        if(!(vTarget.getId().equals("vDelete"))) {
-                            vTarget.getChildren().add(source);
-                        } else {
-                            ((Pane) source.getParent()).getChildren().remove(source);
-                            populateListView();
-                        }
-                    }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+                if(playerController.modifyPlayer(p))
+                {
+                    vTarget.getChildren().add(source);
                 }
             }
-
+            else if(vTarget.getId().equals("vDelete")){
+                p.setObTeam(null);
+                p.setsPosition(null);
+                if(playerController.modifyPlayer(p))
+                {
+                    ((Pane) source.getParent()).getChildren().remove(source);
+                    populateListView();
+                }
+            }
         }
         else
         {
             p.setsPosition(null);
-            try {
-                if(playerController.modifyPlayer(p))
-                {
-                    fpBench.getChildren().add(source);
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            if(playerController.modifyPlayer(p))
+            {
+                fpBench.getChildren().add(source);
             }
         }
     }

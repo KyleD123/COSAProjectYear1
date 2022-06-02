@@ -148,11 +148,9 @@ public class PlayerControllerTest {
         pc.createPlayer(player2);
         player2.setsPosition("Goalie");
 
-        try {
-            assertSame("Passed Player Object exists in database return false", pc.modifyPlayer(player2), false);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        assertSame("Passed Player Object exists in database return false", pc.modifyPlayer(player2), false);
+
     }
 
     @Test

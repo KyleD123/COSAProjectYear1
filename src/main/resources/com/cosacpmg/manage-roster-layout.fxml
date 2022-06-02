@@ -45,7 +45,7 @@
     <bottom>
         <HBox alignment="CENTER" prefHeight="0.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="60.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="60.0" fitWidth="121.0" onMouseClicked="#goHome" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@img/homeBtn.png" />
                     </image>

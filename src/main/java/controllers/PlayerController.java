@@ -48,8 +48,8 @@ public class PlayerController {
         return sent;
     }
 
-    // double check
-    public boolean modifyPlayer(Player obPlayer) throws SQLException  {
+
+    public boolean modifyPlayer(Player obPlayer) {
         Team current = obPlayer.getObTeam();
         try {
             if (obValid.isValid(obPlayer) && isUnique(obPlayer))
