@@ -21,12 +21,16 @@ import java.sql.SQLException;
 public class PlayerControllerTest {
 
     private static PlayerController pc;
+    private static TeamController tc;
 
     @Before
     public void setUpMock() {
         try {
             ConnectionSource obConn = new JdbcPooledConnectionSource("jdbc:h2:mem:myDb");
-            pc = new PlayerController(obConn );
+            pc = new PlayerController(obConn);
+
+            tc = new TeamController(obConn);
+
             TableUtils.clearTable(obConn, Player.class);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,7 +96,42 @@ public class PlayerControllerTest {
         player1.setsFirstName("Timmy");
         player1.setsLastName("Jackson");
         player1.setnPlayerNumber(24);
-//        player1.setsPosition("Right Wing");
+        player1.setsPosition("Right Wing");
+        player1.setsParentInfo("Linda Jackson");
+        player1.setsEmergencyContact("306-456-7892");
+
+        Player player2 = new Player();
+        player2.setsFirstName("Tommy");
+        player2.setsLastName("Jackson");
+        player2.setnPlayerNumber(42);
+        player2.setsPosition("Left Wing");
+        player2.setsParentInfo("Linda Jackson");
+        player2.setsEmergencyContact("306-456-7892");
+
+        try {
+            assertSame("successful createPlayer returns original Player", pc.createPlayer(player1), true);
+
+            assertSame("successful createPlayer returns original Player", pc.createPlayer(player2), true);
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Test
+    public void testNoDuplicatePlayersPosition()
+    {
+        Team obTeam1 = new Team();
+        obTeam1.setTeamName("Blades");
+        obTeam1.setCoachName("Kyle");
+
+        tc.createTeam(obTeam1);
+        Player player1 = new Player();
+        player1.setsFirstName("Timmy");
+        player1.setsLastName("Jackson");
+        player1.setObTeam(obTeam1);
+        player1.setnPlayerNumber(24);
+        player1.setsPosition("Goalie");
+        player1.setObTeam(obTeam1);
         player1.setsParentInfo("Linda Jackson");
         player1.setsEmergencyContact("306-456-7892");
 
@@ -100,29 +139,16 @@ public class PlayerControllerTest {
         player2.setsFirstName("Timmy");
         player2.setsLastName("Jackson");
         player2.setnPlayerNumber(26);
-//        player2.setsPosition("Right Wing");
+        player2.setsPosition(null);
+        player2.setObTeam(obTeam1);
         player2.setsParentInfo("Linda Jackson");
         player2.setsEmergencyContact("306-456-7892");
 
         pc.createPlayer(player1);
-        assertSame("Player Successfully modified, send new data, and return edited Player", pc.modifyPlayer(player2), true);
-    }
+        pc.createPlayer(player2);
+        player2.setsPosition("Goalie");
 
-    @Test
-    public void testNoDuplicatePlayersPosition()
-    {
-        Player player1 = new Player();
-        player1.setsFirstName("Timmy");
-        player1.setsLastName("Jackson");
-        player1.setnPlayerNumber(24);
-        player1.setsPosition("Goalie");
-        player1.setObTeam(new Team());
-
-        player1.setsParentInfo("Linda Jackson");
-        player1.setsEmergencyContact("306-456-7892");
-
-        pc.createPlayer(player1);
-        assertSame("Passed Player Object exists in database return false", pc.modifyPlayer(player1), false);
+        assertSame("Passed Player Object exists in database return false", pc.modifyPlayer(player2), false);
     }
 
     @Test
@@ -131,12 +157,12 @@ public class PlayerControllerTest {
         player1.setsFirstName("Timmy");
         player1.setsLastName("Jackson");
         player1.setnPlayerNumber(24);
-//        player1.setsPosition("Right Wing");
+        player1.setsPosition("Right Wing");
         player1.setsParentInfo("Linda Jackson");
         player1.setsEmergencyContact("306-456-7892");
 
         pc.createPlayer(player1);
-        assertSame("Passed Player Object exists in database return false", pc.modifyPlayer(player1), false);
+        assertSame("Passed Player Object exists in database return false", pc.modifyPlayer(player1), true);
     }
 
     @Test
