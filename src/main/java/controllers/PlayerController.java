@@ -6,6 +6,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import models.Player;
 import models.PlayerValidator;
+import models.Team;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -56,6 +57,38 @@ public class PlayerController {
             }
         }
         return false;
+    }
+
+    public List<Player> getPlayersWithoutTeams()
+    {
+        List<Player> obReturn = new ArrayList<>();
+        try
+        {
+            obReturn = repo.queryForEq("obTeam_id", 0);
+        }
+
+        catch (SQLException e)
+        {
+
+        }
+
+        return obReturn;
+    }
+
+    public List<Player> getAllPlayersByTeam(Team obTeam)
+    {
+        List<Player> obReturn = new ArrayList<>();
+        try
+        {
+            obReturn = repo.queryForEq("obTeam_id", obTeam.getTeamID());
+        }
+
+        catch (SQLException e)
+        {
+
+        }
+
+        return obReturn;
     }
 
     public List<Player> getAllPlayers()

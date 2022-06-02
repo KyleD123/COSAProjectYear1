@@ -44,7 +44,7 @@ public class TeamViewController implements Initializable
 
     private String sValue;
 
-    public static String obCurrentTeam;
+    public static Team obCurrentTeam;
 
     Alert alert;
 
@@ -102,8 +102,7 @@ public class TeamViewController implements Initializable
 
     public void switchRosterScene(MouseEvent mouseEvent) throws Exception
     {
-        sValue = cboName.getValue().toString();
-        obCurrentTeam = sValue;
+        obCurrentTeam = (Team) cboName.getValue();
 
         if (cboName.getValue() == null) {
             alert = new Alert(Alert.AlertType.INFORMATION);

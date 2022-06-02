@@ -9,11 +9,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.Player;
@@ -33,20 +33,22 @@ public class ManageRosterController implements Initializable
 {
 
     @FXML
-    private ListView<Player> PlayerList;
+    private ListView<Player> lvPlayers;
 
     @FXML
     private FlowPane fpBench;
 
-    private PlayerController playerControl;
+    private PlayerController playerController;
 
     public HashMap<Text, Player> playerMap = new HashMap<>();
 
     //only need this method if we are repopulating the team list when re-selecting a team
     private List<Player> listOfPlayerOnTeam = new ArrayList<>();
-    private ArrayList<String> selectedPlayers = new ArrayList<>();
 
     private Text txtPlayer;
+
+    public static Text source;
+
 
 
 
@@ -63,10 +65,10 @@ public class ManageRosterController implements Initializable
             e.printStackTrace();
         }
 
-        playerControl = new PlayerController(databaseConn);
+        playerController = new PlayerController(databaseConn);
         populateListView();
-        //only need this method if we are repopulating the team list when re-selecting a team
-      populateTeamList();
+
+
 
     }
 
@@ -78,11 +80,9 @@ public class ManageRosterController implements Initializable
      */
     public void populateListView()
     {
-        PlayerList.getItems().clear();
-        List<Player> ListOfPlayer = playerControl.getAllPlayers();
+        lvPlayers.getItems().clear();
 
-        ListOfPlayer=ListOfPlayer.stream().filter(x -> x.getsTeamName().equals("")).collect(Collectors.toList());
-        PlayerList.getItems().addAll(ListOfPlayer);
+        lvPlayers.getItems().addAll(playerController.getPlayersWithoutTeams());
 
 
     }
@@ -96,9 +96,9 @@ public class ManageRosterController implements Initializable
      */
     public void addPlayerToTeam() throws SQLException {
 
-        Player obSelected = PlayerList.getSelectionModel().getSelectedItem();
-        obSelected.setsTeamName(TeamViewController.obCurrentTeam);
-        if(playerControl.modifyPlayer(obSelected))
+        Player obSelected = lvPlayers.getSelectionModel().getSelectedItem();
+        obSelected.setObTeam(TeamViewController.obCurrentTeam);
+        if(playerController.modifyPlayer(obSelected))
         {
             txtPlayer = new Text();
             txtPlayer.setText(obSelected.toString());
@@ -106,7 +106,6 @@ public class ManageRosterController implements Initializable
             txtPlayer.setOnDragOver(this::setOnDragOver);
             txtPlayer.setOnDragDropped(this::setOnDragDropped);
             txtPlayer.setOnDragDone(this::setOnDraggedDone);
-            txtPlayer.setOnMouseClicked(e -> {setOnMouseClicked(e,txtPlayer);});
 
             fpBench.getChildren().add(txtPlayer);
             fpBench.setHgap(25);
@@ -125,26 +124,6 @@ public class ManageRosterController implements Initializable
         }
     }
 
-    private void setOnMouseClicked(MouseEvent mouseEvent, Text txtPlayer)
-    {
-        System.out.println("Gabe is shit");
-        txtPlayer.setFill(Color.RED);
-        selectedPlayers.add(txtPlayer.getText());
-
-
-    }
-
-    /**
-     * This method is used to remove a player from a team, setting the sTeamName to be null or ""
-     *
-     * @param
-     * @return
-     */
-    public void removePlayerFromTeam()
-    {
-
-    }
-
 
     /**
      * This method is used to repopulate a team once the program is closed or if someone goes back to the main
@@ -156,28 +135,26 @@ public class ManageRosterController implements Initializable
      */
     //only need this method if we are repopulating the team list when re-selecting a team
 
-    public void populateTeamList()
-    {
-        listOfPlayerOnTeam = playerControl.getAllPlayers().stream().filter(x -> x.getsTeamName().equals(TeamViewController.obCurrentTeam.toString())).collect(Collectors.toList());
-        for (int i = 0; i<listOfPlayerOnTeam.size(); i++)
-        {
-            if (listOfPlayerOnTeam.get(i).getsTeamName().equals(TeamViewController.obCurrentTeam))
-            {
-                Player obSelected = listOfPlayerOnTeam.get(i);
-                Text txtPlayer = new Text();
-                txtPlayer.setText(obSelected.toString());
-
-                txtPlayer.setOnDragDetected(this::setOnDragDetected);
-                txtPlayer.setOnDragOver(this::setOnDragOver);
-                txtPlayer.setOnDragDropped(this::setOnDragDropped);
-                txtPlayer.setOnDragDone(this::setOnDraggedDone);
-                txtPlayer.setOnMouseClicked(e -> {setOnMouseClicked(e,txtPlayer);});
-
-                fpBench.getChildren().add( txtPlayer);
-                playerMap.put(txtPlayer,obSelected);
-            }
-        }
-    }
+//    public void populateTeamList()
+//    {
+//        for (int i = 0; i<listOfPlayerOnTeam.size(); i++)
+//        {
+//            if (listOfPlayerOnTeam.get(i).getsTeamName().equals(TeamViewController.obCurrentTeam))
+//            {
+//                Player obSelected = listOfPlayerOnTeam.get(i);
+//                Text txtPlayer = new Text();
+//                txtPlayer.setText(obSelected.toString());
+//
+//                txtPlayer.setOnDragDetected(this::setOnDragDetected);
+//                txtPlayer.setOnDragOver(this::setOnDragOver);
+//                txtPlayer.setOnDragDropped(this::setOnDragDropped);
+//                txtPlayer.setOnDragDone(this::setOnDraggedDone);
+//
+//                fpBench.getChildren().add( txtPlayer);
+//                playerMap.put(txtPlayer,obSelected);
+//            }
+//        }
+//    }
 
     /**
      * This method is to go back to the main team window
@@ -206,10 +183,73 @@ public class ManageRosterController implements Initializable
     }
 
     @FXML
-    public void setOnDragDropped(DragEvent e)
-    {
+    public void setOnDragDropped(DragEvent e) throws SQLException {
+        Player p = playerMap.get(source);
+    String str = e.getDragboard().getString();
 
+        if(e.getTarget() instanceof VBox)
+    {
+        VBox vTarget = (VBox) e.getTarget();
+
+        switch (vTarget.getId())
+        {
+            case "vGoalie":
+            {
+                p.setsPosition("Goalie");
+                break;
+            }
+            case "vLeftDefense":
+            {
+                p.setsPosition("Left Defense");
+                break;
+            }
+            case "vRightDefense":
+            {
+                p.setsPosition("Right Defense");
+                break;
+            }
+            case "vLeftWing":
+            {
+                p.setsPosition("Left Wing");
+                break;
+            }
+            case "vRightWing":
+            {
+                p.setsPosition("Right Wing");
+
+                break;
+            }
+            case "vCenter":
+            {
+                p.setsPosition("Center");
+                break;
+            }
+            case "vDelete":
+            {
+                p.setObTeam(null);
+                p.setsPosition(null);
+            }
+        }
+        if(playerController.modifyPlayer(p))
+        {
+            if(vTarget.getId() != "vDelete") {
+                vTarget.getChildren().add(source);
+            } else {
+                ((Pane) source.getParent()).getChildren().remove(source);
+                populateListView();
+            }
+        }
     }
+        else
+    {
+        p.setsPosition(null);
+        if(playerController.modifyPlayer(p))
+        {
+            fpBench.getChildren().add(source);
+        }
+    }
+}
+
 
     @FXML
     public void setOnDraggedDone(DragEvent e)
