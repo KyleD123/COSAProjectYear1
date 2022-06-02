@@ -108,9 +108,9 @@ public class ModifyPlayerController implements Initializable
         }
     }
 
-    public void addPlayerToTeam(MouseEvent mouseEvent) throws IOException, SQLException {
-        obTeam = TeamViewController.obCurrentTeam;
-    }
+//    public void addPlayerToTeam(MouseEvent mouseEvent) throws IOException, SQLException {
+//        obTeam = TeamViewController.obCurrentTeam;
+//    }
 
     public void responsePrompt(boolean status) throws IOException
     {

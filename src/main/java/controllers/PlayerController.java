@@ -64,7 +64,8 @@ public class PlayerController {
         List<Player> obReturn = new ArrayList<>();
         try
         {
-            obReturn = repo.queryForEq("obTeam_id", 0);
+            obReturn = repo.query(repo.queryBuilder().where().isNull("obTeam_id").prepare());
+
         }
 
         catch (SQLException e)

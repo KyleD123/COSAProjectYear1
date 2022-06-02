@@ -67,6 +67,7 @@ public class ManageRosterController implements Initializable
 
         playerController = new PlayerController(databaseConn);
         populateListView();
+        populateTeamList();
 
 
 
@@ -81,10 +82,7 @@ public class ManageRosterController implements Initializable
     public void populateListView()
     {
         lvPlayers.getItems().clear();
-
         lvPlayers.getItems().addAll(playerController.getPlayersWithoutTeams());
-
-
     }
 
     /**
@@ -104,7 +102,7 @@ public class ManageRosterController implements Initializable
             txtPlayer.setText(obSelected.toString());
             txtPlayer.setOnDragDetected(this::setOnDragDetected);
             txtPlayer.setOnDragOver(this::setOnDragOver);
-            txtPlayer.setOnDragDropped(this::setOnDragDropped);
+//            txtPlayer.setOnDragDropped(this::setOnDragDropped);
             txtPlayer.setOnDragDone(this::setOnDraggedDone);
 
             fpBench.getChildren().add(txtPlayer);
@@ -135,26 +133,26 @@ public class ManageRosterController implements Initializable
      */
     //only need this method if we are repopulating the team list when re-selecting a team
 
-//    public void populateTeamList()
-//    {
-//        for (int i = 0; i<listOfPlayerOnTeam.size(); i++)
-//        {
-//            if (listOfPlayerOnTeam.get(i).getsTeamName().equals(TeamViewController.obCurrentTeam))
-//            {
-//                Player obSelected = listOfPlayerOnTeam.get(i);
-//                Text txtPlayer = new Text();
-//                txtPlayer.setText(obSelected.toString());
-//
-//                txtPlayer.setOnDragDetected(this::setOnDragDetected);
-//                txtPlayer.setOnDragOver(this::setOnDragOver);
+    public void populateTeamList()
+    {
+        for (int i = 0; i<listOfPlayerOnTeam.size(); i++)
+        {
+            if (listOfPlayerOnTeam.get(i).getObTeam().equals(TeamViewController.obCurrentTeam))
+            {
+                Player obSelected = listOfPlayerOnTeam.get(i);
+                Text txtPlayer = new Text();
+                txtPlayer.setText(obSelected.toString());
+
+                txtPlayer.setOnDragDetected(this::setOnDragDetected);
+                txtPlayer.setOnDragOver(this::setOnDragOver);
 //                txtPlayer.setOnDragDropped(this::setOnDragDropped);
-//                txtPlayer.setOnDragDone(this::setOnDraggedDone);
-//
-//                fpBench.getChildren().add( txtPlayer);
-//                playerMap.put(txtPlayer,obSelected);
-//            }
-//        }
-//    }
+                txtPlayer.setOnDragDone(this::setOnDraggedDone);
+
+                fpBench.getChildren().add( txtPlayer);
+                playerMap.put(txtPlayer,obSelected);
+            }
+        }
+    }
 
     /**
      * This method is to go back to the main team window

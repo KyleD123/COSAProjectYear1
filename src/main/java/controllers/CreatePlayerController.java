@@ -26,7 +26,7 @@ public class CreatePlayerController implements Initializable
     private ImageView btnPlayerAddSave, btnPlayerAddCancel;
 
     @FXML
-    private TextField txtFirstAdd, txtLastAdd, txtPositionAdd, txtNumAdd, txtParentAdd, txtContactAdd;
+    private TextField txtFirstAdd, txtLastAdd, txtNumAdd, txtParentAdd, txtContactAdd;
 
     @FXML
     private Label lblError1, lblError2, lblError3, lblError4, lblError5, lblError6;
