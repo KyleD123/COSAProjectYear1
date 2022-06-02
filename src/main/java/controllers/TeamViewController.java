@@ -39,11 +39,12 @@ public class TeamViewController implements Initializable
     @FXML
     private ListView lstPlayers;
 
-    private Stage obMainStage = new Stage();
-    private TeamController teamControl;
-
     private String sValue;
 
+    private Stage obMainStage = new Stage();
+
+    private TeamController teamControl;
+    private PlayerController playerControl;
     public static Team obCurrentTeam;
 
     Alert alert;
@@ -55,7 +56,7 @@ public class TeamViewController implements Initializable
         ConnectionSource databaseConn = null;
         try
         {
-            databaseConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
+            databaseConn = new JdbcPooledConnectionSource(MainWindow.CONNECT_STRING);
 
         }
         catch (SQLException e)
@@ -64,6 +65,7 @@ public class TeamViewController implements Initializable
         }
 
         teamControl = new TeamController(databaseConn);
+        playerControl = new PlayerController(databaseConn);
         populateDropDownMenu();
     }
 
@@ -118,6 +120,16 @@ public class TeamViewController implements Initializable
             obMainStage.show();
 
         }
+
+
+
+        ObservableList<Player> ListOfPlayer = FXCollections.observableArrayList(playerControl.getAllPlayers());
+
+//        lstPlayers.setItems(ListOfPlayer);
+
+        ListView<Player> lstPlayers = new ListView<Player>(ListOfPlayer);
+        lstPlayers.setItems(ListOfPlayer);
+
     }
 
     public void populateDropDownMenu()
@@ -134,9 +146,9 @@ public class TeamViewController implements Initializable
 
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
-        FXMLLoader mainLoader =  new FXMLLoader(MainWindow.class.getResource("main-team-layout.fxml"));
+//        FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team-window.fxml"));
         obMainStage = (Stage) btnCancel.getScene().getWindow();
-        obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
+//        obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
         obMainStage.close();
     }
 

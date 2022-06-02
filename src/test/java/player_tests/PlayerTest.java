@@ -52,7 +52,7 @@ public class PlayerTest {
         player.setsFirstName("Timmy");
         player.setsLastName("Jackson");
         player.setnPlayerNumber(24);
-        player.setsPosition("Right Wing");
+//        player.setsPosition("Right Wing");
         player.setsParentInfo("Linda Jackson");
         player.setsEmergencyContact("306-456-7892");
     }
@@ -136,34 +136,36 @@ public class PlayerTest {
         assertEquals(0, validator.validate(player).size());
     }
 
-    @Test
-    public void testPlayerPositionIsTooLong() {
-        String invalid = repeatQ(25);
-        player.setsPosition(invalid);
 
-        assertInvalidPlayer("sPosition", "Player Position Too Long", invalid);
-    }
 
-    @Test
-    public void testPlayerPositionUpperBound() {
-        player.setsPosition(repeatQ(20));
+//    @Test
+//    public void testPlayerPositionIsTooLong() {
+//        String invalid = repeatQ(25);
+//        player.setsPosition(invalid);
+//
+//        assertInvalidPlayer("sPosition", "Player Position Too Long", invalid);
+//    }
 
-        assertEquals(0, validator.validate(player).size());
-    }
+//    @Test
+//    public void testPlayerPositionUpperBound() {
+//        player.setsPosition(repeatQ(20));
+//
+//        assertEquals(0, validator.validate(player).size());
+//    }
 
-    @Test
-    public void testPlayerPositionLowerBound() {
-        player.setsPosition(repeatQ(1));
+//    @Test
+//    public void testPlayerPositionLowerBound() {
+//        player.setsPosition(repeatQ(1));
+//
+//        assertEquals(0, validator.validate(player).size());
+//    }
 
-        assertEquals(0, validator.validate(player).size());
-    }
-
-    @Test
-    public void testPlayerPositionIsEmpty() {
-        player.setsPosition("");
-
-        assertInvalidPlayer("sPosition", "Player Position is Required", "");
-    }
+//    @Test
+//    public void testPlayerPositionIsEmpty() {
+//        player.setsPosition("");
+//
+//        assertInvalidPlayer("sPosition", "Player Position is Required", "");
+//    }
 
     @Test
     public void testPlayerParentInfoIsTooLong() {

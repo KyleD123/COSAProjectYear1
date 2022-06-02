@@ -8,9 +8,11 @@ import models.Player;
 import models.PlayerValidator;
 import models.Team;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,17 +48,49 @@ public class PlayerController {
         return sent;
     }
 
-    public boolean modifyPlayer(Player obPlayer) throws SQLException {
-        if (obValid.isValid(obPlayer) && repo.queryForMatching(obPlayer).isEmpty())
-        {
-            try {
+    // double check
+    public boolean modifyPlayer(Player obPlayer) throws SQLException  {
+        Team current = obPlayer.getObTeam();
+        try {
+            if (obValid.isValid(obPlayer) && isUnique(obPlayer))
+            {
                 int nResult = repo.update(obPlayer);
-                return true;
-            } catch (SQLException e) {
-                e.printStackTrace();
+                return nResult != 0;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return false;
+    }
+
+
+    public boolean isUnique(Player obPlayer) throws SQLException {
+        List<Player> lstPlayer = new ArrayList<>();
+
+        if (obPlayer.getObTeam() != null && obPlayer.getsPosition() != null)
+        {
+            lstPlayer = repo.query(repo.queryBuilder().where().eq("obTeam_id", obPlayer.getObTeam().getTeamID()).and()
+                    .eq("sPosition", obPlayer.getsPosition()).and().not().eq("lPlayerID", obPlayer.getlPlayerID()).prepare());
+        }
+
+        //If it = 0 true, otherwise false
+        return lstPlayer.size() == 0;
+    }
+
+    public List<Player> getAllPlayersByTeam(Team obTeam)
+    {
+        List<Player> obReturn = new ArrayList<>();
+        try
+        {
+            obReturn = repo.queryForEq("obTeam_id", obTeam.getTeamID());
+        }
+
+        catch (SQLException e)
+        {
+
+        }
+
+        return obReturn;
     }
 
     public List<Player> getPlayersWithoutTeams()
@@ -76,22 +110,6 @@ public class PlayerController {
         return obReturn;
     }
 
-    public List<Player> getAllPlayersByTeam(Team obTeam)
-    {
-        List<Player> obReturn = new ArrayList<>();
-        try
-        {
-            obReturn = repo.queryForEq("obTeam_id", obTeam.getTeamID());
-        }
-
-        catch (SQLException e)
-        {
-
-        }
-
-        return obReturn;
-    }
-
     public List<Player> getAllPlayers()
     {
         List<Player> obReturn = new ArrayList<>();
@@ -99,12 +117,10 @@ public class PlayerController {
         {
             obReturn = repo.queryForAll();
         }
-
         catch (SQLException e)
         {
 
         }
-
         return obReturn;
     }
 

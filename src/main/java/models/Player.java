@@ -31,8 +31,6 @@ public class Player implements Serializable {
     @Size(max = 20, message = "Player Position Too Long")
     private String sPosition;
 
-
-
     @DatabaseField(canBeNull = true, foreign = true)
     private Team obTeam;
 
@@ -45,6 +43,10 @@ public class Player implements Serializable {
     //@Size(max = 14, min = 12, message = "Invalid Phone Number")
     @Pattern(regexp = "[0-9]?[-]?[0-9]{3}[-][0-9]{3}[-][0-9]{4}", message = "Improper Phone Number Format")
     private String sEmergencyContact;
+
+
+    //Add Player List
+    //Add Team object attribute
 
     public Player() {
     }
@@ -115,7 +117,7 @@ public class Player implements Serializable {
         this.setsLastName(player.getsLastName());
         this.setnPlayerNumber(player.getnPlayerNumber());
         this.setsPosition(player.getsPosition());
-//        this.setsTeamName(player.getsTeamName());
+        this.setObTeam(player.getObTeam());
         this.setsParentInfo(player.getsParentInfo());
         this.setsEmergencyContact(player.getsEmergencyContact());
     }

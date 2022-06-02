@@ -71,7 +71,7 @@ public class ModifyTournamentController  implements Initializable {
     {
         ConnectionSource dbConn = null;
         try {
-            dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
+            dbConn = new JdbcPooledConnectionSource(MainWindow.CONNECT_STRING);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -104,9 +104,9 @@ public class ModifyTournamentController  implements Initializable {
             LocalDate nEndLocale = txtEndEdit.getValue();
             Instant instant2 = Instant.from(nEndLocale.atStartOfDay(ZoneId.systemDefault()));
 
-            toBeEdited.setStartDate(Date.from(instant));
-            toBeEdited.setEndDate(Date.from(instant2));
-            toBeEdited.setTournamentName(txtNameEdit.getText());
+            toBeEdited.setdStartDate(Date.from(instant));
+            toBeEdited.setdEndDate(Date.from(instant2));
+            toBeEdited.setsTournamentName(txtNameEdit.getText());
 
 
             HashMap<String, String> listOfErrors = obValid.getErrors(toBeEdited);
@@ -163,10 +163,10 @@ public class ModifyTournamentController  implements Initializable {
         toBeEdited = tournControl.getLastEntry();
 
         DateFormat canadianDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        txtStartEdit.setPromptText(canadianDateFormat.format(toBeEdited.getStartDate()));
-        txtEndEdit.setPromptText(canadianDateFormat.format(toBeEdited.getEndDate()));
-        txtNameEdit.setText(toBeEdited.getTournamentName() == null ? "" : toBeEdited.getTournamentName());
-        lblEditIDInfo.setText("Editing Information for Tournament ID#: " + toBeEdited.getTournamentId());
+        txtStartEdit.setPromptText(canadianDateFormat.format(toBeEdited.getdStartDate()));
+        txtEndEdit.setPromptText(canadianDateFormat.format(toBeEdited.getdEndDate()));
+        txtNameEdit.setText(toBeEdited.getsTournamentName() == null ? "" : toBeEdited.getsTournamentName());
+        lblEditIDInfo.setText("Editing Information for Tournament ID#: " + toBeEdited.getnTournamentID());
     }
 
 

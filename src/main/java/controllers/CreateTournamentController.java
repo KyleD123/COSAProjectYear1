@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Tournament;
 import models.TournamentValidator;
+import sun.applet.Main;
 
 import java.io.IOException;
 import java.net.URL;
@@ -63,7 +64,7 @@ public class CreateTournamentController implements Initializable
     {
         ConnectionSource dbConn = null;
         try {
-            dbConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
+            dbConn = new JdbcPooledConnectionSource(MainWindow.CONNECT_STRING);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -96,9 +97,9 @@ public class CreateTournamentController implements Initializable
             Instant instant2 = Instant.from(nEndLocale.atStartOfDay(ZoneId.systemDefault()));
 
             Tournament obTemp = new Tournament();
-            obTemp.setStartDate(Date.from(instant));
-            obTemp.setEndDate(Date.from(instant2));
-            obTemp.setTournamentName(txtName.getText());
+            obTemp.setdStartDate(Date.from(instant));
+            obTemp.setdEndDate(Date.from(instant2));
+            obTemp.setsTournamentName(txtName.getText());
 
 
             HashMap<String, String> listOfErrors = obValid.getErrors(obTemp);

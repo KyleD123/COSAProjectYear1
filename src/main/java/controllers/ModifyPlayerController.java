@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.Player;
 import models.PlayerValidator;
@@ -34,23 +35,22 @@ public class ModifyPlayerController implements Initializable
     private TextField txtFirstModify, txtLastModify, txtPositionModify, txtParentModify, txtContactModify;
 
     @FXML
-    private Label lblError1, lblError2, lblError3, lblError4, lblError5;
+    private Label lblError1, lblError2, lblError3, lblError4, lblError5, lblError6;
 
     private PlayerController playerController;
     private PlayerValidator obValid;
 
     private Player obPlayerEdit;
 
-    private String obTeam;
-
-
+    private VBox targetBox;
+    private TextField txtSource;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
         ConnectionSource databaseConn = null;
         try {
-            databaseConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
+            databaseConn = new JdbcPooledConnectionSource(MainWindow.CONNECT_STRING);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -86,7 +86,7 @@ public class ModifyPlayerController implements Initializable
         {
             txtFirstModify.setText(null);
             txtLastModify.setText(null);
-//            txtPositionModify.setText(null);
+            txtPositionModify.setText(null);
             txtParentModify.setText(null);
             txtContactModify.setText(null);
 
@@ -96,7 +96,6 @@ public class ModifyPlayerController implements Initializable
             lblError4.setText(listOfErrors.get("sParentInfo"));
             lblError5.setText(listOfErrors.get("sEmergencyContact"));
         }
-
         else
         {
             lblError1.setText("");
@@ -108,9 +107,7 @@ public class ModifyPlayerController implements Initializable
         }
     }
 
-//    public void addPlayerToTeam(MouseEvent mouseEvent) throws IOException, SQLException {
-//        obTeam = TeamViewController.obCurrentTeam;
-//    }
+
 
     public void responsePrompt(boolean status) throws IOException
     {
@@ -149,4 +146,10 @@ public class ModifyPlayerController implements Initializable
         obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
         obMainStage.show();
     }
+
+
+
+
+
+
 }

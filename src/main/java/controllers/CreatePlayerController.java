@@ -26,7 +26,7 @@ public class CreatePlayerController implements Initializable
     private ImageView btnPlayerAddSave, btnPlayerAddCancel;
 
     @FXML
-    private TextField txtFirstAdd, txtLastAdd, txtNumAdd, txtParentAdd, txtContactAdd;
+    private TextField txtFirstAdd, txtLastAdd, txtPositionAdd, txtNumAdd, txtParentAdd, txtContactAdd;
 
     @FXML
     private Label lblError1, lblError2, lblError3, lblError4, lblError5, lblError6;
@@ -39,7 +39,7 @@ public class CreatePlayerController implements Initializable
     {
         ConnectionSource databaseConn = null;
         try {
-            databaseConn = new JdbcPooledConnectionSource("jdbc:sqlite:eSchedule.db");
+            databaseConn = new JdbcPooledConnectionSource(MainWindow.CONNECT_STRING);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -53,7 +53,6 @@ public class CreatePlayerController implements Initializable
         String sFirstName = txtFirstAdd.getText();
         String sLastName = txtLastAdd.getText();
 //        String sPosition = txtPositionAdd.getText();
-//        String sTeamName = "";
         int nPlayerNum = Integer.parseInt(txtNumAdd.getText());
         String sParent = txtParentAdd.getText();
         String sContact = txtContactAdd.getText();
@@ -62,11 +61,10 @@ public class CreatePlayerController implements Initializable
         obPlayer.setsFirstName(sFirstName);
         obPlayer.setsLastName(sLastName);
 //        obPlayer.setsPosition(sPosition);
-//        obPlayer.setObTeam(sTeamName);
         obPlayer.setnPlayerNumber(nPlayerNum);
         obPlayer.setsParentInfo(sParent);
         obPlayer.setsEmergencyContact(sContact);
-        
+
         HashMap<String, String> listOfErrors = obValid.getErrors(obPlayer);
 
         if (listOfErrors.size() > 0)

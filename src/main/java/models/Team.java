@@ -53,5 +53,4 @@ public class Team implements Serializable {
         return this.getTeamName() == null ? this.getTeamID() + "" : this.getTeamName() + " ID: " + this.getTeamID();
     }
 
-
 }
