@@ -22,7 +22,7 @@
                </font></Button>
             <FlowPane fx:id="fpBench" prefHeight="85.0" prefWidth="1150.0" style="-fx-border-color: black; -fx-border-width: 2;">
                <children>
-                  <Text onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" text="playerName" />
+                  <Text onDragDetected="#setOnDragDetected" onDragDone="#setOnDragDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" text="playerName" />
 
                </children>
                <padding>
@@ -68,37 +68,37 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <VBox fx:id="vRightDefense" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="445.0" />
+            <VBox fx:id="vRightDefense" onDragDetected="#setOnDragDetected" onDragDone="#setOnDragDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="445.0" />
             <Label layoutX="279.0" layoutY="274.0" style="-fx-background-color: white;" text="Goalie" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <VBox fx:id="vGoalie" layoutY="184.0" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="315.0" />
+            <VBox fx:id="vGoalie" layoutY="184.0" onDragDetected="#setOnDragDetected" onDragDone="#setOnDragDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="315.0" />
             <Label layoutX="359.0" layoutY="134.0" style="-fx-background-color: white;" text="Left Defense" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <VBox fx:id="vLeftDefense" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="169.0" />
+            <VBox fx:id="vLeftDefense" onDragDetected="#setOnDragDetected" onDragDone="#setOnDragDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="169.0" />
             <Label layoutX="626.0" layoutY="134.0" style="-fx-background-color: white;" text="Left Wing" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <VBox fx:id="vLeftWing" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="169.0" />
+            <VBox fx:id="vLeftWing" onDragDetected="#setOnDragDetected" onDragDone="#setOnDragDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="169.0" />
             <Label layoutX="618.0" layoutY="411.0" style="-fx-background-color: white;" text="Right Wing">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <VBox fx:id="vRightWing" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="445.0" />
+            <VBox fx:id="vRightWing" onDragDone="#setOnDragDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="445.0" />
             <Label layoutX="694.0" layoutY="274.0" style="-fx-background-color: white;" text="Center" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <VBox fx:id="vCenter" onDragDetected="#setOnDragDetected" onDragDone="#setOnDraggedDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="315.0" />
+            <VBox fx:id="vCenter" onDragDetected="#setOnDragDetected" onDragDone="#setOnDragDone" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: black; -fx-background-color: white;" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="315.0" />
          </children>
       </AnchorPane>
    </center>

@@ -42,8 +42,8 @@ public class ManageRosterController implements Initializable
 
     public HashMap<Text, Player> playerMap = new HashMap<>();
 
-    //only need this method if we are repopulating the team list when re-selecting a team
-    private List<Player> listOfPlayerOnTeam = new ArrayList<>();
+//    //only need this method if we are repopulating the team list when re-selecting a team
+//    private List<Player> listOfPlayerOnTeam = new ArrayList<>();
 
     private Text txtPlayer;
 
@@ -67,10 +67,20 @@ public class ManageRosterController implements Initializable
 
         playerController = new PlayerController(databaseConn);
         populateListView();
-        populateTeamList();
 
+        List<Player> lstPlayers =  playerController.getAllPlayersByTeam(TeamViewController.obCurrentTeam);
 
-
+        for(Player obPlay : lstPlayers)
+        {
+            Text txtPlayer = new Text(obPlay.getsFirstName() + " " + obPlay.getsLastName());
+            txtPlayer.setOnDragDetected(this::setOnDragDetected);
+            txtPlayer.setOnDragOver(this::setOnDragOver);
+//            txtPlayer.setOnDragDropped(this::setOnDragDropped);
+            txtPlayer.setOnDragDone(this::setOnDragDone);
+            fpBench.setHgap(25);
+            fpBench.getChildren().add(txtPlayer);
+            playerMap.put(txtPlayer, obPlay);
+        }
     }
 
     /**
@@ -103,14 +113,14 @@ public class ManageRosterController implements Initializable
             txtPlayer.setOnDragDetected(this::setOnDragDetected);
             txtPlayer.setOnDragOver(this::setOnDragOver);
 //            txtPlayer.setOnDragDropped(this::setOnDragDropped);
-            txtPlayer.setOnDragDone(this::setOnDraggedDone);
+            txtPlayer.setOnDragDone(this::setOnDragDone);
 
             fpBench.getChildren().add(txtPlayer);
             fpBench.setHgap(25);
             playerMap.put(txtPlayer,obSelected);
             populateListView();
             //only need this if we are repopulating the team list when re-selected a team
-            listOfPlayerOnTeam.add(obSelected);
+//            listOfPlayerOnTeam.add(obSelected);
         }
         else
         {
@@ -133,26 +143,26 @@ public class ManageRosterController implements Initializable
      */
     //only need this method if we are repopulating the team list when re-selecting a team
 
-    public void populateTeamList()
-    {
-        for (int i = 0; i<listOfPlayerOnTeam.size(); i++)
-        {
-            if (listOfPlayerOnTeam.get(i).getObTeam().equals(TeamViewController.obCurrentTeam))
-            {
-                Player obSelected = listOfPlayerOnTeam.get(i);
-                Text txtPlayer = new Text();
-                txtPlayer.setText(obSelected.toString());
-
-                txtPlayer.setOnDragDetected(this::setOnDragDetected);
-                txtPlayer.setOnDragOver(this::setOnDragOver);
-//                txtPlayer.setOnDragDropped(this::setOnDragDropped);
-                txtPlayer.setOnDragDone(this::setOnDraggedDone);
-
-                fpBench.getChildren().add( txtPlayer);
-                playerMap.put(txtPlayer,obSelected);
-            }
-        }
-    }
+//    public void populateTeamList()
+//    {
+//        for (int i = 0; i<listOfPlayerOnTeam.size(); i++)
+//        {
+//            if (listOfPlayerOnTeam.get(i).getObTeam().equals(TeamViewController.obCurrentTeam))
+//            {
+//                Player obSelected = listOfPlayerOnTeam.get(i);
+//                Text txtPlayer = new Text();
+//                txtPlayer.setText(obSelected.toString());
+//
+//                txtPlayer.setOnDragDetected(this::setOnDragDetected);
+//                txtPlayer.setOnDragOver(this::setOnDragOver);
+////                txtPlayer.setOnDragDropped(this::setOnDragDropped);
+//                txtPlayer.setOnDragDone(this::setOnDraggedDone);
+//
+//                fpBench.getChildren().add( txtPlayer);
+//                playerMap.put(txtPlayer,obSelected);
+//            }
+//        }
+//    }
 
     /**
      * This method is to go back to the main team window
@@ -250,7 +260,7 @@ public class ManageRosterController implements Initializable
 
 
     @FXML
-    public void setOnDraggedDone(DragEvent e)
+    public void setOnDragDone(DragEvent e)
     {
 
     }
