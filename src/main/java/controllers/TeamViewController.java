@@ -40,15 +40,12 @@ public class TeamViewController implements Initializable
     private Label lblTeamID;
 
     private Stage obMainStage = new Stage();
+
     private TeamController teamControl;
     private PlayerController playerControl;
-
-    private String sValue;
-
     public static Team obCurrentTeam;
 
-
-
+    @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
@@ -79,7 +76,7 @@ public class TeamViewController implements Initializable
 
     public void switchModifyScene(MouseEvent mouseEvent) throws Exception
     {
-        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("edit-main-team-layout.fxml"));
+        FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("edit-team-window.fxml"));
         obMainStage = (Stage) btnEdit.getScene().getWindow();
         obMainStage.setScene(new Scene(newScene.load(), 1366,768));
         obMainStage.show();
@@ -126,7 +123,7 @@ public class TeamViewController implements Initializable
 
     public void cancel(MouseEvent mouseEvent) throws IOException
     {
-//        FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("main-team-layout.fxml"));
+//        FXMLLoader mainLoader =  new FXMLLoader(TeamView.class.getResource("team-window.fxml"));
         obMainStage = (Stage) btnCancel.getScene().getWindow();
 //        obMainStage.setScene(new Scene(mainLoader.load(), 1366,768));
         obMainStage.close();

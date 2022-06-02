@@ -14,7 +14,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-//import models.Game;
+import models.Game;
 import models.Tournament;
 
 import java.net.URL;
@@ -30,16 +30,17 @@ public class MainWindowController implements Initializable
 {
 
     public static final String CONNECT_STRING = MainWindow.CONNECT_STRING;
+
     private ConnectionSource dbConn;
 
-//    private  GameController obGameControl;
+    private  GameController obGameControl;
 
-    private TournamentController obTournamentControl;
+    private  TournamentController obTournamentControl;
     @FXML
-    private ComboBox cmbTournamentBox;
+    private  ComboBox cmbTournamentBox;
 
-//    @FXML
-//    private TableView<Game> tblGames;
+    @FXML
+    private TableView<Game> tblGames;
 
     /**
      * This initialize the MainWindowViewController for the FXML.
@@ -58,7 +59,7 @@ public class MainWindowController implements Initializable
         try
         {
             dbConn = new JdbcPooledConnectionSource(CONNECT_STRING);
-//            obGameControl = new GameController(dbConn);
+            obGameControl = new GameController(dbConn);
             obTournamentControl = new TournamentController(dbConn);
         }
         catch (SQLException e)
@@ -67,9 +68,16 @@ public class MainWindowController implements Initializable
         }
 
         //This is where it displays all of the lists of the tournament
+        populateComboTournaments();
+
+
+    }
+    @FXML
+    public void populateComboTournaments()
+    {
+        cmbTournamentBox.getItems().clear();
         List<Tournament> obList = obTournamentControl.getAllTournament();
         cmbTournamentBox.getItems().addAll(obList);
-
     }
 
     /**
@@ -126,11 +134,11 @@ public class MainWindowController implements Initializable
      * @param actionEvent
      * @throws SQLException
      */
-//    @FXML
-//    public void populateScheduleTable(javafx.event.ActionEvent actionEvent) throws SQLException
-//    {
-//        //CLEARS ANY CONTENT BEFORE DOING ANYTHING ELSE.
-////        tblGames.getItems().clear();
-////        tblGames.getItems().addAll(obGameControl.getAllScheduleByTournament((Tournament) cmbTournamentBox.getValue()));
-//    }
+    @FXML
+    public void populateScheduleTable(javafx.event.ActionEvent actionEvent) throws SQLException
+    {
+        //CLEARS ANY CONTENT BEFORE DOING ANYTHING ELSE.
+        tblGames.getItems().clear();
+        tblGames.getItems().addAll(obGameControl.getAllScheduleByTournament((Tournament) cmbTournamentBox.getValue()));
+    }
 }

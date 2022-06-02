@@ -25,8 +25,6 @@ public class PlayerViewController implements Initializable {
 
     private PlayerController playerController;
 
-
-
     public void switchCreateScene(MouseEvent mouseEvent) throws Exception
     {
         FXMLLoader newScene = new FXMLLoader(MainWindow.class.getResource("create-player-screen-layout.fxml"));
@@ -58,5 +56,7 @@ public class PlayerViewController implements Initializable {
             e.printStackTrace();
         }
         playerController = new PlayerController(databaseConn);
+
     }
+
 }

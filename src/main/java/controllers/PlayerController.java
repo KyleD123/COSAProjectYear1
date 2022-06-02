@@ -66,7 +66,7 @@ public class PlayerController {
     public boolean isUnique(Player obPlayer) throws SQLException {
         List<Player> lstPlayer = new ArrayList<>();
 
-        if (obPlayer.getObTeam() != null)
+        if (obPlayer.getObTeam() != null && obPlayer.getsPosition() != null)
         {
             lstPlayer = repo.query(repo.queryBuilder().where().eq("obTeam_id", obPlayer.getObTeam().getTeamID()).and()
                 .eq("sPosition", obPlayer.getsPosition()).and().not().eq("lPlayerID", obPlayer.getlPlayerID()).prepare());
